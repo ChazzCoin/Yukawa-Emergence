@@ -1,0 +1,121 @@
+3.5 Axioms for Alignment Operators on the Proto–Flavor Lattice
+In this section we isolate the structural assumptions that define the class of Schur–type operators allowed to act on the flavor blocks of the finite Dirac operator. These axioms are additional finite–geometry postulates: they are not implied by the standard noncommutative geometry axioms, but encode our alignment principle for fermion masses and mixings.
+They will be the only input used to single out the Alignment Operator Φ\PhiΦ used in the phenomenological analysis. In particular, in later subsections we show that, under these axioms, Φ\PhiΦ is essentially unique up to a single continuous parameter.
+Proto–flavor space and Schur action
+We work with a 9–dimensional proto–flavor space
+F9  =  Span{∣i⟩:i=1,…,9},\mathcal{F}_9 \;=\; \mathrm{Span}\{|i\rangle : i=1,\dots,9\},F9​=Span{∣i⟩:i=1,…,9},
+equipped with the standard orthonormal basis ∣i⟩|i\rangle∣i⟩. This space represents a finite internal flavor lattice on which the three light generations and their heavy partners are embedded.
+Proto–Yukawa and proto–Majorana couplings are encoded as 9×99\times 99×9 matrices
+Y, M∈M9(C).Y,\,M \in M_9(\mathbb{C}).Y,M∈M9​(C).
+An alignment operator is a linear map
+Φ:M9(C)⟶M9(C)\Phi : M_9(\mathbb{C}) \longrightarrow M_9(\mathbb{C})Φ:M9​(C)⟶M9​(C)
+acting by Schur (entrywise) multiplication with a fixed kernel K∈M9(C)K\in M_9(\mathbb{C})K∈M9​(C):
+ \begin{equation}
+ \label{eq:Schur-action}
+ \bigl(\Phi(Y)\bigr){ij} ;:=; (K\circ Y){ij} ;:=; K_{ij},Y_{ij},
+ \qquad i,j=1,\dots,9.
+ \end{equation}
+ Our goal is to constrain the kernel KKK by a small set of axioms and then classify the resulting operators.
+Axioms A1–A6
+We now formulate the structural axioms for admissible alignment kernels. These axioms package the geometric, symmetry, divisor, and energy–minimization requirements that underlie the Alignment Operator used in this work.
+Axiom A1 (Finite cyclic geometry)
+The proto–flavor space F9\mathcal{F}_9F9​ carries the structure of a cyclic graph with 9 sites. Concretely, we fix a graph distance
+d:{1,…,9}2⟶{0,1,2,3,4}d : \{1,\dots,9\}^2 \longrightarrow \{0,1,2,3,4\}d:{1,…,9}2⟶{0,1,2,3,4}
+given by
+d(i,j)  :=  min⁡(∣i−j∣, 9−∣i−j∣),i,j=1,…,9.d(i,j) \;:=\; \min\bigl(|i-j|,\,9-|i-j|\bigr), \qquad i,j=1,\dots,9.d(i,j):=min(∣i−j∣,9−∣i−j∣),i,j=1,…,9.
+The alignment kernel KijK_{ij}Kij​ depends only on this graph distance, so that there exists a function
+k:{0,1,2,3,4}⟶Ck : \{0,1,2,3,4\} \longrightarrow \mathbb{C}k:{0,1,2,3,4}⟶C
+with
+ \begin{equation}
+ \label{eq:Toeplitz}
+ K_{ij} ;=; k\bigl(d(i,j)\bigr),
+ \qquad i,j=1,\dots,9.
+ \end{equation}
+ Thus Φ\PhiΦ is a Toeplitz (translation–invariant) Schur operator on the 9–site cycle.
+Axiom A2 (Hermiticity and complete positivity)
+The operator Φ\PhiΦ preserves Hermiticity and does not introduce anti–alignment.
+For any Hermitian matrix Y=Y†Y=Y^\daggerY=Y†, the aligned matrix Φ(Y)\Phi(Y)Φ(Y) is also Hermitian.
+
+
+The kernel KKK is real, symmetric, and positive semidefinite, with unit diagonal:
+
+
+Kij=Kji∈R,K⪰0,Kii=1for all i=1,…,9.K_{ij} = K_{ji} \in \mathbb{R},\qquad K \succeq 0,\qquad K_{ii}=1\quad\text{for all }i=1,\dots,9.Kij​=Kji​∈R,K⪰0,Kii​=1for all i=1,…,9.
+Equivalently, Φ\PhiΦ is a completely positive, unital Schur multiplier on M9(C)M_9(\mathbb{C})M9​(C).
+Axiom A3 (Generation permutation covariance)
+The three light generations are a priori indistinguishable. Let G⊂S9G\subset S_9G⊂S9​ be the subgroup of permutations implementing the flavor symmetries of the three light generations and their associated heavy partners on F9\mathcal{F}_9F9​, and let PPP denote the corresponding permutation matrices acting on M9(C)M_9(\mathbb{C})M9​(C) by conjugation.
+The action of Φ\PhiΦ commutes with these flavor permutations:
+ \begin{equation}
+ \label{eq:permutation-covariance}
+ \Phi(PYP^{-1}) ;=; P,\Phi(Y),P^{-1},
+ \qquad\text{for all }Y\in M_9(\mathbb{C})\text{ and }P\in G.
+ \end{equation}
+ In particular, the alignment kernel does not distinguish between individual generations beyond their relative positions on the proto–flavor graph.
+Axiom A4 (Ambient divisor–closed harmonic support with a single forbidden distance)
+There exist an integer N∈NN \in \mathbb{N}N∈N, an injective map
+ι:{1,…,9}↪ZN,\iota : \{1,\dots,9\} \hookrightarrow \mathbb{Z}_N,ι:{1,…,9}↪ZN​,
+and a function k~:{0,1,…,N−1}→C\tilde k : \{0,1,\dots,N-1\} \to \mathbb{C}k~:{0,1,…,N−1}→C such that:
+Ambient cyclic geometry and induced distance.
+ Let dN:ZN×ZN→{0,1,…,⌊N/2⌋}d_N : \mathbb{Z}_N \times \mathbb{Z}_N \to \{0,1,\dots,\lfloor N/2 \rfloor\}dN​:ZN​×ZN​→{0,1,…,⌊N/2⌋} be the cyclic graph distance
+ dN(x,y)  :=  min⁡(∣x−y∣, N−∣x−y∣),x,y∈ZN.d_N(x,y) \;:=\; \min\bigl(|x-y|,\,N - |x-y|\bigr),\qquad x,y\in\mathbb{Z}_N.dN​(x,y):=min(∣x−y∣,N−∣x−y∣),x,y∈ZN​.
+ The proto–flavor graph F9\mathcal F_9F9​ is realized as the induced subgraph of the cyclic graph on ZN\mathbb{Z}_NZN​ with vertex set ι({1,…,9})\iota(\{1,\dots,9\})ι({1,…,9}), and this induced subgraph is isomorphic to the 9–cycle. The distance ddd used in Axiom A1 is the restriction
+ d(i,j)  :=  dN(ι(i),ι(j)),i,j∈{1,…,9}.d(i,j) \;:=\; d_N\bigl(\iota(i),\iota(j)\bigr),\qquad i,j\in\{1,\dots,9\}.d(i,j):=dN​(ι(i),ι(j)),i,j∈{1,…,9}.
+Ambient Toeplitz kernel and restriction to F9\mathcal F_9F9​.
+ Define an N×NN\times NN×N Toeplitz kernel K~\tilde KK~ on CN\mathbb{C}^NCN by
+ K~xy  :=  k~(dN(x,y)),x,y∈ZN.\tilde K_{xy} \;:=\; \tilde k\bigl(d_N(x,y)\bigr), \qquad x,y\in\mathbb{Z}_N.K~xy​:=k~(dN​(x,y)),x,y∈ZN​.
+ The 9×99\times 99×9 alignment kernel KKK on F9\mathcal F_9F9​ is the restriction of K~\tilde KK~ to the embedded sites:
+ Kij  :=  K~ι(i),ι(j)  =  k~(dN(ι(i),ι(j)))  =  k~(d(i,j)),i,j=1,…,9.K_{ij} \;:=\; \tilde K_{\iota(i),\iota(j)} \;=\; \tilde k\bigl(d_N(\iota(i),\iota(j))\bigr) \;=\; \tilde k\bigl(d(i,j)\bigr), \qquad i,j=1,\dots,9.Kij​:=K~ι(i),ι(j)​=k~(dN​(ι(i),ι(j)))=k~(d(i,j)),i,j=1,…,9.
+Divisor–closed ambient harmonic support.
+ Let k~^\widehat{\tilde k}k~ denote the discrete Fourier transform of k~\tilde kk~ on ZN\mathbb{Z}_NZN​, so that
+ k~(d)  =  1N∑n=0N−1k~^(n) e2πind/N,d=0,1,…,N−1.\tilde k(d) \;=\; \frac{1}{N} \sum_{n=0}^{N-1} \widehat{\tilde k}(n)\,e^{2\pi i n d/N}, \qquad d=0,1,\dots,N-1.k~(d)=N1​n=0∑N−1​k~(n)e2πind/N,d=0,1,…,N−1.
+ Define the spectral support
+ D  :=  { n∈{0,…,N−1}:k~^(n)≠0 }.D \;:=\; \{\, n \in \{0,\dots,N-1\} : \widehat{\tilde k}(n) \neq 0 \,\}.D:={n∈{0,…,N−1}:k~(n)=0}.
+ Then DDD is divisor–closed, in the sense that
+ n∈D,  m∣n  ⟹  m∈D.n \in D,\; m\mid n \;\Longrightarrow\; m \in D.n∈D,m∣n⟹m∈D.
+Single forbidden ambient distance.
+ There exists a unique integer
+ d⋆∈{1,…,N−1}d_\star \in \{1,\dots,N-1\}d⋆​∈{1,…,N−1}
+ such that
+ k~(d⋆)=0,k~(d)≠0    for all    d∈{1,…,N−1}∖{d⋆}.\tilde k(d_\star) = 0, \qquad \tilde k(d) \neq 0 \;\;\text{for all}\;\; d \in \{1,\dots,N-1\}\setminus\{d_\star\}.k~(d⋆​)=0,k~(d)=0for alld∈{1,…,N−1}∖{d⋆​}.
+ Thus k~\tilde kk~ has a single forbidden separation scale in the ambient cyclic geometry. The 9–site profile kkk appearing in Axiom A1 is the restriction
+ k(d)  :=  k~(d),d∈{0,1,2,3,4},k(d) \;:=\; \tilde k(d),\qquad d \in \{0,1,2,3,4\},k(d):=k~(d),d∈{0,1,2,3,4},
+ obtained by evaluating k~\tilde kk~ only on the distances actually realized among the embedded sites. No vanishing of k(d)k(d)k(d) on {1,2,3,4}\{1,2,3,4\}{1,2,3,4} is assumed a priori.
+
+
+Minimality of the ambient geometry.
+ The integer NNN is minimal with this property: there is no smaller N′<NN'<NN′<N and injective map ι′:{1,…,9}↪ZN′\iota' : \{1,\dots,9\}\hookrightarrow \mathbb{Z}_{N'}ι′:{1,…,9}↪ZN′​ together with a function k~′:{0,…,N′−1}→C\tilde k' : \{0,\dots,N'-1\}\to\mathbb{C}k~′:{0,…,N′−1}→C satisfying items (1)–(4) above.
+Axiom A5 (NCG compatibility)
+The action of Φ\PhiΦ on flavor blocks of the finite Dirac operator DFD_FDF​ preserves the axioms of the finite spectral triple (AF,HF,DF,JF,ΓF)(A_F,H_F,D_F,J_F,\Gamma_F)(AF​,HF​,DF​,JF​,ΓF​).
+Concretely:
+Φ\PhiΦ acts only on flavor multiplicity indices and commutes with the representation of AFA_FAF​ on HFH_FHF​; in particular, if πF:AF→B(HF)\pi_F : A_F \to \mathcal{B}(H_F)πF​:AF​→B(HF​) denotes the representation, then
+ [ πF(a), Φ(DF) ]  =  [ πF(a), DF ]for all a∈AF.[\,\pi_F(a),\,\Phi(D_F)\,] \;=\; [\,\pi_F(a),\,D_F\,] \qquad\text{for all }a\in A_F.[πF​(a),Φ(DF​)]=[πF​(a),DF​]for all a∈AF​.
+The reality structure JFJ_FJF​, grading ΓF\Gamma_FΓF​, and KO–dimension constraints are unchanged:
+ [JF,Φ(DF)]=[JF,DF],[ΓF,Φ(DF)]=[ΓF,DF].[J_F,\Phi(D_F)] = [J_F,D_F],\qquad [\Gamma_F,\Phi(D_F)] = [\Gamma_F,D_F].[JF​,Φ(DF​)]=[JF​,DF​],[ΓF​,Φ(DF​)]=[ΓF​,DF​].
+The first–order condition remains satisfied when the Yukawa and Majorana blocks of DFD_FDF​ are replaced by their aligned versions, i.e.
+ [[DF,πF(a)], πF(b)∘]=0⟹[[Φ(DF),πF(a)], πF(b)∘]=0,[[D_F,\pi_F(a)],\,\pi_F(b)^{\circ}] = 0 \quad\Longrightarrow\quad [[\Phi(D_F),\pi_F(a)],\,\pi_F(b)^{\circ}] = 0,[[DF​,πF​(a)],πF​(b)∘]=0⟹[[Φ(DF​),πF​(a)],πF​(b)∘]=0,
+ for all a,b∈AFa,b\in A_Fa,b∈AF​, where πF(b)∘:=JF πF(b)∗JF−1\pi_F(b)^{\circ} := J_F\,\pi_F(b)^\ast J_F^{-1}πF​(b)∘:=JF​πF​(b)∗JF−1​.
+
+
+In other words, Φ\PhiΦ refines the internal geometry without changing the algebraic content of the NCG Standard Model.
+Axiom A6 (Alignment energy minimization)
+Among all kernels satisfying A1–A5, the physical alignment kernel minimizes a discrete “misalignment energy” functional built from a graph Laplacian on the 9–site cycle.
+More precisely, there exists a positive quadratic functional
+ \begin{equation}
+ \label{eq:alignment-energy}
+ \mathcal{E}[k] ;=; \sum_{d=0}^{4} \Bigl[(\nabla k)(d)^2 + m^2,k(d)^2\Bigr],
+ \end{equation}
+ where ∇\nabla∇ is a fixed discrete derivative on the distance set {0,1,2,3,4}\{0,1,2,3,4\}{0,1,2,3,4} induced by the 9–cycle and m>0m>0m>0 sets an internal curvature scale, such that the realized profile kkk is the unique minimizer of E\mathcal{E}E subject to the constraints of A2–A4 (in particular k(0)=1k(0)=1k(0)=1, symmetry on the 9–cycle, and the single forbidden ambient distance).
+Operationally, A6 expresses the requirement that alignment decays with distance in the energetically least costly way allowed by the discrete geometry. In Section 3.z we will show that this principle forces an exponential profile
+ \begin{equation}
+ \label{eq:exponential-profile}
+ k(d) ;\propto; \kappa^{,d},\qquad d=0,1,2,3,4,
+ \end{equation}
+ for some κ∈(0,1)\kappa\in(0,1)κ∈(0,1).
+
+Definition of the admissible class C0\mathcal{C}_0C0​
+We can now summarize:
+\boxed{ \begin{minipage}{0.9\textwidth} \textbf{Definition 3.x (Admissible alignment operators).} Let \(\mathcal{C}_0\) denote the set of linear maps \(\Phi : M_9(\mathbb{C})\to M_9(\mathbb{C})\) of the Schur form \eqref{eq:Schur-action} whose kernel \(K\) satisfies axioms A1–A6. An \emph{alignment operator} in the sense of this paper is any \(\Phi\in\mathcal{C}_0\). \end{minipage} }
+In the remainder of this section we classify the elements of C0\mathcal{C}_0C0​. We will show that, under A1–A6, C0\mathcal{C}_0C0​ contains a unique element up to a single continuous parameter κ\kappaκ, and that this element coincides with the Alignment Operator Φ\PhiΦ used in the flavor sector of the NCG Standard Model.
+(Immediately after A4/A6 you can insert your Proposition stating N=360,d⋆=7N=360, d_\star=7N=360,d⋆​=7 under A1–A4 + A6.)
+
+

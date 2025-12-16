@@ -1,0 +1,189 @@
+Relaxation complete.
+Final misalignment energy: 99.972531
+
+=== Emergent internal graph ===
+Number of sites: 39
+First 10 eigenvalues of L_int:
+[2.16047559e-15 9.80951287e-01 1.81564639e+00 2.00000000e+00
+ 2.00000000e+00 2.00000000e+00 2.00000000e+00 2.00000000e+00
+ 4.38302718e+00 5.00000000e+00]
+
+Generation eigenvalue indices: [1 2 3]
+Generation triad lam_gen: [0.98095129 1.81564639 2.        ]
+Base kernel F_base(lam_gen): [5.57545487e-02 5.06933717e-05 6.14421235e-06]
+
+=== Yukawa-like mass scales F_s ===
+Up-type (F_u):         [1.02118018e-03 1.70057317e-08 6.14421235e-06]
+Down-type (F_d):       [3.75671194e-04 3.41569251e-07 6.14421235e-06]
+Charged leptons (F_e): [1.02118018e-03 5.06933717e-05 3.05902321e-07]
+Neutrino (F_n):        [1.38201709e-04 3.41569251e-07 1.12535175e-07]
+
+Best lepton region permutations:
+  pe (e sectors)  = (2, 0, 1)
+  pn (nu sectors) = (1, 0, 2)
+Best total chi^2  ≈ 11.99
+
+Mass ratios (m1/m3, m2/m3) from F_s:
+mu/mt:     1.665e-05, mc/mt:     6.017e-03
+md/mb:     9.092e-04, ms/mb:     1.636e-02
+me/mtau:   2.996e-04, mmu/mtau:  4.964e-02
+
+=== CKM-like mixing matrix (geometry + operator) ===
+[[ 9.74927912e-01+0.j  2.22520934e-01+0.j -1.53139602e-17+0.j]
+ [-2.22520934e-01+0.j  9.74927912e-01+0.j -7.40903717e-18+0.j]
+ [-3.94998658e-19+0.j -1.03280283e-17+0.j  1.00000000e+00+0.j]]
+theta12_q ≈ 0.224 rad, theta23_q ≈ 0.000, theta13_q ≈ 1.531e-17
+(Cabibbo operator angle = 2π/28 ≈ 0.224 rad)
+
+=== PMNS-like mixing matrix (geometry + operator) ===
+[[-0.82092553+0.j  0.20820857+0.j  0.53172405+0.j]
+ [-0.56941346+0.j -0.22834337+0.j -0.78970097+0.j]
+ [-0.04300685+0.j -0.95105652+0.j  0.30600966+0.j]]
+theta12_l ≈ 0.248 rad, theta23_l ≈ 1.201, theta13_l ≈ 5.606e-01
+(Golden operator angle = 2π/5 ≈ 1.257 rad)
+
+=== Observables vs rough targets ===
+mu/mt       : model=1.665e-05, target=2.200e-05, chi2_contrib=0.16
+mc/mt       : model=6.017e-03, target=7.500e-03, chi2_contrib=0.10
+md/mb       : model=9.092e-04, target=1.100e-03, chi2_contrib=0.08
+ms/mb       : model=1.636e-02, target=2.200e-02, chi2_contrib=0.18
+me/mtau     : model=2.996e-04, target=2.900e-04, chi2_contrib=0.00
+mmu/mtau    : model=4.964e-02, target=5.900e-02, chi2_contrib=0.06
+theta12_q   : model=2.244e-01, target=2.270e-01, chi2_contrib=0.00
+theta23_q   : model=7.409e-18, target=4.100e-02, chi2_contrib=0.04
+theta13_q   : model=1.531e-17, target=3.600e-03, chi2_contrib=0.00
+theta12_l   : model=2.484e-01, target=5.840e-01, chi2_contrib=2.82
+theta23_l   : model=1.201e+00, target=7.850e-01, chi2_contrib=4.33
+theta13_l   : model=5.606e-01, target=1.500e-01, chi2_contrib=4.22
+
+Total chi^2 ≈ 11.99
+
+NOTES:
+- The internal graph is emergent from the misalignment functional M[theta],
+  which encodes 6-fold (C_360) and 5-fold (golden) alignment preferences.
+- We then restrict to the largest connected component to define a single,
+  coherent aether vacuum, and build its Laplacian L_int.
+- The generation triad and F_base(lambda) come from the spectrum of L_int,
+  sector hierarchies from discrete integer charges Q_{s,g}, and mixing
+  from a combination of geometry-derived U_geom[s] and fixed operators
+  P_phi (golden) and C_12 (Cabibbo).
+- No random Yukawas or continuous per-sector fits are used; everything
+  comes from the emergent graph, a universal kernel, integer exponents,
+  and discrete 2π/n phase rotations.
+
+=== First-order condition test ===
+Max Frobenius norm over all pairs (a,b): 0.000e+00
+Pairs with norm < 1.0e-12:
+  (a=         I, b=         I) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=         I, b=  Q_sector) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=         I, b=P_sector_u) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=         I, b=P_sector_d) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=         I, b=P_sector_e) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=         I, b=P_sector_nu) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=         I, b=   I_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=         I, b=  H1_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=         I, b=  H2_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=         I, b=E_rg_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=  Q_sector, b=         I) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=  Q_sector, b=  Q_sector) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=  Q_sector, b=P_sector_u) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=  Q_sector, b=P_sector_d) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=  Q_sector, b=P_sector_e) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=  Q_sector, b=P_sector_nu) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=  Q_sector, b=   I_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=  Q_sector, b=  H1_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=  Q_sector, b=  H2_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=  Q_sector, b=E_rg_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_u, b=         I) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_u, b=  Q_sector) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_u, b=P_sector_u) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_u, b=P_sector_d) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_u, b=P_sector_e) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_u, b=P_sector_nu) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_u, b=   I_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_u, b=  H1_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_u, b=  H2_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_u, b=E_rg_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_d, b=         I) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_d, b=  Q_sector) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_d, b=P_sector_u) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_d, b=P_sector_d) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_d, b=P_sector_e) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_d, b=P_sector_nu) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_d, b=   I_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_d, b=  H1_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_d, b=  H2_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_d, b=E_rg_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_e, b=         I) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_e, b=  Q_sector) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_e, b=P_sector_u) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_e, b=P_sector_d) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_e, b=P_sector_e) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_e, b=P_sector_nu) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_e, b=   I_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_e, b=  H1_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_e, b=  H2_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_e, b=E_rg_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_nu, b=         I) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_nu, b=  Q_sector) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_nu, b=P_sector_u) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_nu, b=P_sector_d) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_nu, b=P_sector_e) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_nu, b=P_sector_nu) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_nu, b=   I_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_nu, b=  H1_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_nu, b=  H2_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=P_sector_nu, b=E_rg_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=   I_color, b=         I) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=   I_color, b=  Q_sector) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=   I_color, b=P_sector_u) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=   I_color, b=P_sector_d) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=   I_color, b=P_sector_e) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=   I_color, b=P_sector_nu) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=   I_color, b=   I_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=   I_color, b=  H1_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=   I_color, b=  H2_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=   I_color, b=E_rg_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=  H1_color, b=         I) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=  H1_color, b=  Q_sector) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=  H1_color, b=P_sector_u) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=  H1_color, b=P_sector_d) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=  H1_color, b=P_sector_e) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=  H1_color, b=P_sector_nu) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=  H1_color, b=   I_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=  H1_color, b=  H1_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=  H1_color, b=  H2_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=  H1_color, b=E_rg_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=  H2_color, b=         I) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=  H2_color, b=  Q_sector) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=  H2_color, b=P_sector_u) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=  H2_color, b=P_sector_d) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=  H2_color, b=P_sector_e) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=  H2_color, b=P_sector_nu) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=  H2_color, b=   I_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=  H2_color, b=  H1_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=  H2_color, b=  H2_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=  H2_color, b=E_rg_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=E_rg_color, b=         I) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=E_rg_color, b=  Q_sector) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=E_rg_color, b=P_sector_u) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=E_rg_color, b=P_sector_d) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=E_rg_color, b=P_sector_e) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=E_rg_color, b=P_sector_nu) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=E_rg_color, b=   I_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=E_rg_color, b=  H1_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=E_rg_color, b=  H2_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=E_rg_color, b=E_rg_color) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+
+=== Zero-order condition test ===
+Max Frobenius norm over all pairs (a,b): 6.928e+00
+Pairs with significant violation:
+  (a=  H1_color, b=E_rg_color) → ||[a, J b J^-1]||_F = 6.928e+00
+  (a=E_rg_color, b=  H1_color) → ||[a, J b J^-1]||_F = 6.928e+00
+
+=== Grading & reality tests ===
+||{gamma_F, D_F}||_F = 0.000e+00
+max ||[gamma_F, a]||_F over a∈A_F = 0.000e+00
+||S^2 - I||_F  (⇒ J_F^2 deviation) = 0.000e+00
+||J D_F J^-1 - D_F||_F   = 1.145e-03
+||J D_F J^-1 + D_F||_F   = 5.745e-03

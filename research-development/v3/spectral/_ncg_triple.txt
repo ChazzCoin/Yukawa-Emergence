@@ -1,0 +1,445 @@
+#!/usr/bin/env python3
+"""
+harmonic_divisor_flavor_triple.py
+
+Canonical definition + diagnostics for the
+Harmonic Divisor Flavor Triple:
+
+  (A, H, D, J) =
+    (A_geom ⊗ A_F,
+     H_geom ⊗ H_F,
+     D_geom ⊗ I_F + I_geom ⊗ D_F,
+     J_geom ⊗ J_F)
+
+Geometric part:
+  - H_geom = l^2(Z), truncated to n = -N,...,N
+  - D_geom |n> = n |n>
+  - A_geom: divisor projectors P_div_d (diagonal)
+  - J_geom: complex conjugation
+
+Finite part:
+  - Imported from emergent_9:
+      H_F, A_F, D_F(Yu,Yd,Ye,Ynu), J_F
+    built from emergent alignment Yukawas.
+
+We treat the full triple as an ODD real spectral triple:
+  - No global grading gamma.
+  - Finite gamma_F is internal if needed.
+
+This script:
+  - builds the product triple,
+  - checks: Hermiticity, bounded commutators,
+           order-zero, first-order,
+  - inspects spectrum, zeta, spectral action.
+"""
+
+import numpy as np
+import _emergent_9 as em  # make sure emergent_9.py exists in same directory or PYTHONPATH
+
+
+# =========================
+# CONFIGURATION
+# =========================
+
+N_MODES   = 20        # geometric modes n = -N,...,N
+EPS_FIRST = 1e-12     # tolerance for first-order condition
+EPS_ZERO  = 1e-12     # tolerance for zero-order condition
+
+# Zeta / spectral action
+ZETA_S_LIST      = [2.0, 3.0]
+ZETA_EPS_CUTOFFS = [1e-1, 1e-2, 1e-3]
+LAMBDA_LIST      = [5.0, 10.0, 20.0]
+
+
+# =========================
+# GEOMETRIC TRIPLE
+# =========================
+
+def build_geom_hilbert_dim(N: int) -> int:
+    """Dimension of truncated H_geom."""
+    return 2 * N + 1
+
+
+def build_geom_dirac(N: int) -> np.ndarray:
+    """
+    Truncated geometric Dirac:
+        D_geom |n> = n |n>,   n = -N,...,N.
+    """
+    n_vals = np.arange(-N, N + 1, dtype=float)
+    return np.diag(n_vals)
+
+
+def build_geom_algebra_generators(N: int) -> dict:
+    """
+    Sample geometric algebra generators on H_geom:
+
+      - I_geom
+      - P_div_d: projectors onto modes divisible by d, for d in {2,3,5}.
+
+    These are diagonal in the |n> basis and commute with D_geom.
+    """
+    dim = build_geom_hilbert_dim(N)
+    n_vals = np.arange(-N, N + 1, dtype=int)
+    I_geom = np.eye(dim, dtype=complex)
+
+    gens = {"I_geom": I_geom}
+
+    def proj_div(d: int) -> np.ndarray:
+        mask = (n_vals % d == 0)
+        return np.diag(mask.astype(float))
+
+    for d in [2, 3, 5]:
+        gens[f"P_div_{d}"] = proj_div(d)
+
+    return gens
+
+
+def build_geom_real_structure(N: int):
+    """
+    Geometric real structure J_geom as complex conjugation in the |n> basis.
+    On matrices we implement it by M -> M^* (no swap needed).
+    """
+    dim = build_geom_hilbert_dim(N)
+    # On vectors: (J_geom psi)(n) = conj(psi(n))
+    # On operators: J_geom M J_geom^-1 = M^*
+    # We don't need an explicit matrix here.
+    return dim  # placeholder if you want to track dim
+
+
+# =========================
+# FINITE TRIPLE (FROM emergent_9)
+# =========================
+
+def build_finite_triple_from_emergent():
+    """
+    Use emergent_9 to:
+      - run emergent alignment,
+      - build D_F,
+      - build A_F generators and labels,
+      - get J_F as an LR-swap + conjugation structure.
+
+    Returns:
+      D_F      : (dimF x dimF) finite Dirac matrix
+      ops_F    : list of A_F generators (matrices)
+      labels_F : labels for those generators
+      S_F      : LR-swap matrix implementing J_F: J_F M J_F^-1 = S_F M^* S_F^T
+      dim_per_chirality : dim(H_L) = dim(H_R)
+    """
+    # 1) Emergent Yukawas
+    align = em.run_emergent_alignment()
+    Y_u, Y_d = align["Y_u"], align["Y_d"]
+    Y_e, Y_nu = align["Y_e"], align["Y_nu"]
+
+    # 2) Build finite Dirac
+    D_F = em.build_internal_DF_from_Y(Y_u, Y_d, Y_e, Y_nu)
+
+    # 3) Finite algebra generators
+    ops_F, labels_F = em.build_internal_algebra_ops()
+
+    # 4) Real structure J_F via LR-swap
+    dim_per_chirality = em.dim_per_chirality()
+    S_F = em.build_swap_LR(dim_per_chirality)
+
+    return D_F, ops_F, labels_F, S_F, dim_per_chirality
+
+
+# =========================
+# PRODUCT TRIPLE
+# =========================
+
+def kron(a: np.ndarray, b: np.ndarray) -> np.ndarray:
+    """Kronecker product wrapper."""
+    return np.kron(a, b)
+
+
+def build_product_dirac(D_geom: np.ndarray, D_F: np.ndarray) -> np.ndarray:
+    """
+    Product Dirac:
+        D = D_geom ⊗ I_F + I_geom ⊗ D_F
+    """
+    dim_geom = D_geom.shape[0]
+    dimF     = D_F.shape[0]
+
+    I_geom = np.eye(dim_geom, dtype=complex)
+    I_F    = np.eye(dimF, dtype=complex)
+
+    return kron(D_geom, I_F) + kron(I_geom, D_F)
+
+
+def build_product_algebra(N: int,
+                          ops_F: list[np.ndarray],
+                          labels_F: list[str]) -> tuple[list[np.ndarray], list[str]]:
+    """
+    Build product algebra generators on H = H_geom ⊗ H_F:
+
+        - a_geom ⊗ I_F   for a_geom in A_geom
+        - I_geom ⊗ a_F   for a_F in A_F
+    """
+    geom_gens = build_geom_algebra_generators(N)
+    I_geom    = geom_gens["I_geom"]
+
+    dimF = ops_F[0].shape[0]
+    I_F  = np.eye(dimF, dtype=complex)
+
+    ops_prod:   list[np.ndarray] = []
+    labels_prod: list[str]       = []
+
+    # Geometric part
+    for name, A_geom in geom_gens.items():
+        ops_prod.append(kron(A_geom, I_F))
+        labels_prod.append(f"{name}⊗I_F")
+
+    # Finite part
+    for A_F, lab in zip(ops_F, labels_F):
+        ops_prod.append(kron(I_geom, A_F))
+        labels_prod.append(f"I_geom⊗{lab}")
+
+    return ops_prod, labels_prod
+
+
+def build_product_swap_J(N: int, dim_per_chirality: int) -> np.ndarray:
+    """
+    Build S_prod implementing J on the product:
+
+        J M J^-1 = S_prod · M^* · S_prod^T
+
+    with S_prod = I_geom ⊗ S_F, where S_F swaps L/R.
+    """
+    dim_geom = build_geom_hilbert_dim(N)
+    S_F      = em.build_swap_LR(dim_per_chirality)
+    I_geom   = np.eye(dim_geom, dtype=complex)
+    return kron(I_geom, S_F)
+
+
+def J_action(S_prod: np.ndarray, M: np.ndarray) -> np.ndarray:
+    """
+    Implement J M J^-1 via S_prod and complex conjugation.
+    """
+    return S_prod @ M.conj() @ S_prod.T
+
+
+# =========================
+# AXIOM CHECKS
+# =========================
+
+def test_first_order_condition(
+    D: np.ndarray,
+    ops: list[np.ndarray],
+    labels: list[str],
+    S_prod: np.ndarray,
+    eps: float = 1e-12,
+) -> float:
+    """
+    First-order:
+        [[D, a], J b J^-1] = 0  for all a,b ∈ A.
+
+    Returns max Frobenius norm over all (a,b).
+    """
+    print("=== First-order condition (product triple) ===")
+    max_norm = 0.0
+
+    for a, la in zip(ops, labels):
+        Da = D @ a - a @ D
+        for b, lb in zip(ops, labels):
+            b_tilde = J_action(S_prod, b)
+            comm2   = Da @ b_tilde - b_tilde @ Da
+            norm    = np.linalg.norm(comm2, ord="fro")
+            if norm > max_norm:
+                max_norm = norm
+
+    print(f"Max ||[[D,a],J b J^-1]||_F over all (a,b): {max_norm:.3e}\n")
+    return max_norm
+
+
+def test_zero_order_condition(
+    ops: list[np.ndarray],
+    labels: list[str],
+    S_prod: np.ndarray,
+    eps: float = 1e-12,
+) -> float:
+    """
+    Order-zero:
+        [a, J b J^-1] = 0  for all a,b ∈ A.
+
+    Returns max Frobenius norm over all (a,b).
+    """
+    print("=== Zero-order condition (product triple) ===")
+    max_norm  = 0.0
+
+    for a, la in zip(ops, labels):
+        for b, lb in zip(ops, labels):
+            b_tilde = J_action(S_prod, b)
+            comm    = a @ b_tilde - b_tilde @ a
+            norm    = np.linalg.norm(comm, ord="fro")
+            if norm > max_norm:
+                max_norm = norm
+
+    print(f"Max ||[a,J b J^-1]||_F over all (a,b): {max_norm:.3e}\n")
+    return max_norm
+
+
+# =========================
+# SPECTRAL DIAGNOSTICS
+# =========================
+
+def eigenvalues(D: np.ndarray) -> np.ndarray:
+    vals, _ = np.linalg.eigh(D)
+    return vals
+
+
+def zeta_approx(D: np.ndarray, s: float, eps_cutoff: float) -> float:
+    vals = eigenvalues(D)
+    mask = np.abs(vals) > eps_cutoff
+    vals = np.abs(vals[mask])
+    return float(np.sum(vals ** (-s)))
+
+
+def spectral_action(D: np.ndarray, Lambda: float) -> float:
+    vals = eigenvalues(D)
+    x = vals / Lambda
+    return float(np.sum(np.exp(-x**2)))
+
+
+def run_spectral_diagnostics(D: np.ndarray) -> None:
+    print("=== Spectrum of full D ===")
+    vals = eigenvalues(D)
+    print(f"dim(H) = {len(vals)}")
+    print("10 smallest eigenvalues:", np.round(vals[:10], 6))
+    print("10 largest eigenvalues:",  np.round(vals[-10:], 6))
+    abs_vals = np.abs(vals)
+    print("\nMin |λ| =", abs_vals.min())
+    print("10 smallest |λ|:", np.round(np.sort(abs_vals)[:10], 6))
+    print()
+
+    print("=== Zeta-function approximations ===")
+    for eps_cut in ZETA_EPS_CUTOFFS:
+        for s in ZETA_S_LIST:
+            z = zeta_approx(D, s, eps_cutoff=eps_cut)
+            print(f"eps={eps_cut:>5.0e}, s={s:.1f}: zeta_D(s) ≈ {z:.6e}")
+    print()
+
+    print("=== Spectral action S(Λ) = Tr exp(-(D/Λ)^2) ===")
+    for Lam in LAMBDA_LIST:
+        S_L = spectral_action(D, Lam)
+        print(f"Λ={Lam:>5.1f}: S(Λ) ≈ {S_L:.6f}")
+    print()
+
+
+# =========================
+# MAIN DRIVER
+# =========================
+
+def main() -> None:
+    N = N_MODES
+    print("=== Harmonic Divisor Flavor Triple: Full Diagnostics ===")
+    print(f"Geometric truncation N = {N}  (dim H_geom = {build_geom_hilbert_dim(N)})")
+
+    # Geometric Dirac
+    D_geom = build_geom_dirac(N)
+
+    # Finite triple from emergent alignment
+    print("\n--- Building finite triple from emergent_9 ---")
+    D_F, ops_F, labels_F, S_F, dim_per_chirality = build_finite_triple_from_emergent()
+    dimF = D_F.shape[0]
+    print(f"dim(H_F) = {dimF}")
+
+    # Product Dirac
+    D = build_product_dirac(D_geom, D_F)
+    dimH = D.shape[0]
+    print(f"Total dim(H) = {dimH}\n")
+
+    # Hermiticity
+    herm_norm = np.linalg.norm(D - D.T.conj(), ord=2)
+    print("=== Basic operator checks ===")
+    print(f"||D - D^†||_2 = {herm_norm:.3e}\n")
+
+    # Product algebra
+    ops_prod, labels_prod = build_product_algebra(N, ops_F, labels_F)
+
+    # Product J via S_prod
+    S_prod = build_product_swap_J(N, dim_per_chirality)
+
+    # Axiom checks
+    max_first = test_first_order_condition(D, ops_prod, labels_prod, S_prod, eps=EPS_FIRST)
+    max_zero  = test_zero_order_condition(ops_prod, labels_prod, S_prod, eps=EPS_ZERO)
+
+    # Spectral diagnostics
+    run_spectral_diagnostics(D)
+
+    print("Diagnostics complete.")
+def main_3sm():
+    data3 = em.build_SM_3gen_triple_with_emergent_Y()
+
+    D_F3     = data3["D_F"]
+    ops3     = data3["algebra_ops"]
+    labels3  = data3["algebra_labels"]
+    gamma_F3 = data3["gamma_F"]
+    S_F3     = data3["S_F"]
+
+    em.test_first_order_condition_generic(D_F3, ops3, labels3, S_F3, eps=1e-12)
+    em.test_zero_order_condition_generic(ops3, labels3, S_F3, eps=1e-12)
+    em.test_grading_and_reality_generic(D_F3, ops3, labels3, gamma_F3, S_F3)
+    # 1) Quick single-point evaluation
+    chi2_val, details, obs, emergent = em.flavor_chi2_from_emergent_params(
+        N=60,
+        n_steps=600,
+        eta=1.0,
+        w6=1.0,
+        w5=1.0,
+        keep_fraction=0.01,
+        alpha=1.0,
+        beta=1.0,
+        random_seed=42,
+        use_neutrino_dressing=False,
+    )
+
+    print("χ² =", chi2_val)
+    for name, val, target, contrib in details:
+        print(f"{name:10s}: model={val:.4e}, target={target:.4e}, contrib={contrib:.3f}")
+
+
+if __name__ == "__main__":
+    # main()
+    main_3sm()
+
+"""
+=== First-order condition test (generic J) ===
+Max Frobenius norm over all pairs (a,b): 0.000e+00
+Pairs with norm < 1.0e-12:
+  (a=           I, b=           I) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=           I, b=color_lambda3) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=           I, b=color_lambda8) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=color_lambda3, b=           I) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=color_lambda3, b=color_lambda3) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=color_lambda3, b=color_lambda8) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=color_lambda8, b=           I) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=color_lambda8, b=color_lambda3) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+  (a=color_lambda8, b=color_lambda8) → ||[[D,a],J b J^-1]||_F = 0.000e+00
+
+=== Zero-order condition test (generic J) ===
+Max Frobenius norm over all pairs (a,b): 0.000e+00
+All pairs satisfy [a, J b J^-1] ≈ 0 within eps=1.0e-12
+
+=== Grading & reality tests (generic γ,J) ===
+||{gamma, D_F}||_F = 0.000e+00
+max ||[gamma, a]||_F over a∈A_F = 0.000e+00
+||S^2 - I||_F  (⇒ J^2 deviation) = 0.000e+00
+||J D_F J^-1 - D_F||_F   = 0.000e+00
+||J D_F J^-1 + D_F||_F   = 1.843e-01
+→ KO-sign: J D_F J^-1 = + D_F (J-even Dirac operator)
+
+χ² = 266.5774194954256
+mu_mt     : model=2.5989e-09, target=2.2000e-05, contrib=3.999
+mc_mt     : model=2.9869e-05, target=7.5000e-03, contrib=3.968
+md_mb     : model=2.5989e-09, target=1.1000e-03, contrib=4.000
+ms_mb     : model=2.9869e-05, target=2.2000e-02, contrib=3.989
+me_mt     : model=3.5172e-10, target=2.9000e-04, contrib=4.000
+mmu_mt    : model=4.0423e-06, target=5.9000e-02, contrib=3.999
+theta12_q : model=2.2440e-01, target=2.2700e-01, contrib=0.052
+theta23_q : model=3.6756e-16, target=4.1000e-02, contrib=4.000
+theta13_q : model=1.6246e-16, target=3.6000e-03, contrib=4.000
+theta12_l : model=1.4325e+00, target=5.8400e-01, contrib=211.101
+theta23_l : model=1.1184e+00, target=7.8500e-01, contrib=4.508
+theta13_l : model=1.9370e-02, target=1.5000e-01, contrib=18.960
+
+"""

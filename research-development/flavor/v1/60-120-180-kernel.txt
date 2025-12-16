@@ -1,0 +1,415 @@
+#!/usr/bin/env python3
+# =============================================================================
+#   TRIADIC GEOMETRIC ALIGNMENT — D360 TRIAD (60–120–180) IMPLEMENTATION
+#
+#   9 continuous parameters:
+#      A_u, B_u,
+#      A_d, B_d,
+#      A_e, B_e,
+#      A_nu, B_nu,
+#      kappa      ← triadic coherence
+#
+#   Geometry: 9-site ring (triadic indexing)
+#   Phases:   120-cycle phase wheels φ(i) = A + B (i mod 3)
+#   Kernel:   D360 triadic seed n=60 → (60,120,180), lifted to 9 sites
+#
+#   This script:
+#      - builds 9×9 Yukawas from the triadic kernel + phase wheels
+#      - downfolds to 3×3 (Schur complement)
+#      - constructs a 3×3 seesaw neutrino mass matrix
+#      - runs 1-loop SM RGEs (Yu,Yd,Ye,κ)
+#      - fits 14 flavor observables with CMA-ES
+# =============================================================================
+
+import numpy as np
+from scipy.integrate import solve_ivp
+import cma
+
+# --------------------------------------------------------------------
+#  Physics constants
+# --------------------------------------------------------------------
+MU_HIGH = 2.0e14   # flavor / seesaw scale
+MU_LOW  = 1.0e2    # EW scale
+V_HIGGS = 246.0    # Higgs vev in GeV
+
+# EW couplings at MU_LOW
+g1_EW, g2_EW, g3_EW = 0.36, 0.65, 1.17
+lam_H = 0.13
+
+N_SITES = 9
+
+# --------------------------------------------------------------------
+#  Experimental targets (14 observables)
+# --------------------------------------------------------------------
+targets = {
+    "m_c/m_t":   0.007,
+    "m_u/m_t":   1e-5,
+    "m_s/m_b":   0.02,
+    "m_d/m_b":   0.001,
+    "m_mu/m_tau":0.06,
+    "m_e/m_tau": 3e-4,
+
+    "theta12_q": 0.226,  # Cabibbo
+    "theta23_q": 0.041,
+    "theta13_q": 0.0035,
+
+    "theta12_l": 0.59,
+    "theta23_l": 0.84,
+    "theta13_l": 0.15,
+
+    "Delta_m2_21": 7.4e-5,
+    "Delta_m2_31": 2.5e-3,
+}
+sigmas = {k: 0.3*abs(v) for k, v in targets.items()}
+
+# ====================================================================
+# 1a. (Optional) Original D120 kernel (kept for reference / debugging)
+# ====================================================================
+def kernel_D120_axiom(kappa, forbid_long_arc=False):
+    """
+    D120 axiom-projector kernel on 9 sites.
+
+    Sites are at angles theta_i = 40° * i on a 360° circle,
+    then folded into a 120° fundamental domain via mod 120.
+
+    Distances on the 120° circle are 0, 40, or 80 degrees.
+    """
+    theta_360 = 40.0 * np.arange(N_SITES)     # 0,40,...,320
+    theta = np.mod(theta_360, 120.0)          # fold to 120°
+
+    K = np.zeros((N_SITES, N_SITES), dtype=float)
+
+    for i in range(N_SITES):
+        for j in range(N_SITES):
+            d = abs(theta[i] - theta[j])
+            d = min(d, 120.0 - d)  # geodesic distance on 120° circle
+
+            if d < 1e-12:
+                K[i, j] = 1.0
+            elif abs(d - 40.0) < 1e-12:
+                K[i, j] = kappa
+            elif abs(d - 80.0) < 1e-12:
+                K[i, j] = 0.0 if forbid_long_arc else kappa**2
+            else:
+                K[i, j] = 0.0
+    return K
+
+# ====================================================================
+# 1b. D360 Triadic 60–120–180 Kernel lifted to 9 sites
+# ====================================================================
+def triad_kernel_60_120_180(kappa: float) -> np.ndarray:
+    """
+    3x3 triadic kernel in harmonic space for modes (60, 120, 180).
+
+    Distances in degrees: 0, 60, 120.
+    Map them to powers of kappa: 1, kappa, kappa**2.
+    """
+    modes = np.array([60.0, 120.0, 180.0], dtype=float)
+    dist = np.abs(modes[:, None] - modes[None, :])  # 3x3 matrix
+
+    K3 = np.zeros((3, 3), dtype=float)
+    for i in range(3):
+        for j in range(3):
+            d = dist[i, j]
+            if d < 1e-9:
+                K3[i, j] = 1.0
+            elif np.isclose(d, 60.0):
+                K3[i, j] = kappa
+            elif np.isclose(d, 120.0):
+                K3[i, j] = kappa**2
+            else:
+                # Should not occur for (60,120,180); kept for safety
+                K3[i, j] = 0.0
+    return K3
+
+
+def triad_to_9site_projector() -> np.ndarray:
+    """
+    3x9 projector from triad space (3 modes) to a 9-site ring.
+
+    Mode 0 (60)  -> sites (0,3,6)
+    Mode 1 (120) -> sites (1,4,7)
+    Mode 2 (180) -> sites (2,5,8)
+    """
+    P = np.zeros((3, 9), dtype=complex)
+    triads = [(0, 3, 6), (1, 4, 7), (2, 5, 8)]
+    for a, sites in enumerate(triads):
+        for s in sites:
+            P[a, s] = 1.0 / np.sqrt(3.0)
+    return P
+
+
+def triad_kernel_9x9(kappa: float) -> np.ndarray:
+    """
+    Lift the 3x3 triadic kernel K3 (60,120,180) to a 9x9 kernel.
+
+    K9 = P^† K3 P, where P is the triad_to_9site_projector.
+    """
+    K3 = triad_kernel_60_120_180(kappa)
+    P = triad_to_9site_projector()
+    return P.conj().T @ K3 @ P
+
+# ====================================================================
+# 2. Phase matrix — triadic phase wheel
+# ====================================================================
+def phase_matrix(A, B):
+    """
+    φ(i) = A + B*(i mod 3)
+    Triadic periodicity → 120° geometric phase unit.
+    """
+    phi_gen = np.array([A + B*g for g in range(3)])
+    phi = np.array([phi_gen[i % 3] for i in range(N_SITES)])
+    # matrix of e^{i(φ_i - φ_j)}
+    return np.exp(1j * (phi[:, None] - phi[None, :]))
+
+# ====================================================================
+# 3. Yukawa builder (triadic D360 60–120–180 kernel)
+# ====================================================================
+def build_Yukawa(A, B, kappa, alpha, forbid_long_arc=False):
+    """
+    Aligned 9x9 Yukawa using D360 triadic 60-120-180 kernel.
+
+    Parameters
+    ----------
+    A, B : float
+        Phase-wheel parameters for φ(i) = A + B * (i mod 3).
+    kappa : float
+        Triadic coherence parameter.
+    alpha : float
+        Overall sector normalization (fixed per sector).
+    forbid_long_arc : bool, optional
+        Kept for API compatibility; ignored in the triadic kernel version.
+    """
+    phases = phase_matrix(A, B)      # 9x9 complex phase differences
+    K = triad_kernel_9x9(kappa)      # 9x9 real triadic kernel from (60,120,180)
+    Y9 = phases * K
+
+    # Normalize largest singular value to 1 and rescale to alpha
+    s_max = np.linalg.svd(Y9, compute_uv=False)[0]
+    if s_max == 0:
+        raise RuntimeError("Degenerate Yukawa: largest singular value is zero.")
+    Y9 /= s_max
+    Y9 *= alpha
+    return Y9
+
+# ====================================================================
+# 4. Schur 9→3
+# ====================================================================
+def schur_9to3(Y9: np.ndarray) -> np.ndarray:
+    """
+    Downfold 9x9 matrix to 3x3 via Schur complement.
+
+    Y9 = [[A, B],
+          [B†, D]]
+
+    Yeff = A - B D^{-1} B†
+    """
+    A = Y9[:3, :3]
+    B = Y9[:3, 3:]
+    D = Y9[3:, 3:]
+    Dinv = np.linalg.pinv(D + 1e-10*np.eye(6))
+    return A - B @ Dinv @ B.conj().T
+
+# ====================================================================
+# 5. Proto-Majorana 9x9 matrix
+# ====================================================================
+def proto_majorana(rng, Lambda_Maj=7e13):
+    """
+    Random complex symmetric 9x9 matrix with largest singular value = Lambda_Maj.
+    """
+    M = rng.normal(size=(9, 9)) + 1j * rng.normal(size=(9, 9))
+    M = 0.5 * (M + M.T.conj())
+    M /= np.linalg.svd(M, compute_uv=False)[0]
+    M *= Lambda_Maj
+    return M
+
+# ====================================================================
+# 6. RGE System (1-loop SM Yukawas + κ operator)
+# ====================================================================
+def pack(Yu, Yd, Ye, kappa):
+    def flat(M): return np.concatenate([M.real.ravel(), M.imag.ravel()])
+    return np.concatenate([flat(Yu), flat(Yd), flat(Ye), flat(kappa)])
+
+def unpack(v):
+    n = 3
+    N = n * n
+    def block(i):
+        re = v[i:i+N].reshape((n, n))
+        im = v[i+N:i+2*N].reshape((n, n))
+        return re + 1j * im
+    Yu = block(0)
+    Yd = block(2*N)
+    Ye = block(4*N)
+    kappa = block(6*N)
+    return Yu, Yd, Ye, kappa
+
+def beta(t, v, g1, g2, g3, lam):
+    Yu, Yd, Ye, kappa = unpack(v)
+
+    # Safety clipping to avoid extreme runaway
+    for M in (Yu, Yd, Ye):
+        np.clip(M, -20, 20, out=M)
+
+    T = np.trace(3*Yu@Yu.conj().T + 3*Yd@Yd.conj().T + Ye@Ye.conj().T).real
+    pref = 1.0 / (16.0 * np.pi**2)
+
+    dYu = pref * (
+        Yu * (T - (17.0/20.0)*g1**2 - (9.0/4.0)*g2**2 - 8.0*g3**2)
+        + 1.5 * (Yu @ Yu.conj().T @ Yu - Yd @ Yd.conj().T @ Yu)
+    )
+
+    dYd = pref * (
+        Yd * (T - (1.0/4.0)*g1**2 - (9.0/4.0)*g2**2 - 8.0*g3**2)
+        + 1.5 * (Yd @ Yd.conj().T @ Yd - Yu @ Yu.conj().T @ Yd)
+    )
+
+    dYe = pref * (
+        Ye * (T - (9.0/4.0)*g1**2 - (9.0/4.0)*g2**2)
+        + 1.5 * (Ye @ Ye.conj().T @ Ye)
+    )
+
+    YeT = Ye @ Ye.conj().T
+    dkappa = pref * ((-3.0*g2**2 + lam)*kappa + YeT @ kappa + kappa @ YeT.T)
+
+    return pack(dYu, dYd, dYe, dkappa)
+
+def run_rge(Yu, Yd, Ye, kappa_high):
+    """
+    Run RGEs from MU_HIGH down to MU_LOW.
+    """
+    sol = solve_ivp(
+        beta,
+        [np.log(MU_HIGH), np.log(MU_LOW)],
+        pack(Yu, Yd, Ye, kappa_high),
+        args=(g1_EW, g2_EW, g3_EW, lam_H),
+        method="RK45",
+        rtol=1e-5,
+        atol=1e-8,
+        max_step=0.4,
+    )
+    return unpack(sol.y[:, -1])
+
+# ====================================================================
+# 7. Observables extraction
+# ====================================================================
+def get_obs(Yu, Yd, Ye, Mnu):
+    """
+    Compute 14 observables from Yukawas + neutrino mass matrix.
+    """
+    def angles(U):
+        a = np.abs(U)
+        s13 = a[0, 2]
+        c13 = np.sqrt(max(0.0, 1.0 - s13**2))
+        s12 = a[0, 1]/c13 if c13 > 1e-12 else 0.0
+        s23 = a[1, 2]/c13 if c13 > 1e-12 else 0.0
+        # clamp to [-1,1] to avoid NaNs
+        s12 = min(1.0, max(0.0, s12))
+        s23 = min(1.0, max(0.0, s23))
+        s13 = min(1.0, max(0.0, s13))
+        return np.arcsin(s12), np.arcsin(s23), np.arcsin(s13)
+
+    su = np.sort(np.linalg.svd(Yu, compute_uv=False))
+    sd = np.sort(np.linalg.svd(Yd, compute_uv=False))
+    se = np.sort(np.linalg.svd(Ye, compute_uv=False))
+
+    obs = {
+        "m_c/m_t":    su[1]/su[2],
+        "m_u/m_t":    su[0]/su[2],
+        "m_s/m_b":    sd[1]/sd[2],
+        "m_d/m_b":    sd[0]/sd[2],
+        "m_mu/m_tau": se[1]/se[2],
+        "m_e/m_tau":  se[0]/se[2],
+    }
+
+    # CKM
+    Uu = np.linalg.svd(Yu)[0]
+    Ud = np.linalg.svd(Yd)[0]
+    Vckm = Uu.conj().T @ Ud
+    obs["theta12_q"], obs["theta23_q"], obs["theta13_q"] = angles(Vckm)
+
+    # Neutrinos
+    evals, U_nu = np.linalg.eigh(0.5 * (Mnu + Mnu.T))
+    mnu = np.sort(np.abs(evals))
+
+    Ue = np.linalg.svd(Ye)[0]
+    Upmns = Ue.conj().T @ U_nu
+    obs["theta12_l"], obs["theta23_l"], obs["theta13_l"] = angles(Upmns)
+
+    obs["Delta_m2_21"] = mnu[1]**2 - mnu[0]**2
+    obs["Delta_m2_31"] = mnu[2]**2 - mnu[0]**2
+
+    return obs
+
+# ====================================================================
+# 8. Cost function
+# ====================================================================
+def cost(X, M0):
+    """
+    X = (A_u,B_u, A_d,B_d, A_e,B_e, A_nu,B_nu, kappa)
+    """
+    A_u, B_u, A_d, B_d, A_e, B_e, A_nu, B_nu, kappa = X
+
+    # Fixed physical normalizations
+    alpha_u, alpha_d, alpha_e, alpha_nu = 0.71, 0.095, 0.082, 0.13
+
+    # Build 9×9 Yukawas (triadic D360 kernel)
+    Yu9  = build_Yukawa(A_u,  B_u,  kappa, alpha_u)
+    Yd9  = build_Yukawa(A_d,  B_d,  kappa, alpha_d)
+    Ye9  = build_Yukawa(A_e,  B_e,  kappa, alpha_e)
+    Ynu9 = build_Yukawa(A_nu, B_nu, kappa, alpha_nu)
+
+    # Schur 9→3 for quarks and charged leptons
+    Yu_h = schur_9to3(Yu9)
+    Yd_h = schur_9to3(Yd9)
+    Ye_h = schur_9to3(Ye9)
+
+    # Triadic projector for neutrinos (3 generations ← 9 sites)
+    P = np.zeros((3, 9), dtype=complex)
+    for c, sites in enumerate([(0, 3, 6), (1, 4, 7), (2, 5, 8)]):
+        P[c, sites] = 1.0 / np.sqrt(3.0)
+
+    Ynu_eff = P @ Ynu9 @ P.conj().T
+    MR      = P @ M0   @ P.conj().T
+
+    # Type-I seesaw at high scale
+    Mnu_h = -0.5 * V_HIGGS**2 * (
+        Ynu_eff @ np.linalg.pinv(MR + 1e-8*np.eye(3)) @ Ynu_eff.T
+    )
+    kappa_h = Mnu_h / V_HIGGS**2
+
+    # RGE evolution to low scale
+    Yu_l, Yd_l, Ye_l, kappa_l = run_rge(Yu_h, Yd_h, Ye_h, kappa_h)
+    Mnu_l = kappa_l * V_HIGGS**2
+
+    # Observables
+    obs = get_obs(Yu_l, Yd_l, Ye_l, Mnu_l)
+
+    chi2 = sum(((obs[k] - targets[k]) / sigmas[k])**2 for k in targets)
+    reg  = 0.05 * np.sum(X**2)   # mild regularization on parameters
+
+    return chi2 + reg
+
+# ====================================================================
+# 9. RUN OPTIMIZATION
+# ====================================================================
+if __name__ == "__main__":
+    rng = np.random.default_rng(777)
+    M0 = proto_majorana(rng)
+
+    # Initial guess: A,B in [-0.4,0.4], kappa ~ 0.27
+    x0 = np.concatenate([rng.uniform(-0.4, 0.4, 8), [0.27]])
+
+    es = cma.CMAEvolutionStrategy(
+        x0, 0.35,
+        {'popsize': 80, 'maxiter': 4000, 'verb_disp': 1, 'seed': 42}
+    )
+
+    print("Starting D360 triadic 60–120–180 alignment optimization...")
+    while not es.stop():
+        xs = es.ask()
+        es.tell(xs, [cost(x, M0) for x in xs])
+        es.disp()
+
+    print("\n=== FINAL TRIADIC D360 RESULT ===")
+    print("Best χ² + reg =", es.best.f)
+    print("Best parameters:", es.best.x)
