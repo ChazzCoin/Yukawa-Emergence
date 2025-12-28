@@ -1312,6 +1312,9 @@ if __name__ == "__main__":
     run_ncg_with_alignment()
 
 """
+Appendix C or D, titled something like:
+Compatibility with Spectral Triple Axioms
+
 >>> Emergent alignment Yukawas plugged into NCG tests <<<
 
 === Running emergent alignment pipeline to obtain Yukawas ===

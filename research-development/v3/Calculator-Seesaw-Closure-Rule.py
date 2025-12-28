@@ -321,6 +321,43 @@ if __name__ == "__main__":
     run()
 
 """
+Appendix B (or C): “Constructive Spectral Flow Realization”
+
+In addition to the abstract variational analysis, we implemented an explicit spectral-flow construction in which the residual μ–τ degeneracy is dynamically lifted by harmonic stability selection. 
+In all cases examined, the resulting effective Yukawa exhibits at most a single two-dimensional harmonic block, which is then uniquely resolved by a minimal seesaw completion.
+
+Appendix B.1 — Motivation
+
+While Sections 2–4 establish the abstract existence and uniqueness of the alignment mechanism, it is instructive to demonstrate that such an alignment can arise dynamically from internal spectral data without imposing a preferred flavor basis.
+
+Appendix B.2 — Construction
+Briefly summarize:
+
+kernel with broken translation invariance
+
+misalignment flow 
+𝑒
+−
+𝛽
+𝐾
+e
+−βK
+
+stability projector
+
+triadic compression
+
+No code yet — just equations.
+
+Appendix B.3 — Numerical Illustration
+Here you describe results, not the full script:
+
+harmonic blocks emergent mixing matrix residual 2D block seesaw lifting.
+
+Appendix B.4 — Consistency Checks
+Mention:
+Hermiticity seesaw consistency qualitative stability under parameter variation
+
 RESULTS:
 [[0], [1], [2], [3], [4], [5], [6], [7], [8]]
 

@@ -16,7 +16,6 @@ from dataclasses import dataclass
 from typing import List, Dict, Tuple
 import numpy as np
 
-from v3.spectral import run_ncg_test_suite
 
 
 # ============================================================

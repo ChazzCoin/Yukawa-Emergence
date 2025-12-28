@@ -375,7 +375,7 @@ if __name__ == "__main__":
     main()
 
 """
-/Users/chazzromeo/rAI/Flavor/.venv/bin/python /Users/chazzromeo/rAI/Flavor/alignment_v5.py 
+RESULTS:
 
 Flavor pipeline
   cycle=360  sites=[1, 2, 5]  kappa=0.24  kind=power

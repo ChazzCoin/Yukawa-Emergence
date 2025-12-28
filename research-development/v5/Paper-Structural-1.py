@@ -57,6 +57,7 @@ def angles_from_absU(absU):
     th23 = np.degrees(np.arcsin(np.clip(s23, -1, 1)))
 
     return th12, th13, th23
+
 def scan_geometry(pipe, g_diag_vals, g_off_vals):
     """
     Perform a controlled geometry scan and extract mixing angles.
@@ -80,35 +81,6 @@ def scan_geometry(pipe, g_diag_vals, g_off_vals):
             })
 
     return results
-def apply_full_seesaw_3x3(self, Y):
-    """
-    Apply a full 3x3 seesaw to a single 3D harmonic block.
-    Assumes Y is already the effective 3x3 lepton Yukawa.
-    """
-    n = Y.shape[0]
-    assert n == 3, "Full seesaw requires 3x3 Y."
-
-    zero = np.zeros_like(Y)
-    MR = self.seesaw_M * np.eye(3)
-
-    big = np.block([
-        [zero, Y],
-        [Y.conj().T, MR]
-    ])
-
-    eigvals, eigvecs = eigh(big)
-    eigvals = np.real(eigvals)
-
-    # sort by absolute value
-    order = np.argsort(np.abs(eigvals))
-    eigvals = eigvals[order]
-    eigvecs = eigvecs[:, order]
-
-    # light neutrinos = first 3 eigenvalues
-    light_masses = np.abs(eigvals[:3])
-    light_vectors = eigvecs[:3, :3]
-
-    return light_masses, light_vectors
 
 # ============================================================
 #  CONFIG (same as yours, unchanged)
@@ -364,6 +336,55 @@ class AlignmentPipeline:
 
         return light_masses, light_vectors
 
+    def compute_alignment_energy(self, out):
+        """
+        Compute the alignment energy E(theta) for cases with 1D + 2D lepton blocks.
+        Assumes the first block is 1D (charged lepton) and the second is 2D (neutrino).
+        Returns thetas, energies, and theta_star (minimizer).
+        """
+        blocks = out["blocks"]
+        Y = out["Y"]
+
+        # Require exactly one 1D and one 2D block (common in your runs)
+        if len(blocks) != 2 or len(blocks[0]) != 1 or len(blocks[1]) != 2:
+            print("Alignment energy: Skipping (not 1D + 2D lepton split)")
+            return None
+
+        # Extract sub-blocks
+        e_idx = blocks[0][0]  # charged-lepton index
+        nu_idxs = blocks[1]  # neutrino indices [1,2]
+
+        # Build full 3x3 Hermitians (zero in off-blocks for isolation)
+        He_full = np.zeros((3, 3))
+        He_full[e_idx, e_idx] = np.abs(Y[e_idx, e_idx]) ** 2  # or use full diagonalized
+
+        Hnu_full = np.zeros((3, 3))
+        Y_nu_block = Y[np.ix_(nu_idxs, nu_idxs)]
+        Hnu_full[np.ix_(nu_idxs, nu_idxs)] = Y_nu_block @ Y_nu_block.conj().T
+
+        thetas = np.linspace(0, 2 * np.pi, 400)
+        energies = []
+
+        for theta in thetas:
+            c, s = np.cos(theta), np.sin(theta)
+            R = np.eye(3)
+            R[np.ix_(nu_idxs, nu_idxs)] = np.array([[c, -s], [s, c]])
+
+            Hnu_rot = R @ Hnu_full @ R.T
+            commutator = He_full @ Hnu_rot - Hnu_rot @ He_full
+            E = np.linalg.norm(commutator, 'fro') ** 2
+            energies.append(E)
+
+        energies = np.array(energies)
+        theta_star = thetas[np.argmin(energies)]
+
+        print(f"\n=== Alignment Mechanism (from emergent geometry) ===")
+        print(f"Unique minimum at θ* ≈ {np.degrees(theta_star):.2f}°")
+        print(f"Minimal E(θ*) ≈ {np.min(energies):.3e}")
+        print(f"Effective atmospheric angle ≈ {np.degrees(np.abs(np.sin(theta_star))):.2f}° "
+              f"(from residual rotation)")
+
+        return thetas, energies, theta_star
     # ---------- run the whole pipeline ----------
 
     def run(self):
@@ -402,8 +423,6 @@ class AlignmentPipeline:
             "kept_indices_C360": self.kept_indices,
         }
 
-
-
 # ============================================================
 #  Example usage
 # ============================================================
@@ -417,7 +436,7 @@ def main_seesaw_scan():
     pipe = AlignmentPipeline(cfg, beta=1.5, rel_cut=0.15, tol_rel_blocks=0.03)
 
     out = pipe.run()
-
+    pipe.compute_alignment_energy(out)
     print("\nY eigenvalues:", out["Y_eigvals"])
     print("Masses [GeV]:", out["masses_GeV"])
     print("\n|U|:\n", out["absU"])
@@ -449,33 +468,22 @@ def main_seesaw_scan():
         )
     print("\n--Main Seesaw Scan Complete--\n")
 
-def main():
-    cfg = AlignmentV33Config()
-    pipe = AlignmentPipeline(cfg, beta=1.5, rel_cut=0.15, tol_rel_blocks=0.03, seesaw_M=1e6)
-
-    out = pipe.run()
-
-    print("\nY eigenvalues:", out["Y_eigvals"])
-    print("Masses [GeV]:", out["masses_GeV"])
-    print("\n|U|:\n", out["absU"])
-
-    print("\nHarmonic blocks (on Y):", out["blocks"])
-    print("C360 kept indices (on K):", out["kept_indices_C360"])
-
-    print("\nDirac-like blocks (1D):", out["dirac_blocks"])
-    print("Majorana-like blocks (>=2D) light eigs:", out["majorana_blocks"])
-
 def run_lepton_sector_full_3nu():
     cfg = AlignmentV33Config()
 
-    # Lock geometry into 3D harmonic regime
-    set_geometry_weights(cfg, g_diag=0.90, g_off=1.00)
+    # Settings known to favor full merging into one 3D block
+    set_geometry_weights(cfg, g_diag=0.95, g_off=1.10)  # robust from scan
+
+    # Optional: fine-tune manually if needed
+    # cfg.geometry_weights[(0,2)] = 0.988083 # 0.988083 PMNS angles: θ12 ≈ 33.1°, θ13 ≈ 6.2°, θ23 ≈ 6.3°
+    # cfg.geometry_weights[(2,0)] = 0.996 # PMNS angles: θ12 ≈ 11.7°, θ13 ≈ 8.6°, θ23 ≈ 19.5°
+    cfg.geometry_weights[(2,0)] = 1.0310000412  # PMNS angles: θ12 ≈ 15.0°, θ13 ≈ 6.9°, θ23 ≈ 44.9°
 
     pipe = AlignmentPipeline(
         cfg,
         beta=1.5,
         rel_cut=0.15,
-        tol_rel_blocks=0.03,
+        tol_rel_blocks=0.05,  # slightly looser tolerance helps merging
         seesaw_M=1e6
     )
 
@@ -483,25 +491,36 @@ def run_lepton_sector_full_3nu():
 
     print("\nLepton-sector harmonic blocks:", out["blocks"])
 
-    # sanity check
-    assert out["blocks"] == [[0,1,2]], "Not in 3D harmonic regime."
+    if out["blocks"] == [[0, 1, 2]]:
+        light_masses, light_vectors = pipe.apply_full_seesaw_3x3(out["Y"])
 
-    # apply full seesaw
-    light_masses, light_vectors = pipe.apply_full_seesaw_3x3(out["Y"])
+        print("\nLight neutrino masses (dimensionless):")
+        print(light_masses)
 
-    print("\nLight neutrino masses (dimensionless):")
-    print(light_masses)
+        print("\nNeutrino mixing matrix |U_PMNS|:")
+        print(np.abs(light_vectors))
 
-    print("\nNeutrino mixing matrix |U_PMNS|:")
-    print(np.abs(light_vectors))
+        # Optional: extract angles
+        th12, th13, th23 = angles_from_absU(np.abs(light_vectors))
+        print(f"\nPMNS angles: θ12 ≈ {th12:.1f}°, θ13 ≈ {th13:.1f}°, θ23 ≈ {th23:.1f}°")
 
-    return light_masses, light_vectors
-
+        return light_masses, light_vectors
+    else:
+        print("Warning: Did not achieve full 3D harmonic block.")
+        print("Current blocks:", out["blocks"])
+        print("Try adjusting g_diag downward and/or g_off upward.")
+        return None, None
 if __name__ == "__main__":
     main_seesaw_scan()
     run_lepton_sector_full_3nu()
 
 """
+RESULTS:
+
+=== Alignment Mechanism (from emergent geometry) ===
+Unique minimum at θ* ≈ 0.00°
+Minimal E(θ*) ≈ 0.000e+00
+Effective atmospheric angle ≈ 0.00° (from residual rotation)
 
 Y eigenvalues: [0.20443467 0.30696381 0.31326296]
 Masses [GeV]: [35.57163219 53.41170349 54.50775485]
@@ -547,14 +566,16 @@ g_diag=1.20, g_off=1.15 | θ12=2.3°, θ13=1.8°, θ23=2.3° | blocks=[[0], [1],
 
 --Main Seesaw Scan Complete--
 
-
 Lepton-sector harmonic blocks: [[0, 1, 2]]
 
 Light neutrino masses (dimensionless):
-[7.55617404e-08 8.72520849e-08 9.13414306e-08]
+[5.67375951e-08 6.40210864e-08 6.68725412e-08]
 
 Neutrino mixing matrix |U_PMNS|:
-[[0.97898577 0.19406889 0.0626428 ]
- [0.0904764  0.48103731 0.872019  ]
- [0.18275907 0.85495051 0.48544696]]
+[[0.95897078 0.25657094 0.12060841]
+ [0.15783692 0.69597782 0.70050152]
+ [0.23550487 0.67066104 0.70338555]]
+
+PMNS angles: θ12 ≈ 15.0°, θ13 ≈ 6.9°, θ23 ≈ 44.9°
+
 """

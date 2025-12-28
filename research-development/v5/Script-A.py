@@ -593,6 +593,9 @@ if __name__ == "__main__":
     run()
 
 """
+We find that fermion flavor structure emerges from spectral stability under a misalignment flow, 
+with the appearance of Majorana sectors determined dynamically by harmonic degeneracy rather than imposed symmetry.
+
 RESULTS:
 beta=1.2: blocks=[[0], [1, 2]]
 beta=1.5: blocks=[[0], [1], [2]]
