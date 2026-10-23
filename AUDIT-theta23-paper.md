@@ -101,7 +101,8 @@ The theorist re-derived every verdict on paper. Their analytic results agree wit
 
 ## Scope points from the lab's adversary (relayed by the manager)
 - **The functional class is not the full invariant ring.** The paper's generators are Tr H_e, Tr H_e², Tr H_ν, Tr H_ν² and Tr H_eH_ν. For a 2×2 pair these do generate the ring (Procesi 1976; Sibirskii 1968), so Thm single is complete on its stated scope. For the 3×3 pair they do not: Tr(H_e²H_ν²), Tr((H_eH_ν)²) and the CP-odd Tr([H_e,H_ν]³) are independent. Section (i) and the review show that such invariants carry the e-row phase φ_u.
-- **"Minimiser = 90°" in the lab's record holds only for real H_e with δ = 0.** Section (v) is the general case: with a complex H_e|_E the minimum is ½δe²δν²(1−r²) > 0, and exact alignment cannot be reached.
+- **"Minimiser = 90°" in the lab's record holds only for real H_e with δ = 0.** Section (v) is the general case: with a complex H_e|_E the minimum is ½δe²δν²(1−r²) > 0, and exact alignment cannot be reached. The theorist adds (`files/R1-theorist-addendum.md` §C, derived on paper): the minimiser's θ *location* is the same for any r > 0, but the PMNS angle there is cos²θ₂₃ = (1±r)/2. So θ₂₃ is 0 or 90° only when r = 1, and it tends to 45° as r → 0.
+- Full 3×3 generating set (theorist addendum §B): Tr X³, Tr Y³, Tr X²Y, Tr XY², Tr X²Y² and a degree-6 word (which gives Tr([X,Y]³)), beyond the 2×2 list. The paper's wording "every basis-independent penalty from the sector Hermitians" (tex 181-182, 435) overreaches. The lab's T0 finds Tr([H_e,H_ν]³) carries no usable θ-dependence in its setting. That number is the lab's and has not been rechecked here.
 
 ## What the paper can still claim
 Under explicit conditions the paper's results stand: exactly, and verified by its own verifier, by independent re-derivation (v), and by the theorist's hand derivation. The conditions are:
