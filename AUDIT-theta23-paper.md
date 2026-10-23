@@ -86,3 +86,38 @@ IO, the data's near-degenerate pair (1,2), (m₂−m₁)/m₂ < f: already 1.503
 
 **Plain statement.** The paper's premise Hν|_E ∝ 𝟙 with E = the 2–3 pair requires m₂≈m₃: even at a loose 10 % splitting that is m_lightest ≳ 0.10 eV and Σm_ν ≳ 0.317 eV (IC24 with SK-atm, NO) – 0.318 eV (IC19 w/o SK-atm, NO), 2.6× Planck18+BAO's 0.12 eV and ~5× DESI DR2+CMB's 0.064 eV. **No ΛCDM bound listed allows it**, in either ordering, either variant, at 1, 5 or 10 %. The only pair that is near-degenerate in the data is the solar pair (Δm²₂₁/|Δm²₃ℓ| ≈ 0.03), and only for IO with its absolute scale pinned near the minimum (Σ ≈ 0.099 eV, itself excluded by the DESI ΛCDM bounds). One-line caveat: non-ΛCDM extensions relax these bounds; values not evaluated here. This tension is a statement about the premise "E = 2–3 degenerate pair"; the (i),(ii),(iv) results above (what does and does not follow once such an E is granted) are unaffected.
 Limits: central values only; bounds taken from R1-literature at abstract level (dataset details for Planck's likelihood combination and DR2's CMB set unconfirmed there); the threshold f values 1/5/10 % are the manager's choice, not a physical cutoff.
+
+---
+# Review (item #4, theorist, `files/R1-theorist.md` in the crew folder) and what the paper can still claim (item #5, lead)
+
+## Corrections from the review
+The theorist re-derived every verdict on paper. Their analytic results agree with the captures, apart from the points below.
+- **(i) Tr((H_eH_ν)²) — "holds" is overstated.** Tr M² = a₁²m₁⁴ + 2m₁² u†H_ν|_E u + Tr((H_E H_ν|_E)²). The middle term carries the e-row phase φ_u, so the function is not exactly one cosine. The capture agrees: asymmetry/range is 3.7e-6 against a 2e-7–5e-7 floor, and the 300-draw max is 2.9e-5 against a 7e-7 floor (`full3x3_fourier-run-2026-10-23.txt`). The effect is real but small. No odd harmonics appear, which still agrees.
+- **(i) Size of the commutator's e-row term.** ‖[H_e,H_ν]‖² = ‖[H_E,K_E]‖² + 2u†K_E²u, with K = H_ν − m₁², gives const + C sin²φ + B cos(φ−φ_u), where B = 4(c_ν−m₁²)(δν/2)|u|² r_u. B is **first order** in δν and C is second order. So in the paper's own regime (δν → 0) the 3×3 commutator norm is selected by the e-row orientation, not by ψ₀. The audit's remark "scales ~0.15" has no capture behind it and is replaced by this. This is derived on paper, not yet fitted numerically.
+- **(ii) "δ = 197°: θ13 never 0"** holds only for real SO(2) rotations. The symmetry of H_ν|_E = λ𝟙 is U(2), and a complex rotation inside E can set U_e3 = 0 for any δ.
+- **(ii-A) Wording.** "Near-degenerate" there means a small Δm² ratio (Δm²₂₁/|Δm²₃ℓ| ≈ 0.03), not degenerate masses. For normal ordering at m_lightest = 0, the ratio m₂/m₁ is unbounded.
+- **(iv) Addition.** Q₂ = H_eH_νH_e depends on θ only at O(δν). At exact degeneracy Q₂|_E = c_ν H_e|_E², so it is inert there. The paper's Remark that the stationary set is "frozen at {0,π/4,π/2}" holds for the commutator-norm family. It does not hold for every relational functional: Thm single allows an interior stationary point wherever G′ = 0.
+- **(iii) Convention, cross-checked against the lab crew's T0 `theta23-premise-check`.** T0 gives Σm_ν = 0.32675 eV (normal ordering) and 0.34136 eV (inverted) at "10 %". The audit's figures are 0.31818 and 0.33299 eV. The difference is the definition, not the inputs. T0 uses ε = (m₃−m₂)/m₂; this audit uses f = (m₃−m₂)/m₃. Solving m₂²((1+ε)²−1) = Δm²₃₂ at ε = 0.1 reproduces T0's m_lightest = 0.10498 eV (normal ordering). Both conventions exceed every ΛCDM bound.
+
+## Scope points from the lab's adversary (relayed by the manager)
+- **The functional class is not the full invariant ring.** The paper's generators are Tr H_e, Tr H_e², Tr H_ν, Tr H_ν² and Tr H_eH_ν. For a 2×2 pair these do generate the ring (Procesi 1976; Sibirskii 1968), so Thm single is complete on its stated scope. For the 3×3 pair they do not: Tr(H_e²H_ν²), Tr((H_eH_ν)²) and the CP-odd Tr([H_e,H_ν]³) are independent. Section (i) and the review show that such invariants carry the e-row phase φ_u.
+- **"Minimiser = 90°" in the lab's record holds only for real H_e with δ = 0.** Section (v) is the general case: with a complex H_e|_E the minimum is ½δe²δν²(1−r²) > 0, and exact alignment cannot be reached.
+
+## What the paper can still claim
+Under explicit conditions the paper's results stand: exactly, and verified by its own verifier, by independent re-derivation (v), and by the theorist's hand derivation. The conditions are:
+- functionals of the **2×2 compressions** H_e|_E, H_ν(θ)|_E only;
+- E a 2-dimensional subspace on which H_ν is λ𝟙 (Prop 1) or split by δν (Thm nogo);
+- rotations restricted to **real SO(2)**;
+- **both Bloch vectors real**, i.e. real eigenbases. This must be stated as a hypothesis; it is now used silently in the proof of Thm single.
+
+In that class every relational functional depends on θ only through cos 2(θ+ψ₀). Aligned points are always stationary, a monotone functional selects exact alignment {0, π/2}, and the commutator norm is ½δe²δν² sin²2(θ+ψ₀). So no functional of that class selects an interior θ, and Cor external's demand for a non-inert, externally oriented Q follows.
+
+The paper cannot claim any of the following:
+- that E is the μ–τ flavor plane once θ₁₂, θ₁₃ ≠ 0 (ii);
+- that the obstruction concerns θ₂₃ alone (at m₂ = m₃ all three angles are frame labels; ii);
+- that the theorems carry over to functionals of the full 3×3 pair or to complex H_e (i, v);
+- that the degenerate regime is the physical one: m₂ ≈ m₃ is excluded by every ΛCDM Σm_ν bound in both orderings and both NuFIT 6.0 variants (iii).
+
+Stated honestly, the result is a theorem about a limit: θ₂₃'s frame is fixed by the eigenframe of the degeneracy-lifting term on the ν₂–ν₃ pair, and the theorem says nothing about that frame in the ε → 0 limit.
+
+**Cosmology-independent limit.** KATRIN 2024 bounds the effective electron-neutrino mass at m_β < 0.45 eV (90 % CL; Aker et al., arXiv:2406.13516). Here m_β² = Σ|U_ei|² m_i² ≤ m_heaviest². At the m₂ ≈ m₃ thresholds in (iii) the three masses are nearly equal: m_heaviest ≈ Σm_ν/3, about 0.35 eV even at f = 1 % (1.047 eV/3). That is below 0.45 eV, so **KATRIN does not exclude m₂ ≈ m₃**. Only the cosmological bounds do, and those bounds assume ΛCDM.
