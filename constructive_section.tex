@@ -179,34 +179,60 @@ phase operator on $E$ serves as $Q$.\\
 \emph{Gate.} A null over random label assignments, with the observable defined on the real
 data-fed $\He,\Hnu$.\\
 % PROVISIONAL (2026-10-23). The structural paragraph comes from the lab's T3 gate (lab a56d871,
-% calculations/theta23-harmonic-label/) as relayed by the manager. It is under independent
-% check (theorist item #7, files/R1-theorist-D3.md). Numbers stay [pending] until the T3 record lands.
+% calculations/theta23-harmonic-label/; group-theory facts only, no label assigned) as relayed by
+% the manager. theorist-2 verified it on paper (files/R1-theorist-D3.md, crew
+% flavor-obstruction-paper; rigorous algebra; the e-row coefficient and r^* are derived but
+% numerically unvalidated). Numbers stay [pending] until the T3 record lands.
 \emph{Structure (exact).}
 \begin{remark}[Flavor labels are functions of $\He$]\label{rem:labels}
-Let the charged-lepton masses be distinct. Every operator diagonal in the charged-lepton basis is
-then a polynomial in $\He$, by Lagrange interpolation on the three eigenvalues. In particular a
-harmonic-label operator $\hat\Phi=\operatorname{diag}(n_e,n_\mu,n_\tau)$ equals $f(\He)$ for some
-$f$. So every functional of $(\hat\Phi,\Hnu)$ is a functional of $(\He,\Hnu)$, and a label operator
-adds no relational datum that $\He$ does not already carry.
+Let the charged-lepton masses $a_\alpha=m_\alpha^2$ be distinct. Every operator diagonal in the
+charged-lepton basis is then a polynomial in $\He$ of degree at most 2, by Lagrange interpolation on
+the three eigenvalues. In particular a harmonic-label operator
+$\hat\Phi=\operatorname{diag}(n_e,n_\mu,n_\tau)$ on flavor states equals $f(\He)$ with
+$f(a_\alpha)=n_\alpha$; the unitary form $\operatorname{diag}(e^{2\pi i n_\alpha/N})$ is a polynomial
+with complex coefficients. So every functional of $(\hat\Phi,\Hnu)$ is a functional of
+$(\He,\Hnu)$, and the harmonic structure ($N$, $V_m$, gcd/LCM) enters only through three numbers.
+If the labels sit on mass states instead, $\hat\Phi=q(\Hnu)$ commutes with $\Hnu$ and is inert by
+construction.
 \end{remark}
-\noindent Two consequences.
+\noindent Consequences, stated for functionals \emph{restricted to $E$}:
 \begin{itemize}
-\item \emph{Exact $\mu$--$\tau$ plane (the paper's setting; $E$ invariant under $\He$).} The
-  compression $P_E f(\He) P_E=\operatorname{diag}(f(m_\mu^2),f(m_\tau^2))$ has the flavor frame
-  for every $f$. Only $\delta_e$ changes, to $f(m_\tau^2)-f(m_\mu^2)$. Theorems~single and nogo
-  therefore apply to every such $Q$ unchanged: $\Tr(f(\He)\Hnu(\theta))$ has the same $\psi_0$ and
-  the same stationary set $\{0,\pi/4,\pi/2\}$. Two edge cases: if $f(m_\mu^2)=f(m_\tau^2)$ the
-  compression is inert, and if $f$ reverses the $\mu/\tau$ order the roles of the minima and maxima
-  of a monotone functional swap. [edge cases: pending theorist check]
-\item \emph{$E$ tilted to the data value.} The compressed family $P_E f(\He) P_E$ traces a
-  one-parameter curve of frames, labelled by a ratio $r$ of label differences. A flavor-label $Q$
-  can act only through the $\mu/\tau$ components of $\nu_1$. It is therefore a one-parameter fit to
-  one target, not a prediction. [definition of $r$ and the curve: pending theorist check and the T3 record]
+\item \emph{Exact $\mu$--$\tau$ plane (the paper's setting; $E$ invariant under $\He$).}
+  $f(\He)|_E=c_f\one+\tfrac12 d_f\sigma_z$ with $d_f=f(m_\tau^2)-f(m_\mu^2)$, so the eigenframe
+  is the flavor frame for every $f$ with $d_f\neq0$. Then
+  $\Tr(f(\He)\Hnu(\theta))=\mathrm{const}+\tfrac12 d_f\,\delta_\nu\cos2(\theta+\psi_0)$, with the
+  same $\psi_0$ and the same stationary set $\theta+\psi_0\in(\pi/2)\mathbb Z$; Thms.~single and
+  nogo apply to every such $Q$. This trace identity is exact at $3\times3$.
+  \emph{Order flip} ($d_f<0$): the frame is unchanged and the eigenvalue order is swapped, so
+  $\psi_0\to\psi_0+\pi/2$, maxima and minima exchange, and $\theta_{23}\to90^\circ-\theta_{23}$
+  as a label. \emph{Degenerate} ($d_f=0$, e.g.\ $n_\tau=-n_\mu \bmod N$ for a cosine label):
+  $f(\He)|_E\propto\one$, every functional is flat in $\theta$, $Q$ is inert, and (a) fails.
+\item \emph{The $3\times3$ commutator norm is not frozen.}
+  $\Fnorm{[f(\He),\Hnu(\theta)]}^2=\sum_{i\neq j}(f_i-f_j)^2|(\Hnu)_{ij}|^2$. Its $E$--$E$ part is
+  the paper's $C\sin^22(\theta+\psi_0)$ with $\delta_e\to d_f$. Its e-row part carries a second
+  harmonic with coefficient $\tfrac12(f_\tau-f_\mu)(2f_e-f_\mu-f_\tau)(|w_\mu|^2-|w_\tau|^2)$,
+  whose phase is set by the e-row of $\Hnu$, not by $\psi_0$. It vanishes only if that e-row is
+  zero, $f_\mu=f_\tau$, or $f_e=\tfrac12(f_\mu+f_\tau)$.
+\item \emph{$E$ tilted to the data value} ($E=\nu_1^\perp$). In the $(\nu_2,\nu_3)$ frame the
+  compression has off-diagonal element $(f_\mu-f_e)(A+rB)$, with
+  $A=\overline{U_{\mu2}}U_{\mu3}$, $B=\overline{U_{\tau2}}U_{\tau3}$ and
+  $r=(f_\tau-f_e)/(f_\mu-f_e)$. The labels enter only through $r$; the family is a one-parameter
+  curve of frames. For $\delta=0$ the frame aligns with the $\varepsilon$-term exactly at
+  \[
+    r^*=\frac{s_{23}(c_{12}c_{23}-s_{12}s_{23}s_{13})}{c_{23}(c_{12}s_{23}+s_{12}c_{23}s_{13})}.
+  \]
+  At $\theta_{13}=0$ this gives $r^*=1$, i.e.\ $f_\mu=f_\tau$: the only aligning label is the inert
+  one. The mechanism's entire leverage is $\theta_{13}\neq0$. For $\delta\neq0,\pi$ the frame is
+  complex and exact alignment is generically impossible, since
+  $\min_r|A+rB|=|A|\,|\sin(\arg A-\arg B)|>0$. This is consistent with the audit's complex-case
+  result. $Q$ acts only through $\nu_1$'s $\mu/\tau$ components, and alignment is one real equation
+  in $(r,\theta_{23})$: a one-parameter fit to one target, which reparametrises $\theta_{23}$ and
+  does not determine it.
 \end{itemize}
 \emph{Result.} [pending: lab topic theta23-harmonic-label]\\
 \emph{Verdict on (a)--(e).}
 \begin{itemize}
-\item (a) Holds unless $f(m_\mu^2)=f(m_\tau^2)$.
+\item (a) Holds unless $d_f=f(m_\tau^2)-f(m_\mu^2)=0$, in which case $Q$ is inert on the exact plane and (a) fails.
 \item (b) \textbf{Decided structurally: fails.} The framework's canon assigns no harmonics to the
   leptons. Without a principle that selects the labels, the orientation is a free choice of $f$.
 \item (c)--(e) [pending: T3 record].
