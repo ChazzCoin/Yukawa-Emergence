@@ -1,0 +1,51 @@
+# env: python 3.13.7 numpy 2.4.4 date 2026-10-23 flavor-paper-wt@faf2d83
+# cmd: /opt/homebrew/bin/python3 analysis/composite_operators.py (cwd = repo root)
+
+--- physical-like: charged mu-tau block, quasi-degenerate nu pair (1.00,1.05): c_e=1.5842 d_e=3.14607 c_nu=1.025 d_nu=0.05 psi0=0.35   p/q = 41.291 ---
+  1. max|Q1 - [c_nu X + c_e Y - c_e c_nu 1 + a b cos(phi) 1]| = 1.33e-15
+  2. max|Bloch(Q2) - closed form|                             = 2.66e-15
+  3. Q1: traceless part = alpha(theta) X0 + beta(theta) Y0(theta): fit residual max=1.73e-15; alpha in [1.025,1.025], beta in [1.5842,1.5842]  -> theta-INDEPENDENT coefficients (inside linear class + scalar)
+  3. Q2: traceless part = alpha(theta) X0 + beta(theta) Y0(theta): fit residual max=5.69e-15; alpha in [3.16916,3.32606], beta in [0.0352474,0.0352474]  -> theta-DEPENDENT coefficients (outside the fixed-coefficient linear class)
+     Q1 coefficients predicted (alpha,beta)=(c_nu,c_e)=(1.025,1.5842)
+  4. Q1: theta of zeros of ||[Q1,H_nu(theta)]||^2 : 69.945 deg (phi=180.00 deg), 159.945 deg (phi=360.00 deg)   [aligned = theta = -psi0 mod 90 deg = 69.946]
+  4. Q2: theta of zeros of ||[Q2,H_nu(theta)]||^2 : 69.945 deg (phi=180.00 deg), 159.945 deg (phi=360.00 deg)   [aligned = theta = -psi0 mod 90 deg = 69.946]
+  5. Q2: stationary theta of ||[Q2,H_nu]||^2 over [0,180) deg: 24.252(max,f=1.306e-01), 69.945(min,f=3.303e-10), 115.641(max,f=1.306e-01), 159.945(min,f=3.639e-10)
+     closed form cos phi* = 0.024190020 -> phi* = 88.6139 deg  -> theta* = 24.2534 deg (and mod 90 siblings); aligned = phi in {0,180} deg; pi/4 point = phi = 90 deg
+
+--- physical-like, wide nu splitting (nu pair (0.2, 1.8)): c_e=1.5842 d_e=3.14607 c_nu=1 d_nu=1.6 psi0=0.35   p/q = 1.25887 ---
+  1. max|Q1 - [c_nu X + c_e Y - c_e c_nu 1 + a b cos(phi) 1]| = 1.78e-15
+  2. max|Bloch(Q2) - closed form|                             = 4.44e-15
+  3. Q1: traceless part = alpha(theta) X0 + beta(theta) Y0(theta): fit residual max=1.60e-15; alpha in [1,1], beta in [1.5842,1.5842]  -> theta-INDEPENDENT coefficients (inside linear class + scalar)
+  3. Q2: traceless part = alpha(theta) X0 + beta(theta) Y0(theta): fit residual max=3.58e-15; alpha in [0.658005,5.67879], beta in [0.0352474,0.0352474]  -> theta-DEPENDENT coefficients (outside the fixed-coefficient linear class)
+     Q1 coefficients predicted (alpha,beta)=(c_nu,c_e)=(1,1.5842)
+  4. Q1: theta of zeros of ||[Q1,H_nu(theta)]||^2 : 69.945 deg (phi=180.00 deg), 159.945 deg (phi=360.00 deg)   [aligned = theta = -psi0 mod 90 deg = 69.946]
+  4. Q2: theta of zeros of ||[Q2,H_nu(theta)]||^2 : 69.945 deg (phi=180.00 deg), 159.945 deg (phi=360.00 deg)   [aligned = theta = -psi0 mod 90 deg = 69.946]
+  5. Q2: stationary theta of ||[Q2,H_nu]||^2 over [0,180) deg: 11.277(max,f=1.869e+02), 69.945(min,f=1.430e-08), 128.616(max,f=1.869e+02), 159.945(min,f=1.089e-06)
+     closed form cos phi* = 0.459263623 -> phi* = 62.6604 deg  -> theta* = 11.2767 deg (and mod 90 siblings); aligned = phi in {0,180} deg; pi/4 point = phi = 90 deg
+
+--- PSD extreme: lowest eigenvalue 0 for both (p/q = 1): c_e=1 d_e=2 c_nu=0.5 d_nu=1 psi0=0.35   p/q = 1 ---
+  1. max|Q1 - [c_nu X + c_e Y - c_e c_nu 1 + a b cos(phi) 1]| = 4.44e-16
+  2. max|Bloch(Q2) - closed form|                             = 6.66e-16
+  3. Q1: traceless part = alpha(theta) X0 + beta(theta) Y0(theta): fit residual max=6.28e-16; alpha in [0.5,0.5], beta in [1,1]  -> theta-INDEPENDENT coefficients (inside linear class + scalar)
+  3. Q2: traceless part = alpha(theta) X0 + beta(theta) Y0(theta): fit residual max=9.42e-16; alpha in [0.00256802,1.99743], beta in [-3.10862e-15,1.11022e-15]  -> theta-DEPENDENT coefficients (outside the fixed-coefficient linear class)
+     Q1 coefficients predicted (alpha,beta)=(c_nu,c_e)=(0.5,1)
+  4. Q1: theta of zeros of ||[Q1,H_nu(theta)]||^2 : 69.945 deg (phi=180.00 deg), 159.945 deg (phi=360.00 deg)   [aligned = theta = -psi0 mod 90 deg = 69.946]
+  4. Q2: theta of zeros of ||[Q2,H_nu(theta)]||^2 : 69.945 deg (phi=180.00 deg), 159.945 deg (phi=360.00 deg)   [aligned = theta = -psi0 mod 90 deg = 69.946]
+  5. Q2: stationary theta of ||[Q2,H_nu]||^2 over [0,180) deg: 9.945(max,f=3.375e+00), 69.945(min,f=9.396e-27), 129.945(max,f=3.375e+00), 159.945(min,f=2.127e-08)
+     closed form cos phi* = 0.500000000 -> phi* = 60.0000 deg  -> theta* = 9.9465 deg (and mod 90 siblings); aligned = phi in {0,180} deg; pi/4 point = phi = 90 deg
+
+--- INDEFINITE toy (not m m^dag): c_nu small so p/q < 1: c_e=1 d_e=1 c_nu=0.1 d_nu=1 psi0=0.35   p/q = 0.4 ---
+  1. max|Q1 - [c_nu X + c_e Y - c_e c_nu 1 + a b cos(phi) 1]| = 3.33e-16
+  2. max|Bloch(Q2) - closed form|                             = 4.44e-16
+  3. Q1: traceless part = alpha(theta) X0 + beta(theta) Y0(theta): fit residual max=2.90e-16; alpha in [0.1,0.1], beta in [1,1]  -> theta-INDEPENDENT coefficients (inside linear class + scalar)
+  3. Q2: traceless part = alpha(theta) X0 + beta(theta) Y0(theta): fit residual max=3.24e-16; alpha in [-0.298716,0.698716], beta in [0.75,0.75]  -> theta-DEPENDENT coefficients (outside the fixed-coefficient linear class)
+     Q1 coefficients predicted (alpha,beta)=(c_nu,c_e)=(0.1,1)
+  4. Q1: theta of zeros of ||[Q1,H_nu(theta)]||^2 : 69.945 deg (phi=180.00 deg), 159.945 deg (phi=360.00 deg)   [aligned = theta = -psi0 mod 90 deg = 69.946]
+  4. Q2: theta of zeros of ||[Q2,H_nu(theta)]||^2 : 36.735 deg (phi=113.58 deg), 69.945 deg (phi=180.00 deg), 103.158 deg (phi=246.42 deg), 159.945 deg (phi=360.00 deg)   [aligned = theta = -psi0 mod 90 deg = 69.946]
+  5. Q2: stationary theta of ||[Q2,H_nu]||^2 over [0,180) deg: 6.003(max,f=8.007e-02), 36.735(min,f=3.448e-11), 52.197(max,f=7.229e-03), 69.945(min,f=1.196e-10), 87.696(max,f=7.229e-03), 103.158(min,f=4.026e-11), 133.890(max,f=8.007e-02), 159.945(min,f=6.514e-10)
+     closed form cos phi* = 0.614142843 -> phi* = 52.1103 deg  -> theta* = 6.0016 deg (and mod 90 siblings); aligned = phi in {0,180} deg; pi/4 point = phi = 90 deg
+
+--- 6. positivity: p/q = (c_e/a)(c_nu/b) over random PSD 2x2 pairs (eigenvalues >= 0) ---
+  100000 random draws: min p/q = 1.006854  (>=1 always: True)
+  analytic: c >= a  for PSD (c = (l1+l2)/2 >= |l1-l2|/2), so p/q >= 1, equality iff both smaller eigenvalues are 0.
+# exit: 0

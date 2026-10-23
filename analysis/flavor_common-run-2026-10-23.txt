@@ -1,0 +1,4 @@
+# env: python 3.13.7 numpy 2.4.4 date 2026-10-23 flavor-paper-wt@faf2d83
+# cmd: /opt/homebrew/bin/python3 analysis/flavor_common.py (cwd = repo root)
+flavor_common self-check OK: unitary, PDG round-trip to 1e-12 (np.float64(0.58), np.float64(0.15000000000000002), np.float64(0.85), np.float64(1.2000000000000006))
+# exit: 0
