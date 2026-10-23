@@ -58,8 +58,51 @@ from exact $\mu$--$\tau$ degeneracy, generates $K|_E$ through the charged-lepton
 couplings.\\
 \emph{Gate.} Reproduce numerically the analytic running of the mixing angles of
 Antusch, Kersten, Lindner and Ratz (2003).\\
-\emph{Result.} [pending: lab topic T1]\\
-\emph{Verdict on (a)--(e).} [pending]
+% Source: Domain.Alignment lab crew, calculations/theta23-rg-running/ (README.md, rg_running.py,
+% validate-rg-running.py, run-2026-10-23.txt, run-2026-10-23-validate.txt), commits 397b4e8,
+% b3572ca, 49fa1c6; challenge file: [cite once saved]. All numbers below are that record's.
+% Not yet reproduced by this repo's verifier (item #6 pending).
+\emph{Setup.} The record runs at one loop, below the lightest seesaw scale $M_1$, from a
+$\mu$--$\tau$ permutation-symmetric seed at $M_1$ down to $M_Z$, in the SM and in the MSSM. Before
+any novel number it passes five gates, including the analytic angle RGEs of
+Antusch et~al.\ (2003), reproduced to $3\times10^{-9}$. An independent route reproduces it:
+RK4 transport of $\kappa$, least-squares shooting, and a separate null.\\
+\emph{Result.}
+\begin{itemize}
+\item \emph{Sign.} $\operatorname{sign}(\theta_{23}(M_Z)-\pi/4)=+\operatorname{sign}(C)\,
+  \operatorname{sign}(\Delta m^2_{\rm atm})$, with $C=-3/2$ (SM) and $C=+1$ (MSSM). For normal
+  ordering the SM gives the lower octant and the MSSM the upper. The octant therefore follows the
+  SM/MSSM choice, which is a model input, not data. The two NuFIT~6.0 normal-ordering fits also
+  disagree on the octant (IC19 without SK-atm $48.5^\circ$; IC24 with SK-atm $43.3^\circ$), so no
+  sign can be scored.
+\item \emph{Size.} SM: $|\theta_{23}(M_Z)-45^\circ|\le0.0026^\circ$ for every $\Lambda$CDM-allowed
+  $\Sigma m_\nu$, three orders of magnitude short. MSSM: the NuFIT~6.0 IC19 (without SK-atm)
+  normal-ordering $1\sigma$ window $[+2.6^\circ,+4.2^\circ]$ is reached only at $\tan\beta=50$,
+  $M_{\rm SUSY}=1$~TeV, $\Sigma m_\nu=0.12$~eV (23 of 64 Majorana-phase points). Under DESI DR1+CMB
+  and DR2+CMB the maximum is $+2.03^\circ$ and $+1.79^\circ$. The size grows with the free inputs
+  $\tan\beta$ and $M_1$.
+\item \emph{Which pair is oriented.} The running rotates the solar pair far more than the
+  atmospheric pair: $18.77^\circ$ vs $3.57^\circ$ at $\tan\beta=50$, $\Sigma m_\nu=0.12$~eV, phases~0.
+\item \emph{Seed consistency (not a D1 result).} The permutation seed has $\theta_{13}=0$; running
+  generates at most $1.78^\circ$ under $\Lambda$CDM, against the measured $8.5^\circ$.
+\end{itemize}
+\emph{Verdict on (a)--(e).}
+\begin{itemize}
+\item (a) \textbf{Passes:} the running term on $E$ is rank one, not $\propto\one_E$.
+\item (b) \textbf{Passes in part:} its direction $e_\tau$ is set by the charged-lepton mass
+  ordering (data), but its sign is the model coefficient $C$.
+\item (c) \textbf{Fails:} the running does not single out the $\nu_2$--$\nu_3$ frame; it orients the
+  solar pair more strongly.
+\item (d) \textbf{Unscored:} the record's null (random breaking of matched norm) splits about 50/50
+  on the sign against the running's fixed sign. 10.3\% of it lands as close to $48.5^\circ$ as the
+  running at the one allowed configuration that reaches the window. The challenge found that null
+  unmatched and $\theta_{23}$-only, so it does not score (d) as stated.
+\item (e) \textbf{Fails}, except in the tuned corner above, and there $\theta_{13}$ is wrong.
+\end{itemize}
+Seesaw-threshold effects act through $Y_\nu$, whose orientation is unmeasured, so they fail (b) by
+construction (stated in the record, not computed). Not tested: two loops, SUSY threshold
+corrections, and a non-$\mu$--$\tau$ high-scale structure combined with running.
+\textbf{D1 fails as a data-fixed $\theta_{23}$ mechanism.}
 
 \subsection{D2: Majorana phases (the complex dimension)}\label{sec:D2}
 \emph{Candidate.} $\Hnu=m_\nu m_\nu^\dagger$ erases the Majorana phases; $Q$ is built from
