@@ -60,7 +60,9 @@ couplings.\\
 Antusch, Kersten, Lindner and Ratz (2003).\\
 % Source: Domain.Alignment lab crew, calculations/theta23-rg-running/ (README.md, rg_running.py,
 % validate-rg-running.py, run-2026-10-23.txt, run-2026-10-23-validate.txt), commits 397b4e8,
-% b3572ca, 49fa1c6; challenge file: [cite once saved]. All numbers below are that record's.
+% b3572ca, 49fa1c6, closed in 6834d33 (null relabelled; "(d) passes on sign" struck). Challenge:
+% lab crew folder, galt-crews/flavor-obstruction-lab/files/R1-T1-challenge.md (not in a repo).
+% All numbers below are that record's.
 % This repo's verifier, section "D1", reproduces the sign rule and the solar-vs-atmospheric
 % comparison independently (analysis/d1_rg_scale.py; analysis/verify-run-2026-10-23-D1.txt).
 % Sizes are the lab's alone.
@@ -100,10 +102,9 @@ RK4 transport of $\kappa$, least-squares shooting, and a separate null.\\
   ordering (data), but its sign is the model coefficient $C$.
 \item (c) \textbf{Fails:} the running does not single out the $\nu_2$--$\nu_3$ frame; it orients the
   solar pair more strongly.
-\item (d) \textbf{Unscored:} the record's null (random breaking of matched norm) splits about 50/50
-  on the sign against the running's fixed sign. 10.3\% of it lands as close to $48.5^\circ$ as the
-  running at the one allowed configuration that reaches the window. The challenge found that null
-  unmatched and $\theta_{23}$-only, so it does not score (d) as stated.
+\item (d) \textbf{Unscored:} the record's null is unmatched, tests $\theta_{23}$ only, and uses
+  phases $(0,0)$. It splits about 50/50 on the sign, against the running's fixed sign, so it cannot
+  score (d) as stated.
 \item (e) \textbf{Fails}, except in the tuned corner above, and there $\theta_{13}$ is wrong.
 \end{itemize}
 Seesaw-threshold effects act through $Y_\nu$, whose orientation is unmeasured, so they fail (b) by
