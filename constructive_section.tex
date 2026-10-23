@@ -348,6 +348,32 @@ exact.\\
 \textbf{D3 fails as a data-fixed $\theta_{23}$ mechanism}, on (b) and on the small-denominator null.
 It is a consistency check of a known result.
 
+\subsection{D3b: an external harmonic frame}\label{sec:D3b}
+% PROVISIONAL (2026-10-23): lab e34fc31 (calculations/theta23-harmonic-frame/; gate 6e6ff74;
+% pre-registration amendment e92d5af; capture run-2026-10-23-t3b.txt). Validator and adversary are
+% pending. All numbers are that record's.
+\emph{Candidate.} The labels of D3, but in a frame $R\in SO(3)$ that is not the charged-lepton
+frame, i.e.\ not orthogonal to $E$ and oriented from outside the mass and flavor data. This is the
+setting the D4 consequence points to.\\
+\emph{Gate.} Haar sampling on $SO(3)$ (two samplers against the analytic angle density), and
+$R=\one$ reproducing D3's $r^*$ and the T0 frame-label table.\\
+\emph{Result} (provisional).
+\begin{itemize}
+\item \emph{Exact.} Aligning the $\nu_2$--$\nu_3$ pair and the solar pair together requires $\nu_2$
+  to be an eigenvector of $Q$. The needed frame tilt is then
+  $\theta_{\rm joint}=\min_\alpha\arccos|U_{\alpha2}|=47.2^\circ$--$52.2^\circ$, independent of the
+  labels.
+\item No label ratio is special: the small-denominator $r$ sit at grid percentiles 0.08--1.00.
+  The pre-registered yardstick $F<0.05$ holds for the whole grid, since every $r$ needs a tilt
+  $\le43^\circ$. It therefore does not discriminate, a design flaw that the record flags.
+\item \emph{Divisor-angle coincidences.} Every $3\sigma$ coincidence of the tilt with a divisor
+  angle has look-elsewhere probability $\ge0.133$. The single $1\sigma$ hit below 5\% is one variant
+  among 52 tests.
+\end{itemize}
+\emph{Verdict} (provisional). (b) fails by construction: $R$ is a free $SO(3)$ input. Whether canon
+fixes such a frame is a question for the author. (d) is not scored, because the pre-registered
+yardstick does not discriminate. \textbf{D3b fails as a data-fixed $\theta_{23}$ mechanism.}
+
 \subsection{D4: a fourth generation-space direction}\label{sec:D4}
 \emph{Candidate.} A non-degenerate $\Hnu^{(4)}$ on $\mathbb C^4$, compressed to $\mathbb C^3$
 (the 3+1 sterile structure); the compression may carry an orientation on $E$ fixed by the
@@ -401,9 +427,27 @@ role. What this does \emph{not} exclude is a $Q$ whose compression to $E$ is non
 by data outside $(\He,\Hnu)$. Examples are a seesaw non-unitarity operator
 $\eta\sim Y_\nu M^{-2}Y_\nu^\dagger$, which is not a function of $(\He,\Hnu)$ in general, or the
 external harmonic frame of T3b.\\
-\emph{Result.} [pending: the lab's T4 record]\\
-\emph{Verdict on (a)--(e).} [pending the T4 record. Structurally: (a) fails for any $Q$ built from
-mass states outside $E$; for the sterile-in-$E$ case (b) fails, because $x$ is free]
+% Numbers: PROVISIONAL (2026-10-23), lab dc6d4b7 (gate), a7cc8a3 (pre-registration), e734dbc (run),
+% calculations/theta23-fourth-direction/. Validator and adversary are pending. Sampling region: the
+% PrGlo17 3-sigma box as a uniform prior (a choice, per the record).
+\emph{Result} (provisional).
+\begin{itemize}
+\item \emph{Exact.} $P_EQ_4P_E=0$ to $2.7\times10^{-17}$ over 4 variants $\times$ 2 $\delta$ $\times$
+  200 draws. $\Tr(H_e^{(4)}\Hnu(\theta))$ is a single cosine to $9\times10^{-15}$, with harmonics
+  $\ge2$ vanishing to $5\times10^{-15}$. Words in $P_1,P_4$ are scalar on $E$ for $n=3,\dots,6$ to
+  $1.3\times10^{-15}$. The in-$E$ rotation leaves columns 1 and 4 and $P_E$ fixed.
+\item \emph{The free sterile mass.} Over $x=0$--$10\,m_\tau^2$ in the PrGlo17 box, $x$ moves $\psi_0$
+  by a median $4.1^\circ$.
+\item \emph{Consistency check} (PART~B). The one non-inert 4D object, the active-block compression
+  $Q_{\rm act}$, has median norm 16--23 times the $\varepsilon$-term at $m_4^2=1$~eV$^2$ (5--95\%:
+  0.8--54). Yet it changes no measured element: $|N_{\alpha1}|$ and $|N_{\alpha4}|$ are invariant under
+  the in-$E$ rotation. Read as $\theta_{23}'$, its frame lands in the NuFIT~6.0 $3\sigma$ window at
+  0.57--1.03 times the random-frame rate (random $\approx0.09$--$0.11$), never above the
+  pre-registered $2\times$. So no enrichment appears.
+\end{itemize}
+\emph{Verdict on (a)--(e)} (provisional). (a) fails exactly for operators of the fourth mass state.
+(b) fails for $H_e^{(4)}$, because $\psi_0$ depends on the free $x$. The frame-label problem persists
+in 3+1. \textbf{D4 fails.}
 
 \subsection{D5: the Lorentzian fourth dimension}\label{sec:D5}
 \emph{Candidate.} Lift the Pauli algebra of $E$, $\mathrm{Cl}(3,0)$, into $\mathrm{Cl}(1,3)$. The
