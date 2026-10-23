@@ -53,3 +53,36 @@ Limits: 2×2 restriction only (full 3×3 composites not run); ‖[Q,He]‖² not
 5000 random draws (all quadrants, independent trace parts), matrices built from eigen-projectors, not the paper's σ-decomposition. All PASS:
 V1 eigenvector angle ξ−t 2.2e-16; V2 Tr(HeHν)=2c_ec_ν+½δeδν cos2(t+ψ₀) 1.8e-14; V3a [a·σ,b·σ]=2i(a×b)·σ 1.8e-15; V3b ‖[He,Hν]‖²=½δe²δν² sin²2(t+ψ₀) 3.1e-13; V4 dE/dt = 2C sin4(t+ψ₀) 2.6e-11 (relative to C); V5 Cayley–Hamilton word reductions (Tr X²Y, Tr XYXY = Tr(XY)²−2detX detY, Tr X²Y²) ≤1.7e-13. **Bloch algebra and the closed form hold.**
 **Hidden assumption (beyond the paper):** the proof places both Bloch vectors in the xz-plane (real eigenbases). For a complex Hermitian H_e|_E (σ_y component, r = length of its xz projection) the identities become Tr = 2c_ec_ν + ½δeδν r cos2(t+ψ₀′) and E = ½δe²δν²(1 − r²cos²2(t+ψ₀′)) (verified 1.1e-14 / 2.0e-13, 2000 draws): the stationary set is the same family but the minimum is ½δe²δν²(1−r²) > 0 — exact alignment is unreachable (median 1−r² = 0.49 over the draws). Thm "monotone"/"nogo" statements "minima E=0 at exact alignment" need the real-eigenbasis assumption stated.
+
+---
+# Addendum (item #3): (ii-A) which pair is near-degenerate in the data; (iii) quasi-degeneracy vs Δm²₃ℓ and Σm_ν
+
+Capture for every number below: `analysis/nufit_degeneracy-run-2026-10-23.txt` (script `analysis/nufit_degeneracy.py`; input `analysis/data/nufit6_central.csv`).
+Inputs: NuFIT 6.0 Table 1 **central values only**, arXiv:2410.05380 v2, JHEP 12 (2024) 216, transcribed from `files/R1-literature.md` §3.1 (not re-read from the PDF by me). Variants named as in that paper: **IC19 w/o SK-atm** and **IC24 with SK-atm**. Cosmology bounds (ΛCDM, 95 %) as recorded in R1-literature §3.2 at abstract level: Planck 2018+BAO 0.12 eV (arXiv:1807.06209), DESI DR1+CMB 0.072 eV (arXiv:2404.03002), DESI DR2+CMB 0.064 eV (arXiv:2503.14738). No uncertainties propagated.
+
+## (ii-A) The data's near-degenerate pair is the solar pair, not the 2–3 pair
+- Δm²₂₁/|Δm²₃ℓ| = 0.02956 (IC19 w/o SK-atm, NO), 0.02984 (IC19 w/o SK-atm, IO), 0.02981 (IC24 with SK-atm, NO), 0.03015 (IC24 with SK-atm, IO). In both orderings the small splitting is Δm²₂₁, between mass states 1,2 (NO: m₁,m₂ light; IO: m₁,m₂ heavy, m₃ lightest). The 2–3 pair is split by ~Δm²₃ℓ in NO and is the far-apart pair in IO.
+- U→U R₁₂(t) (rotation inside the solar pair), all four variants: the third column |U_x3| is unchanged (drift 0.00e+00 at t=10…45°), |U_e3| = 0.1482 / 0.1492 / 0.1488 / 0.1494 (IC19 NO / IC19 IO / IC24 NO / IC24 IO) constant, and θ13, θ23 read back unchanged (e.g. IC19 w/o SK-atm NO: θ13 = 8.520°, θ23 = 48.500° for all t). |U_e1|, |U_e2| and **θ12 change** (IC19 w/o SK-atm NO: |U_e1| 0.8230→0.9609 and |U_e2| 0.5484→0.2339 at t=20°; θ12 33.680°→13.680°).
+- U→U R₂₃(t): the first column is unchanged (drift 0.00e+00), |U_e2| and |U_e3| change (IC19 w/o SK-atm NO, t=20°: |U_e2| 0.5484→0.4648, |U_e3| 0.1482→0.3267) and θ12, θ13, θ23 all move (θ13 8.520°→19.068°, θ23 48.500°→30.974°) — the (ii) result again.
+- **Which angle:** a rotation inside the data's actually near-degenerate (solar) pair shifts **θ12** (and |U_e1|,|U_e2|), leaves θ13, θ23 and ν₃ fixed. So if the degeneracy that mattered were the data's own, the unobservable frame angle would be θ12, not θ23. The paper's obstruction on θ23 needs the 2–3 pair degenerate, which is not what the data show.
+- Not shown: the capture reads angles from |U_ij|, so δ is not tracked; only central values, no ±1σ.
+
+## (iii) What the paper's m₂≈m₃ premise requires
+Ground truth (m_lightest = 0): Σm_ν = 0.05899 (IC19 w/o SK-atm, NO), 0.05878 (IC24 with SK-atm, NO) — matches the known ~0.059 eV; IO 0.09945 (IC19 w/o SK-atm), 0.09892 (IC24 with SK-atm) — matches ~0.10 eV. Ground truth PASS.
+Relative splitting of the 2–3 pair at m_lightest = 0 (NO): 82.8 % (IC19 w/o SK-atm), 82.7 % (IC24 with SK-atm).
+
+Exact condition (m₃−m₂)/m₃ < f, NO, solved by bisection (m_lightest = m₁):
+| f | variant | m_lightest ≥ | Σm_ν | vs 0.12 / 0.072 / 0.064 eV |
+|---|---|---|---|---|
+| 1 % | IC19 w/o SK-atm, NO | 0.34791 eV | 1.04745 eV | all EXCLUDED |
+| 5 % | IC19 w/o SK-atm, NO | 0.15062 eV | 0.46031 eV | all EXCLUDED |
+| 10 % | IC19 w/o SK-atm, NO | 0.10202 eV | 0.31818 eV | all EXCLUDED |
+| 1 % | IC24 with SK-atm, NO | 0.34642 eV | 1.04297 eV | all EXCLUDED |
+| 5 % | IC24 with SK-atm, NO | 0.14998 eV | 0.45834 eV | all EXCLUDED |
+| 10 % | IC24 with SK-atm, NO | 0.10158 eV | 0.31681 eV | all EXCLUDED |
+
+IO, paper's literal "2–3" pair (m₂−m₃)/m₂ < f: relative splitting 100 % at m_lightest=0; thresholds m₃ ≥ 0.35160 / 0.15243 / 0.10344 eV (IC19 w/o SK-atm; f = 1/5/10 %), Σm_ν = 1.06179 / 0.47309 / 0.33299 eV; IC24 with SK-atm: 0.34977 / 0.15163 / 0.10291 eV, Σ = 1.05627 / 0.47063 / 0.33126 eV — all EXCLUDED by all three bounds.
+IO, the data's near-degenerate pair (1,2), (m₂−m₁)/m₂ < f: already 1.503 % (IC19 w/o SK-atm) / 1.519 % (IC24 with SK-atm) at m_lightest=0, so f = 5 %, 10 % hold with Σ = 0.09945 / 0.09892 eV (allowed by Planck18+BAO 0.12, EXCLUDED by DESI DR1 0.072 and DR2 0.064); f = 1 % needs m₃ ≥ 0.03541 / 0.03577 eV, Σ = 0.15750 / 0.15786 eV (excluded by all three).
+
+**Plain statement.** The paper's premise Hν|_E ∝ 𝟙 with E = the 2–3 pair requires m₂≈m₃: even at a loose 10 % splitting that is m_lightest ≳ 0.10 eV and Σm_ν ≳ 0.317 eV (IC24 with SK-atm, NO) – 0.318 eV (IC19 w/o SK-atm, NO), 2.6× Planck18+BAO's 0.12 eV and ~5× DESI DR2+CMB's 0.064 eV. **No ΛCDM bound listed allows it**, in either ordering, either variant, at 1, 5 or 10 %. The only pair that is near-degenerate in the data is the solar pair (Δm²₂₁/|Δm²₃ℓ| ≈ 0.03), and only for IO with its absolute scale pinned near the minimum (Σ ≈ 0.099 eV, itself excluded by the DESI ΛCDM bounds). One-line caveat: non-ΛCDM extensions relax these bounds; values not evaluated here. This tension is a statement about the premise "E = 2–3 degenerate pair"; the (i),(ii),(iv) results above (what does and does not follow once such an E is granted) are unaffected.
+Limits: central values only; bounds taken from R1-literature at abstract level (dataset details for Planck's likelihood combination and DR2's CMB set unconfirmed there); the threshold f values 1/5/10 % are the manager's choice, not a physical cutoff.

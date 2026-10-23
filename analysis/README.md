@@ -11,3 +11,4 @@ Each script has a header (inputs, method, run line). Run captures: `<script>-run
 | `composite_operators.py` | (iv) ½{He,Hν} and HeHνHe on E: linear-class test, self-consistent eigenframe, stationary points | `python3 composite_operators.py` (~15 s) |
 | `bloch_rederivation.py` | (v) numeric re-derivation of Bloch algebra and E closed form (+ complex-H_e case) | `python3 bloch_rederivation.py` |
 | (verifier capture) `verify-run-2026-10-23.txt` | gate: output of `../verify_theta23_obstruction.py` | `python3 ../verify_theta23_obstruction.py` |
+| `nufit_degeneracy.py` + `data/nufit6_central.csv` | (ii-A)/(iii) NuFIT 6.0 central values (IC19 w/o SK-atm, IC24 with SK-atm; NO/IO): Δm²21/\|Δm²3ℓ\|, R12/R23 column tests, m_lightest and Σm_ν for relative pair splitting <1/5/10 % vs Planck18+BAO / DESI DR1 / DR2 | `python3 nufit_degeneracy.py` |
