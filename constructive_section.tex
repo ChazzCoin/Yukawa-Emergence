@@ -116,8 +116,57 @@ corrections, and a non-$\mu$--$\tau$ high-scale structure combined with running.
 $m_\nu$ itself (the CP parities of the degenerate pair, $\mu$--$\tau$ reflection).\\
 \emph{Gate.} Harrison--Scott $\mu$--$\tau$ reflection ($\theta_{23}=\pi/4$, $\delta=\pm\pi/2$);
 the Casas--Espinosa--Ibarra--Navarro results for a degenerate pair.\\
-\emph{Result.} [pending]\\
-\emph{Verdict on (a)--(e).} [pending; also state whether (b) holds only under a symmetry]
+% PROVISIONAL (2026-10-23): the lab calculator's result only; validator and adversary are
+% pending. Finalize only on the manager's confirmation.
+% Source: Domain.Alignment lab crew, calculations/theta23-majorana-phase/ (majorana_gate.py,
+% majorana_lib.py, t2_question.py; run-2026-10-23.txt, run-2026-10-23-t2.txt). Commits:
+% gate a139b08, pre-registered question b6d9ed5, result 71a1021. All numbers are that record's.
+\emph{Setup.} The gate reproduces Grimus--Lavoura and Harrison--Scott: $\mu$--$\tau$ reflection on
+a complex-symmetric $m_\nu$ gives $|U_{\mu j}|=|U_{\tau j}|$ and $\theta_{23}=45^\circ$ exactly,
+and $\delta=\pm90^\circ$ (both signs occur) when $\theta_{13}\neq0$, with CP parities $\pm1$. It
+also reproduces the CP-parity stability of Casas et~al.\\
+\emph{Result: what $m_\nu$ carries at $\varepsilon\to0$} (rigorous, checked against a closed form).
+\begin{itemize}
+\item \emph{Frame freedom.} $\Hnu$ leaves a $u(2)$ frame freedom on the degenerate $\nu_2$--$\nu_3$
+  pair (4 real dimensions in the block). $m_\nu$ cuts it to $o(2)$ (1 dimension).
+\item \emph{Stationarity.} Along the remaining direction
+  $d\theta_{23}/d\varphi=0.8414\cos(\psi/2)$, with $\psi$ the relative Majorana phase. So
+  $\theta_{23}$ is stationary to first order at opposite CP parity ($\psi=\pi$).
+\item \emph{Under the reflection.} With opposite $\nu_2$--$\nu_3$ parity, $\theta_{23}$ stays
+  exactly $45^\circ$ along the remaining direction while $\theta_{13}$ runs over
+  $0.067^\circ$--$34.6^\circ$. With the same parity, the reflection fixes the frame discretely.
+\item \emph{Solar pair.} It has the same structure: $d\theta_{12}/d\varphi=1$ at $\psi=0$ and $0$ at
+  $\psi=\pi$.
+\end{itemize}
+\emph{Result: the measured deviation.}
+\begin{itemize}
+\item \emph{Size.} Reaching the NuFIT~6.0 values needs a reflection-odd breaking of relative size
+  $\rho\approx0.02$--$0.13$ over the $\Lambda$CDM-allowed $\Sigma m_\nu$.
+\item \emph{Null.} A matched-norm random odd breaking lands in the measured octant at chance:
+  $P=0.497$--$0.509$ in all 12 variant$\times m_{\rm lightest}$ cells.
+\item \emph{Data-fixed direction.} The only odd direction fixed by data is the $\tau$-Yukawa
+  splitting $m\to EmE$. It sets the octant by
+  $\operatorname{sign}(\eta)\operatorname{sign}(\Delta m^2_{\rm atm})$, where $\operatorname{sign}(\eta)$
+  is a model choice, as in D1.
+\item \emph{Inverted ordering.} Reaching the data $\theta_{23}$ inflates
+  $\Delta m^2_{21}/|\Delta m^2_{\rm atm}|$ by a factor of 2.9--23.6.
+\end{itemize}
+\emph{Verdict on (a)--(e)} (provisional).
+\begin{itemize}
+\item (a) \textbf{Passes:} $m_\nu$ is non-inert on the pair, reducing its frame freedom from 4
+  dimensions to 1.
+\item (b) \textbf{Fails:} $45^\circ$ and $\pm90^\circ$ come from the stated reflection input, not
+  from data. The breaking that the measured deviation needs has a free orientation. So (b) holds
+  only under an imposed symmetry, and only for the symmetric values.
+\item (c) \textbf{Fails:} no datum orients the remaining breaking.
+\item (d) \textbf{Fails:} the octant is at chance against the matched-norm null.
+\item (e) \textbf{Scorable but not supported:} the scorable output is $\delta=\pm90^\circ$, which
+  needs no $\theta_{23}$ input. The inverted-ordering data sit $15^\circ$/$4^\circ$ from it
+  (IC19 without SK-atm / IC24 with SK-atm) and the normal-ordering data $87^\circ$/$58^\circ$.
+\end{itemize}
+\textbf{D2 fails as a data-fixed $\theta_{23}$ mechanism.} It supplies the honest content of the
+\emph{erased dimension}: $m_\nu$ reduces the degenerate-pair freedom from 4 to 1 and makes $45^\circ$
+stationary at opposite CP parity, but no datum orients the breaking that remains.
 
 \subsection{D3: the harmonic (frequency) dimension}\label{sec:D3}
 \emph{Candidate.} $\mu$ and $\tau$ carry distinct harmonic labels on the cycle; the harmonic
