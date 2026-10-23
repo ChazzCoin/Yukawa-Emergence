@@ -345,7 +345,7 @@ is selected.
   \label{eq:Eclosed}
 \end{equation}
 The stationary points are $\theta+\psi_0\in\tfrac\pi4\mathbb Z$; equivalently
-$\theta_{23}\in\{0,\pi/4,\pi/2\}\ (\mathrm{mod}\ \tfrac\pi2)$, the minima
+$\theta_{23}\in\{0,\pi/4,\pi/2\}$ on the fundamental interval $[0,\pi/2]$, the minima
 ($\mathcal E=0$) at exact alignment $\{0,\pi/2\}$ and $\pi/4$ the unique interior
 maximum.
 \item[(iii)] The amplitude $C$ carries the entire dependence on the fermion mass
@@ -464,6 +464,16 @@ and electroweak scales supplies a $Q$ meeting conditions (a)--(b) with a
 $\theta_{23}-\pi/4$ can be tied to the measured splittings. That is a question about
 added dynamics, not about the finite geometry, and is exactly where
 Corollary~\ref{cor:external} says the content must come from.
+
+% Relation to known results (R2 novelty audit; manager ruling 2026-10-23). The fragment cites labels
+% from constructive_section.tex (sec:D2, sec:D3b, prop:jarlskog), which must be \input as well.
+\input{relation_known_results}
+
+An earlier version of this work stated the uniqueness of the linear relational operator
+$\alpha\He+\beta\Hnu$ as a theorem. As stated, that is false: $A=\He^2$ is Hermitian and built from
+$\He$ alone, and it is generically non-degenerate on $E$, so it also breaks the residual
+$\mathrm{SO}(2)$. Proposition~\ref{prop:minimal} therefore states the linear class as a definition
+of the class tested, not as a uniqueness result.
 
 %=======================================================================
 \appendix
