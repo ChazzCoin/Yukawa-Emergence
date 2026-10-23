@@ -127,6 +127,15 @@ def main():
     ok &= aligned
     print("  stationary set {0,45,90} deg is mass-independent: C is a pure prefactor (analytic).")
 
+    # --- D1 (constructive section, RG scale): analysis/d1_rg_scale.py ----------
+    print("\n" + "=" * 70)
+    print("D1: RG scale -- mu-tau seed under flavor-diagonal transport (analysis/d1_rg_scale.py)")
+    print("=" * 70)
+    import os, sys
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "analysis"))
+    import d1_rg_scale
+    ok &= d1_rg_scale.main() == 0
+
     print("\n" + "=" * 70)
     print("ALL CHECKS PASS" if ok else "SOME CHECK FAILED")
     print("=" * 70)

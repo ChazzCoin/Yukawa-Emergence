@@ -61,7 +61,9 @@ Antusch, Kersten, Lindner and Ratz (2003).\\
 % Source: Domain.Alignment lab crew, calculations/theta23-rg-running/ (README.md, rg_running.py,
 % validate-rg-running.py, run-2026-10-23.txt, run-2026-10-23-validate.txt), commits 397b4e8,
 % b3572ca, 49fa1c6; challenge file: [cite once saved]. All numbers below are that record's.
-% Not yet reproduced by this repo's verifier (item #6 pending).
+% This repo's verifier, section "D1", reproduces the sign rule and the solar-vs-atmospheric
+% comparison independently (analysis/d1_rg_scale.py; analysis/verify-run-2026-10-23-D1.txt).
+% Sizes are the lab's alone.
 \emph{Setup.} The record runs at one loop, below the lightest seesaw scale $M_1$, from a
 $\mu$--$\tau$ permutation-symmetric seed at $M_1$ down to $M_Z$, in the SM and in the MSSM. Before
 any novel number it passes five gates, including the analytic angle RGEs of
@@ -83,6 +85,11 @@ RK4 transport of $\kappa$, least-squares shooting, and a separate null.\\
   $\tan\beta$ and $M_1$.
 \item \emph{Which pair is oriented.} The running rotates the solar pair far more than the
   atmospheric pair: $18.77^\circ$ vs $3.57^\circ$ at $\tan\beta=50$, $\Sigma m_\nu=0.12$~eV, phases~0.
+  This repo's verifier finds the same ordering with flavor-diagonal transport from the
+  $\mu$--$\tau$ seed (Sec.~D1 of the verifier). It holds for inverted ordering at every
+  $m_{\rm lightest}$. For normal ordering it holds above $m_{\rm lightest}\simeq4.4$~meV (both
+  NuFIT~6.0 variants). Below that, in the hierarchical limit, the atmospheric pair rotates more,
+  but there the running is smallest.
 \item \emph{Seed consistency (not a D1 result).} The permutation seed has $\theta_{13}=0$; running
   generates at most $1.78^\circ$ under $\Lambda$CDM, against the measured $8.5^\circ$.
 \end{itemize}
