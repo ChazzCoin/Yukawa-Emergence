@@ -1,0 +1,10 @@
+# NuFIT 6.0 Table 1 (p.6), arXiv:2410.05380v2 PDF (dated 28 Oct 2025; v1 7 Oct 2024; JHEP 12 (2024) 216).
+# Re-read from the PDF by literature-2, crew flavor-obstruction-paper, item #8, 2026-10-23 (files/R1-literature-T2.md).
+# Values as printed. Where a printed 3-sigma bound exceeds 360 deg, the wrapped value (minus 360) follows in parentheses
+# (manager ruling, R1). Angles in degrees. Central values match nufit6_central.csv exactly (checked in item #8).
+# Header notes: IC19 NO dchi2=0.6 (IO best); IC24 NO best (IO dchi2=6.1).
+variant,ordering,theta23_bfp,theta23_p1s,theta23_m1s,theta23_3s_lo,theta23_3s_hi,delta_bfp,delta_p1s,delta_m1s,delta_3s_lo,delta_3s_hi
+IC19 w/o SK-atm,NO,48.5,+0.7,-0.9,41.0,50.5,177,+19,-20,96,422 (62)
+IC19 w/o SK-atm,IO,48.6,+0.7,-0.9,41.4,50.6,285,+25,-28,201,348
+IC24 with SK-atm,NO,43.3,+1.0,-0.8,41.3,49.9,212,+26,-41,124,364 (4)
+IC24 with SK-atm,IO,47.9,+0.7,-0.9,41.5,49.8,274,+22,-25,201,335
