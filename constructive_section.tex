@@ -125,7 +125,8 @@ $m_\nu$ itself (the CP parities of the degenerate pair, $\mu$--$\tau$ reflection
 the Casas--Espinosa--Ibarra--Navarro results for a degenerate pair.\\
 % CONFIRMED (manager, 2026-10-23): lab 2010400 (eta = J_tau; T1/T2 sign rules agree); validator
 % 75a3c3a; challenge closed (lab crew folder, galt-crews/flavor-obstruction-lab/files/R1-T2-challenge.md),
-% headline survives, six edits applied. Lab (e)-edit commit: [cite when it lands]. Citations checked
+% headline survives, six edits applied. Lab f1f00e3: (e) scored against the NuFIT 3-sigma delta
+% ranges, BRSM/Zhou citations corrected, Zhou 2014 added as T1 prior art. Citations checked
 % in item #8 (crew folder files/R1-literature-T2.md).
 % Source: Domain.Alignment lab crew, calculations/theta23-majorana-phase/ (majorana_gate.py,
 % majorana_lib.py, t2_question.py; run-2026-10-23.txt, run-2026-10-23-t2.txt). Commits:
@@ -249,14 +250,54 @@ construction.
   in $(r,\theta_{23})$: a one-parameter fit to one target, which reparametrises $\theta_{23}$ and
   does not determine it.
 \end{itemize}
-\emph{Result.} [pending: lab topic theta23-harmonic-label]\\
+% Numbers: PROVISIONAL (2026-10-23), lab 3f67f4b, calculations/theta23-harmonic-label/
+% (t3_question.py; run-2026-10-23-t3.txt, PART n = section of that capture). Validator #20 and
+% adversary #21 are open. All numbers are that record's.
+\emph{Setup.} Labels range over every assignment with $N=2,\dots,60$, $n_\mu\neq n_\tau$ and
+residues $0..N-1$ (71\,980 tuples; pooling the sub-cycle sectors $V_m$ adds no new frames). Three
+label forms are scanned: linear $\hat\Phi$, and the cosine (C) and sine (S) Hermitian parts of
+$W=e^{2\pi i\hat\Phi/N}$. Scoring is on the real frame, $\delta\in\{0,180^\circ\}$. Two readings:
+\emph{A}, with $E$ at its data value and the prediction being the frame implied by $Q_E$'s
+eigenframe; \emph{B}, with $\theta_{23}$ solved from the alignment condition itself, so that data
+$\theta_{23}$ is not an input. The gate passes (PART 0--1): the closed-form $r^*$ returns the data
+angles exactly, $r^*=1$ for every $\theta_{23}$ at $\theta_{13}=0$, and Lagrange interpolation is
+exact.\\
+\emph{Result} (provisional).
+\begin{itemize}
+\item \emph{Alignment ratio.} $r^*_{23}=0.816$--$0.820$ at $\delta=0$ and $1.218$--$1.222$ at
+  $\delta=180^\circ$, across the four variants (PART 2). For the data $\delta$ the alignment
+  equation has no exact real solution: $\arg(A/B)=0.59^\circ$ (NO IC19 without SK-atm) to
+  $-11.4^\circ$ (IO IC24 with SK-atm).
+\item \emph{Not a distinguished rational.} $r^*$ does not sit at a small-denominator rational.
+  Its smallest denominator in the window is 9--11 (reading B) and 3--5 (reading A). Against a
+  centred-window null, $P(q_{\min}\le\text{data})=0.55$--$1.00$ in reading B and $0.44$--$0.95$ in
+  reading A (PART 5).
+\item \emph{Window-landing is generic.} In reading A, 4.8--6.5\% of linear label assignments land
+  $\theta_{23}'$ in the NuFIT~6.0 $3\sigma$ window (PART 3). [Count of cells at or above 5\%: the
+  record's verdict says 6 of 8; the PART 3 table shows 7 of 8, with only IO IC24 at
+  $\delta=180^\circ$ below (4.84\%). Under check with the lab.] The share drops to 0.8--1.0\% once $\theta_{13}'$ is also required within
+  $0.5^\circ$ of data, since the label rotation moves $\theta_{13}'$ over $3.5^\circ$--$13.3^\circ$
+  across the $3\sigma$ $r$-interval (PART 5).
+\item \emph{Octant.} In reading B the root nearest $45^\circ$ lies in the data octant in
+  $\ge99.9\%$ of assignments at one $\delta$ and $\le0.1\%$ at the other (PART 3). The octant follows
+  $\operatorname{sign}(\cos\delta)$, not the labels.
+\item \emph{Solar pair.} [pending: the lab's validator is checking the residue convention for
+  linear labels.]
+\end{itemize}
+
 \emph{Verdict on (a)--(e).}
 \begin{itemize}
 \item (a) Holds unless $d_f=f(m_\tau^2)-f(m_\mu^2)=0$, in which case $Q$ is inert on the exact plane and (a) fails.
 \item (b) \textbf{Decided structurally: fails.} The framework's canon assigns no harmonics to the
   leptons. Without a principle that selects the labels, the orientation is a free choice of $f$.
-\item (c)--(e) [pending: T3 record].
+\item (c) \textbf{Fails as a data-fixed mechanism:} a label can align the $\nu_2$--$\nu_3$ frame
+  only by tuning $r$ to $r^*$, and only through the $\theta_{13}$ tilt.
+\item (d) \textbf{Fails:} $r^*$ is not distinguished against the null in either reading.
+\item (e) \textbf{Fails:} landing in the window is generic, and the octant is set by $\delta$, not
+  by the labels.
 \end{itemize}
+\textbf{D3 fails as a data-fixed $\theta_{23}$ mechanism} (provisional until the lab's validator
+and adversary close).
 
 \subsection{D4: a fourth generation-space direction}\label{sec:D4}
 \emph{Candidate.} A non-degenerate $\Hnu^{(4)}$ on $\mathbb C^4$, compressed to $\mathbb C^3$
