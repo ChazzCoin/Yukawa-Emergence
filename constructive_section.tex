@@ -199,11 +199,14 @@ stationary at opposite CP parity, but no datum orients the breaking that remains
 phase operator on $E$ serves as $Q$.\\
 \emph{Gate.} A null over random label assignments, with the observable defined on the real
 data-fed $\He,\Hnu$.\\
-% PROVISIONAL (2026-10-23). The structural paragraph comes from the lab's T3 gate (lab a56d871,
-% calculations/theta23-harmonic-label/; group-theory facts only, no label assigned) as relayed by
-% the manager. theorist-2 verified it on paper (files/R1-theorist-D3.md, crew
-% flavor-obstruction-paper; rigorous algebra; the e-row coefficient and r^* are derived but
-% numerically unvalidated). Numbers stay [pending] until the T3 record lands.
+% FINAL (manager, 2026-10-23). Source: Domain.Alignment lab crew, calculations/theta23-harmonic-label/
+% (gate a56d871; t3_question.py, run-2026-10-23-t3.txt, PART n = section of that capture; follow-up
+% captures run-2026-10-23-t3-signed.txt, -t3-qnull.txt, -t3-jarlskog.txt). Commits: 3f67f4b
+% (calculated), ea229c1 (reproduced), 6ca51a3 + a80e32b (follow-ups: recount, signed-residue rerun,
+% independent centred-window null), ef716dd (challenge edits incl. the Jarlskog verification).
+% Challenge: lab crew folder, galt-crews/flavor-obstruction-lab/files/R1-T3-challenge.md
+% (adversary-3; all five edits adopted). Structural paragraph verified on paper by theorist-2
+% (crew folder files/R1-theorist-D3.md). Never quote the PART 7 ratio hits: they are null-expected.
 \emph{Structure (exact).}
 \begin{remark}[Flavor labels are functions of $\He$]\label{rem:labels}
 Let the charged-lepton masses $a_\alpha=m_\alpha^2$ be distinct. Every operator diagonal in the
@@ -272,16 +275,23 @@ $0.8170349147$ at $\delta=0$ and $1.2179887361$ at $\delta=\pi$
 reading B below, the octant rule is the subleading $U_{e3}$ term.\\
 \emph{Known context.} A flavor-diagonal label operator is the residual $\mathbb Z_N$ generator $T$ of
 the charged-lepton sector in discrete flavor models. There it fixes only the charged-lepton basis,
-and the mixing comes from the neutrino-side symmetry (King and Luhn~\cite{kingluhn2013}
-[claim under check, item \#9]). D3 is a consistency check against that known no-go, not a new
-mechanism.\\
-\emph{CP-odd channel.} $\det[\hat\Phi,\Hnu]=2iJ\,\Delta(n)\,\Delta(m^2)$, with $\Delta(n)$ the
-Vandermonde of the labels and $\Delta(m^2)$ that of the neutrino masses squared (Jarlskog~1985
-[exact form and sign under check, item \#9; the lab is verifying it numerically]). Labels
-therefore only rescale $J$ and cannot orient anything through this channel.\\
-% Numbers: PROVISIONAL (2026-10-23), lab 3f67f4b, calculations/theta23-harmonic-label/
-% (t3_question.py; run-2026-10-23-t3.txt, PART n = section of that capture). Validator #20 and
-% adversary #21: challenge closed (lab crew folder files/R1-T3-challenge.md, once saved), headline\n% survives, five relabellings pre-applied here; finalize once the lab's edits land. All numbers are\n% that record's. Per the manager: never quote the PART 7 ratio hit.
+and the mixing comes from the neutrino-side symmetry: $U=U_l^\dagger U_\nu$, with $U_l$
+diagonalising $T$ and $U_\nu$ the Klein-group generators~\cite{residual2014} (stated there; the
+general setting is reviewed in~\cite{kingluhn2013,feruglioromanino2021}). Integer flavor charges are Froggatt--Nielsen charges, which set
+hierarchies, not angles~\cite{froggattnielsen1979}. D3 is a consistency check against these known
+results, not a new mechanism.\\
+\begin{proposition}[The CP-odd channel is closed]\label{prop:jarlskog}
+$\det[\hat\Phi,\Hnu]=2iJ\,(n_\mu-n_e)(n_\tau-n_\mu)(n_\tau-n_e)\,
+(m_2^2-m_1^2)(m_3^2-m_2^2)(m_3^2-m_1^2)$, with
+$J=\operatorname{Im}(U_{e1}U_{\mu2}U_{e2}^*U_{\mu1}^*)$ in the PDG sign convention
+(Jarlskog~\cite{jarlskog1985}). The overall sign depends on the commutator order, the
+ordering of the differences and the sign convention for $J$; the form here is the one verified in
+these conventions. Labels therefore enter the CP-odd invariant only through a
+Vandermonde factor that rescales $J$; they cannot orient anything through it.
+\end{proposition}
+\noindent The lab verified it exactly as quoted, with no sign or factor correction: the ratio of
+the determinant to the formula is 1 to $10^{-11}$ at the four data points and on 2000 random points
+(lab ef716dd, \texttt{run-2026-10-23-t3-jarlskog.txt}).\\
 \emph{Setup.} Labels range over every assignment with $N=2,\dots,60$, $n_\mu\neq n_\tau$ and
 residues $0..N-1$ (71\,980 tuples; pooling the sub-cycle sectors $V_m$ adds no new frames). Three
 label forms are scanned: linear $\hat\Phi$, and the cosine (C) and sine (S) Hermitian parts of
@@ -294,7 +304,7 @@ independent ones. Inverted-ordering cells are scored at $\delta\in\{0,180^\circ\
 inverted-ordering data $\delta$ ($285^\circ$/$274^\circ$). The gate passes (PART 0--1): the closed-form $r^*$ returns the data
 angles exactly, $r^*=1$ for every $\theta_{23}$ at $\theta_{13}=0$, and Lagrange interpolation is
 exact.\\
-\emph{Result} (provisional).
+\emph{Result.}
 \begin{itemize}
 \item \emph{Alignment ratio.} $r^*_{23}=0.816$--$0.820$ at $\delta=0$ and $1.218$--$1.222$ at
   $\delta=180^\circ$, across the four variants (PART 2). For the data $\delta$ the alignment
@@ -304,19 +314,24 @@ exact.\\
   Its smallest denominator in the window is 9--11 (reading B) and 3--5 (reading A). Against a
   centred-window null, $P(q_{\min}\le\text{data})=0.55$--$1.00$ in reading B and $0.44$--$0.95$ in
   reading A (PART 5).
-\item \emph{Window-landing depends on the measure.} In reading A, 4.8--6.5\% of linear label
-  assignments land $\theta_{23}'$ in the NuFIT~6.0 $3\sigma$ window (PART 3). This share depends on
-  the label measure: a rerun with signed residues changes it. The share drops to 0.8--1.0\% once
-  $\theta_{13}'$ is also required within $0.5^\circ$ of data, since the label rotation moves
+\item \emph{Window-landing depends on the measure.} In reading A, linear label assignments land
+  $\theta_{23}'$ in the NuFIT~6.0 $3\sigma$ window at 4.8--6.5\% with canonical residues (7 of 8 cells
+  $\ge5\%$; PART 3), and at 2.6--3.3\% with signed residues (0 of 8). The share drops to 0.8--1.0\%
+  once $\theta_{13}'$ is also required within $0.5^\circ$ of data, since the label rotation moves
   $\theta_{13}'$ over $3.5^\circ$--$13.3^\circ$ across the $3\sigma$ $r$-interval (PART 5). No
   individual ratio that hits the window is singled out: such hits occur at the rate the null
-  expects.
+  expects. The centred-window null is reproduced independently (P within $5\times10^{-4}$).
 \item \emph{Octant.} In reading B the root nearest $45^\circ$ lies in the data octant in
   $\ge99.9\%$ of assignments at one $\delta$ and $\le0.1\%$ at the other (PART 3). The octant follows
   $\operatorname{sign}(\cos\delta)$, i.e.\ the sign of the subleading $U_{e3}$ term in
   Prop.~\ref{prop:rstar}, not the labels.
-\item \emph{Solar pair.} [pending: the lab's validator is checking the residue convention for
-  linear labels.]
+\item \emph{Both pairs at once (convention-free).} Any label set, with any residue convention,
+  acts on every pair only through the single ratio $r$ (C and S labels through their own single
+  ratios). Aligning both pairs needs $r=r^*_{23}$ ($+0.816$--$+0.822$ at $\delta=0$;
+  $+1.218$--$+1.222$ at $\delta=180^\circ$) and $r=r^*_{12}$ ($-0.99$ to $-1.47$; $-0.59$ to $-0.88$)
+  at once. The best single $r$ still leaves $\ge31.4^\circ$ of misalignment on one pair, and at
+  $r^*_{23}$ the solar misalignment is $34.5^\circ$--$34.6^\circ$
+  (\texttt{run-2026-10-23-t3-signed.txt}). \textbf{No label set orients both pairs.}
 \end{itemize}
 
 \emph{Verdict on (a)--(e).}
@@ -330,8 +345,8 @@ exact.\\
 \item (e) \textbf{Fails:} landing in the window is measure-dependent and at the null rate, and the
   octant is set by $\delta$, not by the labels.
 \end{itemize}
-\textbf{D3 fails as a data-fixed $\theta_{23}$ mechanism} (provisional until the lab's validator
-and adversary close).
+\textbf{D3 fails as a data-fixed $\theta_{23}$ mechanism}, on (b) and on the small-denominator null.
+It is a consistency check of a known result.
 
 \subsection{D4: a fourth generation-space direction}\label{sec:D4}
 \emph{Candidate.} A non-degenerate $\Hnu^{(4)}$ on $\mathbb C^4$, compressed to $\mathbb C^3$
