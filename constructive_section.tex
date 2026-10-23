@@ -121,8 +121,10 @@ corrections, and a non-$\mu$--$\tau$ high-scale structure combined with running.
 $m_\nu$ itself (the CP parities of the degenerate pair, $\mu$--$\tau$ reflection).\\
 \emph{Gate.} Harrison--Scott $\mu$--$\tau$ reflection ($\theta_{23}=\pi/4$, $\delta=\pm\pi/2$);
 the Casas--Espinosa--Ibarra--Navarro results for a degenerate pair.\\
-% PROVISIONAL (2026-10-23): the lab calculator's result only; validator and adversary are
-% pending. Finalize only on the manager's confirmation.
+% PROVISIONAL (2026-10-23). Validator agrees (lab 75a3c3a). Challenge closed (lab crew folder,
+% galt-crews/flavor-obstruction-lab/files/R1-T2-challenge.md): headline survives, six edits adopted
+% and pre-applied here. Finalize once the lab's record edits land and the manager confirms.
+% Citations from the adversary's memory are under check (item #8).
 % Source: Domain.Alignment lab crew, calculations/theta23-majorana-phase/ (majorana_gate.py,
 % majorana_lib.py, t2_question.py; run-2026-10-23.txt, run-2026-10-23-t2.txt). Commits:
 % gate a139b08, pre-registered question b6d9ed5, result 71a1021. All numbers are that record's.
@@ -133,7 +135,11 @@ also reproduces the CP-parity stability of Casas et~al.\\
 \emph{Result: what $m_\nu$ carries at $\varepsilon\to0$} (rigorous, checked against a closed form).
 \begin{itemize}
 \item \emph{Frame freedom.} $\Hnu$ leaves a $u(2)$ frame freedom on the degenerate $\nu_2$--$\nu_3$
-  pair (4 real dimensions in the block). $m_\nu$ cuts it to $o(2)$ (1 dimension).
+  pair (4 real dimensions in the block). $m_\nu$ cuts it to $o(2)$ (1 dimension). This is a known
+  result (Branco, Rebelo and Silva-Marcos~\cite{brsm1999} [citation under check]): for a degenerate
+  Majorana pair the angle is unphysical at the same CP parity and physical at opposite parity. It
+  holds only in the degenerate limit, which the cosmological bounds exclude
+  (Sec.~\ref{sec:object}).
 \item \emph{Stationarity.} Along the remaining direction
   $d\theta_{23}/d\varphi=0.8414\cos(\psi/2)$, with $\psi$ the relative Majorana phase. So
   $\theta_{23}$ is stationary to first order at opposite CP parity ($\psi=\pi$).
@@ -145,14 +151,15 @@ also reproduces the CP-parity stability of Casas et~al.\\
 \end{itemize}
 \emph{Result: the measured deviation.}
 \begin{itemize}
-\item \emph{Size.} Reaching the NuFIT~6.0 values needs a reflection-odd breaking of relative size
+\item \emph{Size.} Reaching the NuFIT~6.0 central values takes a reflection-odd breaking of relative size
   $\rho\approx0.02$--$0.13$ over the $\Lambda$CDM-allowed $\Sigma m_\nu$.
 \item \emph{Null.} A matched-norm random odd breaking lands in the measured octant at chance:
   $P=0.497$--$0.509$ in all 12 variant$\times m_{\rm lightest}$ cells.
 \item \emph{Data-fixed direction.} The only odd direction fixed by data is the $\tau$-Yukawa
   splitting $m\to EmE$. It sets the octant by
-  $\operatorname{sign}(\eta)\operatorname{sign}(\Delta m^2_{\rm atm})$, where $\operatorname{sign}(\eta)$
-  is a model choice, as in D1.
+  $\operatorname{sign}(\eta)\operatorname{sign}(\Delta m^2_{\rm atm})$, with $\eta$ identified with
+  D1's running strength $J_\tau$. This splits by model, as in D1: [SM / MSSM values pending the
+  lab's record edit]. The sign is a model choice.
 \item \emph{Inverted ordering.} Reaching the data $\theta_{23}$ inflates
   $\Delta m^2_{21}/|\Delta m^2_{\rm atm}|$ by a factor of 2.9--23.6.
 \end{itemize}
@@ -164,10 +171,14 @@ also reproduces the CP-parity stability of Casas et~al.\\
   from data. The breaking that the measured deviation needs has a free orientation. So (b) holds
   only under an imposed symmetry, and only for the symmetric values.
 \item (c) \textbf{Fails:} no datum orients the remaining breaking.
-\item (d) \textbf{Fails:} the octant is at chance against the matched-norm null.
-\item (e) \textbf{Scorable but not supported:} the scorable output is $\delta=\pm90^\circ$, which
-  needs no $\theta_{23}$ input. The inverted-ordering data sit $15^\circ$/$4^\circ$ from it
-  (IC19 without SK-atm / IC24 with SK-atm) and the normal-ordering data $87^\circ$/$58^\circ$.
+\item (d) \textbf{Not applicable:} there is no octant prediction to test. The chance level
+  $P=0.5$ against the matched-norm null is forced by the reflection symmetry.
+\item (e) \textbf{Not scored:} the reflection gives $\delta=\pm90^\circ$, but with a free sign.
+  Whether exact reflection $(45^\circ,\pm90^\circ)$ lies inside the NuFIT~6.0 $3\sigma$ ranges per
+  variant is [pending: the lab's scoring with the ranges from item #8]. For reference, the central
+  $\delta$ values sit $15^\circ$/$4^\circ$ from $270^\circ$ for inverted ordering (IC19 without
+  SK-atm / IC24 with SK-atm), and $87^\circ$ from $90^\circ$ / $58^\circ$ from $270^\circ$ for
+  normal ordering.
 \end{itemize}
 \textbf{D2 fails as a data-fixed $\theta_{23}$ mechanism.} It supplies the honest content of the
 \emph{erased dimension}: $m_\nu$ reduces the degenerate-pair freedom from 4 to 1 and makes $45^\circ$
