@@ -17,10 +17,21 @@ data other than $\theta_{23}$, \emph{or by no continuous input at all}. Every ca
 on two questions: does it give near-maximal mixing, and which octant does it pick?
 
 \subsection{What is established: near-maximal, not the octant}\label{sec:octant}
-% PENDING: theorist item #13 (the paragraph, with the sigma distances computed from
-% analysis/data/nufit6_ranges.csv). Brief values to verify: 45 deg is 3.9 sigma from IC19 w/o
-% SK-atm NO (48.5 +0.7/-0.9) and 1.7 sigma from IC24 with SK-atm NO (43.3 +1.0/-0.8).
-[pending]
+% From theorist-4 (crew folder files/R2-theorist.md); every number from analysis/data/nufit6_ranges.csv.
+NuFIT~6.0~\cite{nufit6} gives, for normal ordering, $\theta_{23}=48.5^{+0.7}_{-0.9}{}^\circ$ (IC19,
+without SK-atm) and $43.3^{+1.0}_{-0.8}{}^\circ$ (IC24, with SK-atm); for inverted ordering,
+$48.6^{+0.7}_{-0.9}{}^\circ$ and $47.9^{+0.7}_{-0.9}{}^\circ$. The two data sets put the
+normal-ordering best fit in opposite octants. In units of the side-appropriate $1\sigma$ error,
+$45^\circ$ lies $3.9\sigma$ and $1.7\sigma$ (NO) and $4.0\sigma$ and $3.2\sigma$ (IO) from the best
+fits. But the $\chi^2$ profile is not Gaussian, and every published $3\sigma$ interval
+($[41.0,50.5]^\circ$ and $[41.3,49.9]^\circ$ NO; $[41.4,50.6]^\circ$ and $[41.5,49.8]^\circ$ IO)
+contains $45^\circ$. What the data establish is that $\theta_{23}$ is near-maximal: the best fits lie
+within $3.6^\circ$ of $45^\circ$, and the $3\sigma$ ranges within $[41.0^\circ,50.6^\circ]$. The octant,
+and whether $\theta_{23}$ differs from $45^\circ$ at all, are not established. Each mechanism below
+is therefore scored on two questions: does it give near-maximal $\theta_{23}$, and which octant does
+it pick.
+% Do not print the 3.9/4.0 sigma figures as an exclusion; a true Delta chi^2(45) needs the NuFIT
+% chi^2 profiles (theorist-4 check C1).
 
 \subsection{D7: residual-symmetry sum rules}\label{sec:D7}
 \emph{Candidate.} TM1, TM2 and $\mu$--$\tau$ reflection, which give closed-form relations between
@@ -68,9 +79,32 @@ fundamental domain.\\
 $J=s_{12}c_{12}s_{13}c_{13}^2s_{23}c_{23}\sin\delta$ is extremal in $\theta_{23}$ at $45^\circ$ and
 in $\delta$ at $\pm90^\circ$, so a maximal-$J$ principle gives the $\mu$--$\tau$-reflection pattern
 without a symmetry.\\
-% PENDING: theorist item #13. The proposition and its proof (first-order deviation zero;
-% second-order form; other invariants at the data point).
-\emph{Proposition.} [pending]\\
+% Proposition and proof from theorist-4 (files/R2-theorist.md), exact algebra.
+\begin{proposition}[Maximal CP violation is octant-blind]\label{prop:Jextremum}
+Let $J=A\sin2\theta_{23}\sin\delta$ with $A=\tfrac18\sin2\theta_{12}\sin2\theta_{13}\cos\theta_{13}>0$.
+(i) On $\theta_{23}\in(0,\pi/2)$ the critical points of $J$ are exactly $(\pi/4,\pm\pi/2)$.
+(ii) For every fixed $\delta$ with $\sin\delta\neq0$, $\partial_{\theta_{23}}J=0$ iff
+$\theta_{23}=\pi/4$.
+(iii) $J(\pi/2-\theta_{23},\delta)=J(\theta_{23},\delta)$ identically, so no function of $J$
+distinguishes the octants, at any order.
+\end{proposition}
+\begin{proof}
+$\partial_{\theta_{23}}J=2A\cos2\theta_{23}\sin\delta$ and $\partial_\delta J=A\sin2\theta_{23}\cos\delta$.
+On the open interval $\sin2\theta_{23}\neq0$, which gives (i) and (ii). (iii) holds because
+$\sin2(\pi/2-\theta_{23})=\sin2\theta_{23}$.
+\end{proof}
+\noindent Near $(45^\circ,-90^\circ)$, with $x=\theta_{23}-45^\circ$ and $y=\delta+90^\circ$,
+$J=-A\cos2x\cos y=-A+2Ax^2+\tfrac{A}{2}y^2+O(4)$, with no cross term. An offset in $\delta$
+therefore induces no shift in $\theta_{23}$; only the width depends on $\delta$, through the
+$\theta_{23}$-curvature $4A|\sin\delta|$. The same holds verbatim for the weak-basis CP-odd invariant
+$\Tr([\He,\Hnu]^3)\propto J$. The $e$-row Majorana invariants $\operatorname{Im}(U_{e1}U_{e3}^*)$ and
+$\operatorname{Im}(U_{e2}U_{e3}^*)$ do not depend on $\theta_{23}$ at all.\\
+\emph{A CP-even exception (leading order, under test).} The misalignment norm is not octant-blind.
+To leading order in $m_\mu^2/m_\tau^2$ and $\Delta m^2_{21}/\Delta m^2_{31}$,
+$-\tfrac12\Tr([\He,\Hnu]^2)=m_\tau^4\,|U_{\tau3}|^2(1-|U_{\tau3}|^2)\,(\Delta m^2_{31})^2$, which is
+maximal at $|U_{\tau3}|^2=\tfrac12$, i.e.\ $\theta_{23}^*\approx44.4^\circ$ at
+$\sin^2\theta_{13}=0.022$ (first octant, independent of $\delta$ at this order). [pending: lab check
+of the exact argmax, theorist-4's C2]\\
 \emph{Question (lab).} With $\theta_{12}$ and $\theta_{13}$ at data, what deviation from $45^\circ$
 does the principle allow once $\delta$ is at its data value; and is any other natural invariant
 extremal at the data point? \emph{Null.} Random points.\\
