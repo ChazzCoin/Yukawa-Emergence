@@ -143,6 +143,13 @@ def main():
     import d2_reflection
     ok &= d2_reflection.main() == 0
 
+    # --- D3 (constructive section, harmonic labels): analysis/d3_rstar_identity.py
+    print("\n" + "=" * 70)
+    print("D3: harmonic labels -- r* as a column-orthogonality identity (analysis/d3_rstar_identity.py)")
+    print("=" * 70)
+    import d3_rstar_identity
+    ok &= d3_rstar_identity.main() == 0
+
     print("\n" + "=" * 70)
     print("ALL CHECKS PASS" if ok else "SOME CHECK FAILED")
     print("=" * 70)

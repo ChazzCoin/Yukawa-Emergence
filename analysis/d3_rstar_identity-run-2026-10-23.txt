@@ -1,0 +1,13 @@
+# env: Python 3.13.7, numpy 2.4.4, 2026-10-23T21:04:39Z; cmd: /opt/homebrew/bin/python3 analysis/d3_rstar_identity.py
+  [IC19 w/o SK-atm NO d=  0] r*=0.8170349147 identity=0.8170349147 lab=0.8170349147 leading=0.8011 -> PASS
+  [IC19 w/o SK-atm NO d=180] r*=1.2179887361 identity=1.2179887361 lab=1.2179887361 leading=1.1989 -> PASS
+  [IC19 w/o SK-atm IO d=  0] r*=0.8157270425 identity=0.8157270425 lab=0.8157270425 leading=0.7996 -> PASS
+  [IC19 w/o SK-atm IO d=180] r*=1.2196804956 identity=1.2196804956 lab=1.2196804956 leading=1.2004 -> PASS
+  [IC24 with SK-atm NO d=  0] r*=0.8201923095 identity=0.8201923095 lab=0.8201923095 leading=0.8013 -> PASS
+  [IC24 with SK-atm NO d=180] r*=1.2221140769 identity=1.2221140769 lab=1.2221140769 leading=1.1987 -> PASS
+  [IC24 with SK-atm IO d=  0] r*=0.8164127100 identity=0.8164127100 lab=0.8164127100 leading=0.7999 -> PASS
+  [IC24 with SK-atm IO d=180] r*=1.2198741390 identity=1.2198741390 lab=1.2198741390 leading=1.2001 -> PASS
+  theta13 = 0: r* = 1.000000000000000 -> PASS
+
+D3 CHECKS PASS
+exit 0
