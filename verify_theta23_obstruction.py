@@ -136,6 +136,13 @@ def main():
     import d1_rg_scale
     ok &= d1_rg_scale.main() == 0
 
+    # --- D2 (constructive section, Majorana phases): analysis/d2_reflection.py --
+    print("\n" + "=" * 70)
+    print("D2: Majorana phases -- mu-tau reflection gate (Grimus-Lavoura; analysis/d2_reflection.py)")
+    print("=" * 70)
+    import d2_reflection
+    ok &= d2_reflection.main() == 0
+
     print("\n" + "=" * 70)
     print("ALL CHECKS PASS" if ok else "SOME CHECK FAILED")
     print("=" * 70)

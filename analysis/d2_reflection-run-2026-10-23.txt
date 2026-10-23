@@ -1,0 +1,11 @@
+# env: Python 3.13.7, numpy 2.4.4, 2026-10-23T20:51:06Z; cmd: /opt/homebrew/bin/python3 analysis/d2_reflection.py
+  reflection-symmetric m, 2000 random draws (seed 20261023):
+    Takagi U^T m U diagonal (1e-10 rel):          PASS
+    max ||U_mu j|-|U_tau j||  = 1.78e-13, max |theta23-45| = 6.52e-12 deg -> PASS
+    max ||sin delta|-1| (theta13>0) = 1.99e-13, signs seen [-1, 1] -> PASS
+    rho = U^+ S U* diagonal +-1: offdiag 2.54e-13, |parity|-1 5.78e-12 -> PASS
+    CP-parity patterns seen: [(-1, -1, -1), (-1, -1, 1), (-1, 1, -1), (-1, 1, 1), (1, -1, -1), (1, -1, 1), (1, 1, -1), (1, 1, 1)]
+  control, generic complex-symmetric m (200 draws): fraction with theta23=45: 0.000, with rho diagonal: 0.000 -> PASS
+
+D2 CHECKS PASS
+exit 0

@@ -6,7 +6,7 @@
 % lab crew's verdict for that candidate arrives through the manager. Numbers enter only
 % when the lab topic holding them exists (calculations/<topic>/ in Domain.Alignment) and
 % the verifier reproduces them.
-% TODO bib: \bibitem{brsm1999} (and any D-candidate refs) go in theta23_obstruction_paper.tex's bibliography once verified.
+% Bibliography: brsm1999, zhou2014, xingzhao2016 are in theta23_obstruction_paper.tex (verified, item #8).
 % Audit basis: AUDIT-theta23-paper.md (this repo), sections (ii), (ii-A), (iii), Review,
 % "What the paper can still claim".
 
@@ -58,7 +58,8 @@ Conditions (a) and (b) are those of Cor.~\ref{cor:external}; (c)--(e) make them 
 from exact $\mu$--$\tau$ degeneracy, generates $K|_E$ through the charged-lepton Yukawa
 couplings.\\
 \emph{Gate.} Reproduce numerically the analytic running of the mixing angles of
-Antusch, Kersten, Lindner and Ratz (2003).\\
+Antusch, Kersten, Lindner and Ratz (2003). Prior art for radiative breaking of $\mu$--$\tau$ reflection:
+Zhou~\cite{zhou2014}; review: Xing and Zhao~\cite{xingzhao2016}.\\
 % Source: Domain.Alignment lab crew, calculations/theta23-rg-running/ (README.md, rg_running.py,
 % validate-rg-running.py, run-2026-10-23.txt, run-2026-10-23-validate.txt), commits 397b4e8,
 % b3572ca, 49fa1c6, closed in 6834d33 (null relabelled; "(d) passes on sign" struck). Challenge:
@@ -122,25 +123,31 @@ corrections, and a non-$\mu$--$\tau$ high-scale structure combined with running.
 $m_\nu$ itself (the CP parities of the degenerate pair, $\mu$--$\tau$ reflection).\\
 \emph{Gate.} Harrison--Scott $\mu$--$\tau$ reflection ($\theta_{23}=\pi/4$, $\delta=\pm\pi/2$);
 the Casas--Espinosa--Ibarra--Navarro results for a degenerate pair.\\
-% PROVISIONAL (2026-10-23). Validator agrees (lab 75a3c3a). Challenge closed (lab crew folder,
-% galt-crews/flavor-obstruction-lab/files/R1-T2-challenge.md): headline survives, six edits adopted
-% and pre-applied here. Finalize once the lab's record edits land and the manager confirms.
-% Citations from the adversary's memory are under check (item #8).
+% CONFIRMED (manager, 2026-10-23): lab 2010400 (eta = J_tau; T1/T2 sign rules agree); validator
+% 75a3c3a; challenge closed (lab crew folder, galt-crews/flavor-obstruction-lab/files/R1-T2-challenge.md),
+% headline survives, six edits applied. Lab (e)-edit commit: [cite when it lands]. Citations checked
+% in item #8 (crew folder files/R1-literature-T2.md).
 % Source: Domain.Alignment lab crew, calculations/theta23-majorana-phase/ (majorana_gate.py,
 % majorana_lib.py, t2_question.py; run-2026-10-23.txt, run-2026-10-23-t2.txt). Commits:
 % gate a139b08, pre-registered question b6d9ed5, result 71a1021. All numbers are that record's.
 \emph{Setup.} The gate reproduces Grimus--Lavoura and Harrison--Scott: $\mu$--$\tau$ reflection on
 a complex-symmetric $m_\nu$ gives $|U_{\mu j}|=|U_{\tau j}|$ and $\theta_{23}=45^\circ$ exactly,
 and $\delta=\pm90^\circ$ (both signs occur) when $\theta_{13}\neq0$, with CP parities $\pm1$. It
-also reproduces the CP-parity stability of Casas et~al.\\
+also reproduces the CP-parity stability of Casas et~al. This repo's verifier reproduces the
+reflection gate independently (Sec.~D2 of \texttt{verify\_theta23\_obstruction.py};
+\texttt{analysis/d2\_reflection.py}): over 2000 random reflection-symmetric $m_\nu$,
+$||U_{\mu j}|-|U_{\tau j}||\le2\times10^{-13}$, $||\sin\delta|-1|\le2\times10^{-13}$ with both signs,
+and $U^\dagger S U^*$ diagonal with entries $\pm1$, all eight parity patterns occurring; a generic
+complex-symmetric control fails every test.\\
 \emph{Result: what $m_\nu$ carries at $\varepsilon\to0$} (rigorous, checked against a closed form).
 \begin{itemize}
 \item \emph{Frame freedom.} $\Hnu$ leaves a $u(2)$ frame freedom on the degenerate $\nu_2$--$\nu_3$
-  pair (4 real dimensions in the block). $m_\nu$ cuts it to $o(2)$ (1 dimension). This is a known
-  result (Branco, Rebelo and Silva-Marcos~\cite{brsm1999} [citation under check]): for a degenerate
-  Majorana pair the angle is unphysical at the same CP parity and physical at opposite parity. It
-  holds only in the degenerate limit, which the cosmological bounds exclude
-  (Sec.~\ref{sec:object}).
+  pair (4 real dimensions in the block). $m_\nu$ cuts it to $o(2)$ (1 dimension). The underlying
+  fact is known: for exactly degenerate Majorana neutrinos the mixing matrix can be rotated away
+  only if all have the same CP parity, and cannot be when one has the opposite parity
+  (Branco, Rebelo and Silva-Marcos~\cite{brsm1999}, pp.~2--4, shown there for three degenerate
+  neutrinos). The pair statement is the lab's $2\times2$ sub-case. It holds only in the degenerate
+  limit, which the cosmological bounds exclude (Sec.~\ref{sec:object}).
 \item \emph{Stationarity.} Along the remaining direction
   $d\theta_{23}/d\varphi=0.8414\cos(\psi/2)$, with $\psi$ the relative Majorana phase. So
   $\theta_{23}$ is stationary to first order at opposite CP parity ($\psi=\pi$).
@@ -158,13 +165,15 @@ also reproduces the CP-parity stability of Casas et~al.\\
   $P=0.497$--$0.509$ in all 12 variant$\times m_{\rm lightest}$ cells.
 \item \emph{Data-fixed direction.} The only odd direction fixed by data is the $\tau$-Yukawa
   splitting $m\to EmE$. It sets the octant by
-  $\operatorname{sign}(\eta)\operatorname{sign}(\Delta m^2_{\rm atm})$, with $\eta$ identified with
-  D1's running strength $J_\tau$. This splits by model, as in D1: [SM / MSSM values pending the
-  lab's record edit]. The sign is a model choice.
+  $\operatorname{sign}(\eta)\operatorname{sign}(\Delta m^2_{\rm atm})$, with $\eta=J_\tau$, D1's
+  running strength; the T1 and T2 sign rules agree. In the SM the sign is data-fixed, but
+  $|J_\tau|=2.8\times10^{-5}$ is 653--3027 times too small. In the MSSM the sign is a model input:
+  $\tan\beta=50$ reaches 2 of 24 normal-ordering IC19 (without SK-atm) rows, and it has the wrong
+  sign for normal-ordering IC24 (with SK-atm) and for inverted ordering.
 \item \emph{Inverted ordering.} Reaching the data $\theta_{23}$ inflates
   $\Delta m^2_{21}/|\Delta m^2_{\rm atm}|$ by a factor of 2.9--23.6.
 \end{itemize}
-\emph{Verdict on (a)--(e)} (provisional).
+\emph{Verdict on (a)--(e).}
 \begin{itemize}
 \item (a) \textbf{Passes:} $m_\nu$ is non-inert on the pair, reducing its frame freedom from 4
   dimensions to 1.
@@ -174,12 +183,11 @@ also reproduces the CP-parity stability of Casas et~al.\\
 \item (c) \textbf{Fails:} no datum orients the remaining breaking.
 \item (d) \textbf{Not applicable:} there is no octant prediction to test. The chance level
   $P=0.5$ against the matched-norm null is forced by the reflection symmetry.
-\item (e) \textbf{Not scored:} the reflection gives $\delta=\pm90^\circ$, but with a free sign.
-  Whether exact reflection $(45^\circ,\pm90^\circ)$ lies inside the NuFIT~6.0 $3\sigma$ ranges per
-  variant is [pending: the lab's scoring with the ranges from item #8]. For reference, the central
-  $\delta$ values sit $15^\circ$/$4^\circ$ from $270^\circ$ for inverted ordering (IC19 without
-  SK-atm / IC24 with SK-atm), and $87^\circ$ from $90^\circ$ / $58^\circ$ from $270^\circ$ for
-  normal ordering.
+\item (e) \textbf{Not scored:} the reflection gives $\delta=\pm90^\circ$ with a free sign. Against
+  NuFIT~6.0 (\texttt{analysis/data/nufit6\_ranges.csv}), $\theta_{23}=45^\circ$ lies inside all four
+  $3\sigma$ ranges, $\delta=270^\circ$ inside all four $\delta$ ranges, and $\delta=90^\circ$ outside
+  all four. Exact reflection is therefore $3\sigma$-consistent for one sign of $\delta$ in every
+  variant, as an input, not as a prediction.
 \end{itemize}
 \textbf{D2 fails as a data-fixed $\theta_{23}$ mechanism.} It supplies the honest content of the
 \emph{erased dimension}: $m_\nu$ reduces the degenerate-pair freedom from 4 to 1 and makes $45^\circ$
