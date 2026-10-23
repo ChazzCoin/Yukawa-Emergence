@@ -1,0 +1,30 @@
+# R2 inputs (D7-D10, D12 to come). Collected 2026-10-23 by literature-5, crew flavor-obstruction-paper, item #12
+# (verbatim note: crew folder files/R2-literature.md). Status: OPENED-img = PDG page images read directly;
+# OPENED-summ = page fetched through a summarising tool (equations are the tool's transcription; re-read the
+# source before gating on them); OPENED-abs = abstract page only; SEARCH = snippet only.
+# Flags: CONFLICT = two fetches disagree; GARBLED = the tool's transcription is garbled; GAP = not retrieved.
+quantity,value,uncertainty_or_CL,convention,source,url,status,flag
+CKM sin theta12,0.22501,+-0.00068,PDG standard (Eq12.3; V_ub = s13 e^{-i delta}),PDG 2024 CKM review Eq12.28,https://pdg.lbl.gov/2024/reviews/rpp2024-rev-ckm-matrix.pdf,OPENED-img,
+CKM sin theta13,0.003732,+0.000090 -0.000085,same,PDG 2024 Eq12.28,https://pdg.lbl.gov/2024/reviews/rpp2024-rev-ckm-matrix.pdf,OPENED-img,
+CKM sin theta23,0.04183,+0.00079 -0.00069,same,PDG 2024 Eq12.28,https://pdg.lbl.gov/2024/reviews/rpp2024-rev-ckm-matrix.pdf,OPENED-img,
+CKM delta [rad],1.147,+-0.026,same (65.7 deg by conversion),PDG 2024 Eq12.28,https://pdg.lbl.gov/2024/reviews/rpp2024-rev-ckm-matrix.pdf,OPENED-img,
+Wolfenstein lambda,0.22501,+-0.00068,Eq12.4,PDG 2024 Eq12.26 (CKMfitter-type),https://pdg.lbl.gov/2024/reviews/rpp2024-rev-ckm-matrix.pdf,OPENED-img,
+Wolfenstein A,0.826,+0.016 -0.015,Eq12.4,PDG 2024 Eq12.26,https://pdg.lbl.gov/2024/reviews/rpp2024-rev-ckm-matrix.pdf,OPENED-img,
+Wolfenstein rho-bar,0.1591,+-0.0094,Eq12.4,PDG 2024 Eq12.26,https://pdg.lbl.gov/2024/reviews/rpp2024-rev-ckm-matrix.pdf,OPENED-img,
+Wolfenstein eta-bar,0.3523,+0.0073 -0.0071,Eq12.4,PDG 2024 Eq12.26,https://pdg.lbl.gov/2024/reviews/rpp2024-rev-ckm-matrix.pdf,OPENED-img,
+CKM Jarlskog J,3.12e-5,+0.13e-5 -0.12e-5,,PDG 2024 p13,https://pdg.lbl.gov/2024/reviews/rpp2024-rev-ckm-matrix.pdf,OPENED-img,
+TM1 sin^2 theta12,(1/3)(1-3s13^2)/(1-s13^2),exact,PDG; |Ue1|=sqrt(2/3),Albright-Rodejohann arXiv:0812.0436 Eq23; King arXiv:1701.04413 Eq50,https://ar5iv.labs.arxiv.org/html/1701.04413,OPENED-summ,
+TM1 cos delta,-cot(2theta23)(1-5s13^2)/(2sqrt2 s13 sqrt(1-3s13^2)),exact,PDG; delta in (-pi;pi),King arXiv:1701.04413 Eq51; A-R Eq24,https://ar5iv.labs.arxiv.org/html/1701.04413,OPENED-summ,two sources agree as transcribed
+TM2 sin^2 theta12,(1/3)/(1-s13^2),exact (>=1/3),PDG; |Ui2|=1/sqrt3,Albright-Rodejohann arXiv:0812.0436 Eq15,https://ar5iv.labs.arxiv.org/html/0812.0436,OPENED-summ,
+TM2 cos delta relation,see A-R Eq16,-,PDG,Albright-Rodejohann Eq16 and Eq18,https://ar5iv.labs.arxiv.org/html/0812.0436,OPENED-summ,GARBLED - re-read the source
+mu-tau reflection,theta23=pi/4; delta=+-pi/2,exact,PDG,Harrison-Scott hep-ph/0210197,https://arxiv.org/abs/hep-ph/0210197,SEARCH,already gated in D2 (lab 2010400)
+first-order theta23-45 ~ theta13 cos delta,-,-,-,-,-,-,GAP - no source retrieved
+QLC theta12 + theta_C,pi/4,data sum 45.1+-2.4 deg,-,Minakata-Smirnov hep-ph/0405088 Eq1-4,https://ar5iv.labs.arxiv.org/html/hep-ph/0405088,OPENED-summ,Eq13 composition factors elided by the tool
+QLC theta23 + theta23^CKM,pi/4,-,-,Raidal hep-ph/0404046 Eq1,https://ar5iv.labs.arxiv.org/html/hep-ph/0404046,OPENED-summ,no explicit U_bimax V_CKM^dagger formula in Raidal per the tool
+Anarchy (2003) flat variables,sin^2 th12; sin^2 th23; cos^4 th13,KS prob 64% (MNS) vs <6e-6 (CKM),2003 data,de Gouvea-Murayama hep-ph/0301050 Eq8-9,https://ar5iv.labs.arxiv.org/html/hep-ph/0301050,OPENED-summ,
+Anarchy (2012) measure,ds12^2 dc13^4 ds23^2 ddelta (+Majorana),P_KS 44% central; >24% within 3 sigma,2012 data,de Gouvea-Murayama arXiv:1204.1249,https://ar5iv.labs.arxiv.org/html/1204.1249,OPENED-summ,title/venue unconfirmed
+Feruglio A4 Ex.2 (seesaw; NO),tau=-0.195+1.0636i; s12^2=0.291; s13^2=0.0486; s23^2=0.331; delta/pi=1.47,published fit,-,Feruglio arXiv:1706.08749 Sec 3.1.3,https://ar5iv.labs.arxiv.org/html/1706.08749,OPENED-summ,CONFLICT between two fetches; s13^2 far above data
+Feruglio A4 Ex.1 (Weinberg; IO),tau=0.0111+0.9946i; s12^2=0.295; s13^2=0.0447; theta23 0.651 (as relayed); delta/pi=1.55,published fit,-,Feruglio arXiv:1706.08749 Sec 3.1.2,https://ar5iv.labs.arxiv.org/html/1706.08749,OPENED-summ,CONFLICT between two fetches
+NPPT modular A4 model I(a) (seesaw; NO),Im tau 0.66-0.73; Re tau +-(0.25-0.31) or +-(0.46-0.54); s23^2>0.54; delta=+-(50-180) deg,allowed ranges (no single best fit),-,Novichkov-Penedo-Petcov-Titov arXiv:1808.03012,https://ar5iv.labs.arxiv.org/html/1808.03012,OPENED-summ,does not discuss tau=i or omega
+modular S4 case A (alternative),tau=+-0.1045+1.01i; s12^2=0.305; s13^2=0.02125; s23^2=0.551; delta/pi=+-1.314,best fit,-,NPPT arXiv:1811.04933,https://ar5iv.labs.arxiv.org/html/1811.04933,OPENED-summ,
+A4 weight-2 forms Y1..Y3,eta-quotient expressions (Feruglio Eq28; NPPT Eq10); q-expansion Y=(1+12q+36q^2;-6q^{1/3}(1+7q);-18q^{2/3}(1+2q)); Y2^2+2Y1Y3=0,-,normalisations differ between papers,Feruglio 1706.08749; NPPT 1808.03012,https://ar5iv.labs.arxiv.org/html/1808.03012,OPENED-summ,
