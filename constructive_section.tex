@@ -250,16 +250,47 @@ construction.
   in $(r,\theta_{23})$: a one-parameter fit to one target, which reparametrises $\theta_{23}$ and
   does not determine it.
 \end{itemize}
+\begin{proposition}[The aligning ratio is a unitarity identity]\label{prop:rstar}
+For real $U$ ($\delta\in\{0,\pi\}$), the label ratio that aligns $Q_E$ with the $\nu_2$--$\nu_3$
+frame is
+\[
+  r^*=-\frac{U_{\mu2}U_{\mu3}}{U_{\tau2}U_{\tau3}}
+     =1+\frac{U_{e2}U_{e3}}{U_{\tau2}U_{\tau3}}
+     \simeq1\mp\frac{2\tan\theta_{12}\sin\theta_{13}}{\sin2\theta_{23}}
+     \quad(\delta=0,\pi).
+\]
+\end{proposition}
+\noindent\emph{Proof.} Orthogonality of columns 2 and 3,
+$\sum_\alpha U_{\alpha2}U_{\alpha3}=0$, gives $-U_{\mu2}U_{\mu3}=U_{e2}U_{e3}+U_{\tau2}U_{\tau3}$.
+For the leading order, use $U_{e2}U_{e3}=s_{12}c_{13}s_{13}e^{-i\delta}$ and
+$U_{\tau2}U_{\tau3}=-c_{12}s_{23}c_{23}c_{13}+O(s_{13})$. $\square$\\
+So $r^*=1$ at $\theta_{13}=0$ is the statement $U_{e3}=0$, and the deviation of $r^*$ from 1 is
+entirely the $U_{e3}$ term. Leading order gives $\approx0.80$ / $1.20$. The exact form reproduces the
+lab's PART~2 value to $10^{-16}$: NO IC19 (without SK-atm) gives $0.8170349147$ at $\delta=0$ and
+$1.2179887361$ at $\delta=\pi$ (lead's check, 2026-10-23; not yet a committed capture). In the
+reading B below, the octant rule is the subleading $U_{e3}$ term.\\
+\emph{Known context.} A flavor-diagonal label operator is the residual $\mathbb Z_N$ generator $T$ of
+the charged-lepton sector in discrete flavor models. There it fixes only the charged-lepton basis,
+and the mixing comes from the neutrino-side symmetry (King and Luhn~\cite{kingluhn2013}
+[claim under check, item \#9]). D3 is a consistency check against that known no-go, not a new
+mechanism.\\
+\emph{CP-odd channel.} $\det[\hat\Phi,\Hnu]=2iJ\,\Delta(n)\,\Delta(m^2)$, with $\Delta(n)$ the
+Vandermonde of the labels and $\Delta(m^2)$ that of the neutrino masses squared (Jarlskog~1985
+[exact form and sign under check, item \#9; the lab is verifying it numerically]). Labels
+therefore only rescale $J$ and cannot orient anything through this channel.\\
 % Numbers: PROVISIONAL (2026-10-23), lab 3f67f4b, calculations/theta23-harmonic-label/
 % (t3_question.py; run-2026-10-23-t3.txt, PART n = section of that capture). Validator #20 and
-% adversary #21 are open. All numbers are that record's.
+% adversary #21: challenge closed (lab crew folder files/R1-T3-challenge.md, once saved), headline\n% survives, five relabellings pre-applied here; finalize once the lab's edits land. All numbers are\n% that record's. Per the manager: never quote the PART 7 ratio hit.
 \emph{Setup.} Labels range over every assignment with $N=2,\dots,60$, $n_\mu\neq n_\tau$ and
 residues $0..N-1$ (71\,980 tuples; pooling the sub-cycle sectors $V_m$ adds no new frames). Three
 label forms are scanned: linear $\hat\Phi$, and the cosine (C) and sine (S) Hermitian parts of
 $W=e^{2\pi i\hat\Phi/N}$. Scoring is on the real frame, $\delta\in\{0,180^\circ\}$. Two readings:
 \emph{A}, with $E$ at its data value and the prediction being the frame implied by $Q_E$'s
 eigenframe; \emph{B}, with $\theta_{23}$ solved from the alignment condition itself, so that data
-$\theta_{23}$ is not an input. The gate passes (PART 0--1): the closed-form $r^*$ returns the data
+$\theta_{23}$ is not an input. The $\delta=0$ and $\delta=180^\circ$ columns are near-mirrors
+($\mu\leftrightarrow\tau$ sends $r\to1/r$), so the 8 variant$\times\delta$ cells are about 4
+independent ones. Inverted-ordering cells are scored at $\delta\in\{0,180^\circ\}$, far from the
+inverted-ordering data $\delta$ ($285^\circ$/$274^\circ$). The gate passes (PART 0--1): the closed-form $r^*$ returns the data
 angles exactly, $r^*=1$ for every $\theta_{23}$ at $\theta_{13}=0$, and Lagrange interpolation is
 exact.\\
 \emph{Result} (provisional).
@@ -272,15 +303,17 @@ exact.\\
   Its smallest denominator in the window is 9--11 (reading B) and 3--5 (reading A). Against a
   centred-window null, $P(q_{\min}\le\text{data})=0.55$--$1.00$ in reading B and $0.44$--$0.95$ in
   reading A (PART 5).
-\item \emph{Window-landing is generic.} In reading A, 4.8--6.5\% of linear label assignments land
-  $\theta_{23}'$ in the NuFIT~6.0 $3\sigma$ window (PART 3). [Count of cells at or above 5\%: the
-  record's verdict says 6 of 8; the PART 3 table shows 7 of 8, with only IO IC24 at
-  $\delta=180^\circ$ below (4.84\%). Under check with the lab.] The share drops to 0.8--1.0\% once $\theta_{13}'$ is also required within
-  $0.5^\circ$ of data, since the label rotation moves $\theta_{13}'$ over $3.5^\circ$--$13.3^\circ$
-  across the $3\sigma$ $r$-interval (PART 5).
+\item \emph{Window-landing depends on the measure.} In reading A, 4.8--6.5\% of linear label
+  assignments land $\theta_{23}'$ in the NuFIT~6.0 $3\sigma$ window (PART 3). This share depends on
+  the label measure: a rerun with signed residues changes it. The share drops to 0.8--1.0\% once
+  $\theta_{13}'$ is also required within $0.5^\circ$ of data, since the label rotation moves
+  $\theta_{13}'$ over $3.5^\circ$--$13.3^\circ$ across the $3\sigma$ $r$-interval (PART 5). No
+  individual ratio that hits the window is singled out: such hits occur at the rate the null
+  expects.
 \item \emph{Octant.} In reading B the root nearest $45^\circ$ lies in the data octant in
   $\ge99.9\%$ of assignments at one $\delta$ and $\le0.1\%$ at the other (PART 3). The octant follows
-  $\operatorname{sign}(\cos\delta)$, not the labels.
+  $\operatorname{sign}(\cos\delta)$, i.e.\ the sign of the subleading $U_{e3}$ term in
+  Prop.~\ref{prop:rstar}, not the labels.
 \item \emph{Solar pair.} [pending: the lab's validator is checking the residue convention for
   linear labels.]
 \end{itemize}
@@ -293,8 +326,8 @@ exact.\\
 \item (c) \textbf{Fails as a data-fixed mechanism:} a label can align the $\nu_2$--$\nu_3$ frame
   only by tuning $r$ to $r^*$, and only through the $\theta_{13}$ tilt.
 \item (d) \textbf{Fails:} $r^*$ is not distinguished against the null in either reading.
-\item (e) \textbf{Fails:} landing in the window is generic, and the octant is set by $\delta$, not
-  by the labels.
+\item (e) \textbf{Fails:} landing in the window is measure-dependent and at the null rate, and the
+  octant is set by $\delta$, not by the labels.
 \end{itemize}
 \textbf{D3 fails as a data-fixed $\theta_{23}$ mechanism} (provisional until the lab's validator
 and adversary close).
