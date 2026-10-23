@@ -1,0 +1,106 @@
+% constructive_section.tex — SKELETON (crew flavor-obstruction-paper, R1, 2026-10-23)
+% The constructive continuation of theta23_obstruction_paper.tex, Sec. \ref{sec:external}.
+% A fragment for \input after Sec. \ref{sec:external}; it uses that file's macros
+% (\He, \Hnu, \Tr, \one, \Fnorm) and leaves every proof in it untouched.
+% Status: object, conditions and per-candidate gates only. Every "Result" is empty until the
+% lab crew's verdict for that candidate arrives through the manager. Numbers enter only
+% when the lab topic holding them exists (calculations/<topic>/ in Domain.Alignment) and
+% the verifier reproduces them.
+% Audit basis: AUDIT-theta23-paper.md (this repo), sections (ii), (ii-A), (iii), Review,
+% "What the paper can still claim".
+
+%=======================================================================
+\section{What would fix the orientation: a test battery}\label{sec:constructive}
+%=======================================================================
+
+\subsection{The object to be fixed}\label{sec:object}
+% Manager decision 2026-10-23 (files/R1-constructive-spec.md).
+The no-go of Secs.~\ref{sec:obstruction}--\ref{sec:external} is the $\varepsilon\to0$ limit
+of a non-degenerate problem. Write the data-fed neutrino Hermitian as
+\begin{equation}\label{eq:epsilon-split}
+  \Hnu \;=\; \Hnu^{(0)} + \varepsilon\,K,\qquad
+  \Hnu^{(0)}\big|_{E}=\lambda\,\one_E ,
+\end{equation}
+where $E$ is the atmospheric ($\nu_2$--$\nu_3$) pair and $K|_E$ is the degeneracy-lifting
+term. For $\varepsilon\neq0$ the rotation $R(\theta)$ inside $E$ is no longer a symmetry of
+$\Hnu$. The frame is then physical, and the orientation that has to be supplied is the
+\emph{eigenframe of $K|_E$}, not $\theta_{23}$ taken alone.
+% TODO(lead): state the two audit facts this rests on, citing the captures:
+%   (1) away from theta12=theta13=0 the degenerate E is tilted out of the mu--tau flavor plane, and
+%       rotating inside it moves theta12 and theta13 as well (AUDIT (ii));
+%   (2) the data's small splitting is the solar pair, Dm21/|Dm3l| ~ 0.03 (AUDIT (ii-A)), and
+%       m2 ~ m3 is excluded by every LCDM Sigma m_nu bound (AUDIT (iii)) but not by KATRIN
+%       (m_beta < 0.45 eV).
+
+\subsection{Conditions on a candidate operator}\label{sec:conditions}
+A candidate external operator $Q$ \emph{passes} only if it meets all five conditions:
+\begin{enumerate}
+\item[(a)] \textbf{Non-inert:} $Q|_E\not\propto\one_E$.
+\item[(b)] \textbf{Externally oriented:} the eigen-orientation of $Q$ on $E$ is fixed by data other
+  than the mixing angles.
+\item[(c)] \textbf{Fixes the frame:} $Q$ fixes the eigenframe of $K|_E$ in \eqref{eq:epsilon-split}.
+\item[(d)] \textbf{Beats the null:} the selected orientation beats a null ensemble of generic
+  tilted $(\He,\Hnu)$ configurations, so it is not a look-elsewhere coincidence.
+\item[(e)] \textbf{Scorable:} it yields a number, a sign or an octant that can be scored against
+  NuFIT~6.0 \cite{nufit6} without using $\theta_{23}$ as an input, with the variant (IC19 without
+  SK-atm, or IC24 with SK-atm) named.
+\end{enumerate}
+Conditions (a) and (b) are those of Cor.~\ref{cor:external}; (c)--(e) make them testable.
+"Fails" is a complete verdict when its reason is given.
+
+% One subsection per candidate, run one at a time in this order. Each stub states the
+% candidate, the ground-truth gate that must pass before any novel number is believed,
+% and the verdict on (a)--(e). Gates are those in the manager's plan (files/plan.md).
+
+\subsection{D1: scale (renormalization-group running)}\label{sec:D1}
+\emph{Candidate.} Running of the Weinberg operator from the seesaw scale to $M_Z$, starting
+from exact $\mu$--$\tau$ degeneracy, generates $K|_E$ through the charged-lepton Yukawa
+couplings.\\
+\emph{Gate.} Reproduce numerically the analytic running of the mixing angles of
+Antusch, Kersten, Lindner and Ratz (2003).\\
+\emph{Result.} [pending: lab topic T1]\\
+\emph{Verdict on (a)--(e).} [pending]
+
+\subsection{D2: Majorana phases (the complex dimension)}\label{sec:D2}
+\emph{Candidate.} $\Hnu=m_\nu m_\nu^\dagger$ erases the Majorana phases; $Q$ is built from
+$m_\nu$ itself (the CP parities of the degenerate pair, $\mu$--$\tau$ reflection).\\
+\emph{Gate.} Harrison--Scott $\mu$--$\tau$ reflection ($\theta_{23}=\pi/4$, $\delta=\pm\pi/2$);
+the Casas--Espinosa--Ibarra--Navarro results for a degenerate pair.\\
+\emph{Result.} [pending]\\
+\emph{Verdict on (a)--(e).} [pending; also state whether (b) holds only under a symmetry]
+
+\subsection{D3: the harmonic (frequency) dimension}\label{sec:D3}
+\emph{Candidate.} $\mu$ and $\tau$ carry distinct harmonic labels on the cycle; the harmonic
+phase operator on $E$ serves as $Q$.\\
+\emph{Gate.} A null over random label assignments, with the observable defined on the real
+data-fed $\He,\Hnu$.\\
+\emph{Result.} [pending]\\
+\emph{Verdict on (a)--(e).} [pending]
+
+\subsection{D4: a fourth generation-space direction}\label{sec:D4}
+\emph{Candidate.} A non-degenerate $\Hnu^{(4)}$ on $\mathbb C^4$, compressed to $\mathbb C^3$
+(the 3+1 sterile structure); the compression may carry an orientation on $E$ fixed by the
+fourth direction's data.\\
+\emph{Gate.} The standard 3+1 parametrization, and the current bounds on sterile mixing.\\
+\emph{Result.} [pending]\\
+\emph{Verdict on (a)--(e).} [pending]
+
+\subsection{D5: the Lorentzian fourth dimension}\label{sec:D5}
+\emph{Candidate.} Lift the Pauli algebra of $E$, $\mathrm{Cl}(3,0)$, into $\mathrm{Cl}(1,3)$. The
+question is whether the extra element can give a \emph{Hermitian}, non-inert $Q$ on $E$ with an
+externally fixed orientation; Hermiticity is the expected obstacle.\\
+\emph{Gate.} The embedding $\mathrm{Cl}(3,0)\subset\mathrm{Cl}(1,3)$ checked numerically: the
+generators, their signature, and the Hermiticity of the candidate.\\
+\emph{Result.} [pending]\\
+\emph{Verdict on (a)--(e).} [pending]
+
+\subsection{D6: the rotational (polarization) dimension}\label{sec:D6}
+\emph{Candidate.} $E\otimes D^1$; a polarization-dependent term acts as $Q$.\\
+\emph{Gate.} [to be named with the lab: the reduction $D^l\otimes D^1$ and what fixes its
+orientation]\\
+\emph{Result.} [pending]\\
+\emph{Verdict on (a)--(e).} [pending]
+
+\subsection{Summary}\label{sec:constructive-summary}
+% Table: candidate | (a) | (b) | (c) | (d) | (e) | prediction | lab topic | verifier check.
+[pending: filled once every candidate has a verdict]
