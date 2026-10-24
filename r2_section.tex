@@ -2,8 +2,8 @@
 % R2: Chazz's open mandate ("what fixes theta23, by any route"), the manager's brief
 % galt-crews/flavor-obstruction/files/brief-R2.md. A fragment for \input after
 % constructive_section.tex. It uses the macros of theta23_obstruction_paper.tex and touches no
-% proof there. Every number is [pending] until the lab's record for that candidate lands and is
-% confirmed through the manager. Inputs: analysis/data/nufit6_ranges.csv (728a1d0) and
+% proof there. Verdicts D7-D9, D11 and D12 were folded in 2026-10-23 from the lab's
+% 'R2 - where it stands' (crew/flavor-obstruction-lab 3ffb5ed), relayed by the manager; D10 pending. Inputs: analysis/data/nufit6_ranges.csv (728a1d0) and
 % analysis/data/r2_inputs.csv (pending, literature item #12).
 % 2D (sin^2 theta23, delta) chi^2 grids: analysis/data/valencia2020/ (b634f2f; Zenodo 4726908, 2020
 % data epoch). RULE: every number taken from these grids is labelled 'Valencia 2020, not NuFIT 6.0' in
@@ -55,7 +55,20 @@ $\delta$ ranges, all four variants), what $\theta_{23}$ and octant does each rul
 result inside the $3\sigma$ window? \emph{Null.} The window is about $10^\circ$ wide, so the score
 is the joint prediction ($\theta_{12}$ too, where the rule fixes it) and the sign of the
 $\delta$--octant correlation. (b) passes by construction; the test is (e).\\
-\emph{Result.} [pending]\quad\emph{Verdict.} [pending]
+% Lab: crew/flavor-obstruction-lab 3ffb5ed, calculations/theta23-sum-rules/ (README; captures named inline).
+\emph{Result.} Line (b), $\theta_{23}(\delta)$, is scored on the Valencia 2020 two-dimensional $\chi^2$
+grids (Valencia 2020, not NuFIT~6.0; the NuFIT 2D grids were not obtained). Under the registered
+statistic with the full trial count ($\times27\times2$), two cells pass: TM1 (IO), $p=0.005$, and
+Petcov GRA (IO), $p=0.016$. The curve control asks how often a curve of the same shape with a
+different constant scores as well. It gives fractions $0.520$, $0.130$, $0.142$ and $0.681$ (TM1 NO,
+TM2 NO, TM1 IO, TM2 IO), none below the $0.005$ threshold, so no TM cell is special on the control
+(\texttt{run-2026-10-23-d7-recount.txt}). Line (a), $\theta_{12}(\theta_{13})$, is scored on
+NuFIT~6.0 $1\sigma$ errors with $\theta_{13}$ propagated. TM1 sits $+0.85\sigma$ to $+0.95\sigma$
+from the data, not special after multiplicity; TM2 sits $+2.74\sigma$ to $+2.82\sigma$, inside
+$3\sigma$ (\texttt{run-2026-10-23-d7-line-a-nufit.txt}).\quad
+\emph{Verdict.} No sum rule is special on $\theta_{23}(\delta)$ under the curve control. The
+$\theta_{23}$ verdicts rest on Valencia 2020 grids and are provisional until a NuFIT~6.0 rerun.
+
 
 \subsection{D8: quark--lepton complementarity}\label{sec:D8}
 \emph{Candidate.} $U_{\rm PMNS}=U_{\rm bimax}V_{\rm CKM}^\dagger$ (and the other order):
@@ -65,7 +78,17 @@ $\theta_{12}+\theta_C\simeq45^\circ$, $\theta_{23}+\theta_{23}^{\rm CKM}\simeq45
 composition order and phase convention, against NuFIT; the octant each order picks; whether any
 order gets $\theta_{13}$ right. \emph{Null.} Random correction matrices with the CKM's angle
 sizes.\\
-\emph{Result.} [pending]\quad\emph{Verdict.} [pending]
+% Lab: calculations/theta23-sum-rules/ (D8 PART), capture run-2026-10-23-d7-line-a-nufit.txt.
+\emph{Result.} In both composition orders $\theta_{23}$ enters as the bimaximal input, so the
+ansatz makes no $\theta_{23}$ prediction to score; it is tested on $(\sin^2\theta_{12},\sin^2\theta_{13})$
+against NuFIT~6.0. Order~2 gives $\sin^2\theta_{13}=0.00056$, $\chi^2=1366$--$1515$ (2 dof): excluded.
+Order~1, with the phase $g$ fitted free ($g=5.89$), gives $\chi^2=8.90$--$12.69$ (2 dof) across the
+four variants, roughly $2\sigma$ tension (\texttt{run-2026-10-23-d7-line-a-nufit.txt}). Its small
+family-wise number against Haar is flagged but not called special, because a Haar null rewards any
+small-$\theta_{13}$ ansatz and $g$ is an unpenalised fit parameter (lab README, record edits).\quad
+\emph{Verdict.} $\theta_{23}$ is an input by ansatz, not an output. Order~2 is excluded; order~1 is
+not special.
+
 
 \subsection{D9: Haar typicality (anarchy)}\label{sec:D9}
 \emph{Candidate.} No mechanism: the mixing matrix is a typical Haar draw on $U(3)$.\\
@@ -74,7 +97,22 @@ p-value (item \#12).\\
 \emph{Question.} The p-value of the NuFIT~6.0 point under Haar, and the Bayes factor of Haar
 against a $\mu$--$\tau$-reflection-centred prior (width from the D2 breaking size). If Haar is not
 disfavoured, the verdict is that no orientation mechanism is required by the data.\\
-\emph{Result.} [pending]\quad\emph{Verdict.} [pending]
+% Lab: calculations/theta23-anarchy/ (README; captures named inline).
+\emph{Result.} On the de~Gouv\^ea--Murayama statistic, the NuFIT~6.0 best fits give
+$p_H=0.410$, $0.427$, $0.412$ and $0.419$ (NO IC19, NO IC24, IO IC19, IO IC24;
+\texttt{run-2026-10-23-scored.txt}), and over the full $3\sigma$ box $p_H$ ranges over
+$0.353$--$0.488$ in every variant (\texttt{run-2026-10-23-box.txt}). The statistic cannot detect
+closeness to $45^\circ$: setting $\theta_{23}=45^\circ$ exactly gives $p_H=0.439$--$0.443$, a
+\emph{more} typical value, and the box maximum sits at $\theta_{23}=45^\circ$. As information only
+(post hoc, not a registered trial): the Haar probability of being at least this close to maximal,
+$2|\sin^2\theta_{23}-\tfrac12|$, is $0.122$, $0.059$, $0.125$ and $0.101$ in the same order
+(\texttt{run-2026-10-23-challenge.txt}). A Bayes factor against a reflection-centred prior was
+computed only on the Valencia 2020 grids (Valencia 2020, not NuFIT~6.0) and is kept out of the
+verdict.\quad
+\emph{Verdict.} Haar is not disfavoured anywhere in the $3\sigma$ box. The test is blind to the
+feature R2 asks about, so ``not disfavoured'' does not show that near-maximal $\theta_{23}$ needs no
+explanation.
+
 
 \subsection{D10: modular symmetry at fixed points}\label{sec:D10}
 \emph{Candidate.} An $A_4$ modular model at the fixed points $\tau=i,\ \omega,\ i\infty$
@@ -84,7 +122,10 @@ matrices, and the angles at the published $\tau$ (item \#12).\\
 \emph{Question.} The angles at each fixed point: near-maximal $\theta_{23}$, right $\theta_{12}$
 and $\theta_{13}$, which octant. \emph{Null.} The angle distribution over random $\tau$ in the
 fundamental domain.\\
-\emph{Result.} [pending]\quad\emph{Verdict.} [pending]
+\emph{Result.} [pending: gate only. The literature inputs for the gate (fixed-point parameter
+counts, whether $\theta_{23}$ is fixed by the residual symmetry, modulus stabilisation) are being
+collected.]\quad\emph{Verdict.} [pending]
+
 
 \subsection{D11: an extremum principle}\label{sec:D11}
 \emph{Candidate.} Maximal CP violation:
@@ -121,7 +162,34 @@ of the exact argmax, theorist-4's C2]\\
 \emph{Question (lab).} With $\theta_{12}$ and $\theta_{13}$ at data, what deviation from $45^\circ$
 does the principle allow once $\delta$ is at its data value; and is any other natural invariant
 extremal at the data point? \emph{Null.} Random points.\\
-\emph{Result.} [pending]\quad\emph{Verdict.} [pending]
+\emph{Result.} By Proposition~\ref{prop:Jextremum}, $J$ and every function of it are octant-blind at
+all orders. The extremum principle's other prediction, $\delta=\pm90^\circ$, splits: $\delta=270^\circ$
+lies inside all four NuFIT~6.0 $3\sigma$ ranges, and $\delta=90^\circ$ lies outside all four
+(the normal-ordering ranges $96^\circ\to422^\circ$ and $124^\circ\to364^\circ$ wrap past $360^\circ$
+only to $62^\circ$ and $4^\circ$; \texttt{analysis/data/nufit6\_ranges.csv}).\quad
+\emph{Verdict.} Maximal CP violation gives near-maximal $\theta_{23}$ and $\delta=270^\circ$, both
+allowed, but it cannot pick an octant. The CP-even exception above is still pending.
+
+\subsection{D12: the Littlest Seesaw}\label{sec:D12}
+% Lab: calculations/theta23-littlest-seesaw/ (README; gate run-2026-10-23.txt, rerun run-2026-10-24-scored2.txt,
+% reproduction run-2026-10-24-validate.txt; record fix 3ffb5ed).
+\emph{Candidate.} Two right-handed neutrinos with constrained sequential dominance CSD($n$):
+atmospheric column $\propto(0,1,1)$, solar column fixed by the integer $n$, with the continuous inputs fixed
+by observables other than $\theta_{23}$. The gate reproduces the published LS predictions
+(closed forms to $4.4\times10^{-13}$; \texttt{run-2026-10-23.txt}).\\
+\emph{Result.} With $\theta_{23}$ removed from the $\chi^2$ and the $\delta$ term built piecewise from
+the NuFIT~6.0 $1\sigma$ and $3\sigma$ edges, $n=3$ fits well: $\chi^2=3.63$ (NO IC19) and $3.18$
+(NO IC24) at $\delta\simeq271.7^\circ$, predicting $\theta_{23}=45.38^\circ$ and $45.41^\circ$, inside both
+normal-ordering windows (\texttt{run-2026-10-24-scored2.txt}). Inverted ordering is not fittable
+(normal-ordering prediction by construction). The test is a conditional null: among null models that
+fit at least as well, how often does $\theta_{23}$ land in the window? Random vectors do so about
+$0.15$ of the time (validator, \texttt{run-2026-10-24-validate.txt}); vectors in the CSD plane
+(atmospheric $(0,1,1)$, solar $(1,a,b)$) do so $0.36$--$0.47$ of the time (58--121 matched models over both
+variants; \texttt{run-2026-10-24-scored2.txt}).\quad
+\emph{Verdict.} $n=3$ is the best-fitting R2 candidate, but its near-maximal $\theta_{23}$ is what
+the whole CSD plane gives. The CSD($n$) constraint carries no $\theta_{23}$ specialness beyond the
+chosen vacuum alignment, and (b) holds only in the sense that the alignment itself is an input.
+
 
 \subsection{Summary}\label{sec:r2-summary}
 % Table: candidate | near-maximal? | octant | joint prediction | (b) | (e) | lab topic | verifier check.

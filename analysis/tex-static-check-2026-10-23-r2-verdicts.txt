@@ -1,0 +1,8 @@
+inputs expanded from theta23_obstruction_paper.tex: ['constructive_section', 'r2_section', 'relation_known_results']
+labels 41, refs 23, bibitems 24, cite keys 24
+refs with no label: none
+labels defined more than once: none
+cites with no bibitem: none
+bibitems defined more than once: none
+bibitems never cited: none
+brace balance (expanded): 0
