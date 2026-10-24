@@ -122,9 +122,33 @@ matrices, and the angles at the published $\tau$ (item \#12).\\
 \emph{Question.} The angles at each fixed point: near-maximal $\theta_{23}$, right $\theta_{12}$
 and $\theta_{13}$, which octant. \emph{Null.} The angle distribution over random $\tau$ in the
 fundamental domain.\\
-\emph{Result.} [pending: gate only. The literature inputs for the gate (fixed-point parameter
-counts, whether $\theta_{23}$ is fixed by the residual symmetry, modulus stabilisation) are being
-collected.]\quad\emph{Verdict.} [pending]
+% Lab: crew/flavor-obstruction-lab, calculations/theta23-modular-fixed-points/ (gate c94252c, capture
+% run-2026-10-23.txt; independent reproduction e25408b, capture run-2026-10-23-validate.txt). Literature:
+% crew folder files/R2-D10-literature.md. Only A4 level 3 at tau = i was computed.
+\emph{Result.} The gate asks two questions at $\tau=i$: (G1) does any continuous coupling left at the
+fixed point enter $\theta_{23}$, and (G2) is $\tau=i$ forced by the modulus potential? The lab computed
+Feruglio's three $A_4$ level-3 examples~\cite{feruglio2017} from the weight-2 forms; the closed forms
+agree to $10^{-16}$, and an independent cubic-theta route reproduces them
+(\texttt{run-2026-10-23.txt}, \texttt{run-2026-10-23-validate.txt}).
+(G1) In the Weinberg-operator model, $m_\nu$ at $\tau=i$ is fixed by $\tau$ alone up to an overall
+scale, so no coupling enters $\theta_{23}$. The residual symmetry fixes
+$\sin^2\theta_{23}=(16-4\sqrt3)/26$, i.e.\ $\theta_{23}=36.2^\circ$ or $53.8^\circ$ by labelling, with
+$\theta_{12}=8.8^\circ$ and a degenerate-pair spectrum $|m_1|=|m_2|$, $m_3=0$. Both values lie outside
+all four NuFIT~6.0 $3\sigma$ windows. The seesaw examples do not give a physical alternative at
+$\tau=i$. In Example~2 the coupling $g$ enters only as an overall scale, and $\sin^2\theta_{23}$ is
+the same $0.651/0.349$ for every $g$ tested, with two massless states. In Example~3 the spectrum is
+rank one for $g_2/g_1\neq0$, so its angles are not physical (\texttt{run-2026-10-23.txt}).
+(G2) In the modulus potential of Ref.~\cite{npp2022}, built from
+$H(\tau)=(j-1728)^{m/2}j^{n/3}P(j)$, $\tau=i$ is a minimum only inside a chosen discrete class
+($n\neq0$, with $P(j)=1$ taken as the simplest choice); $(m,n,P)$ are free input. The same paper
+states that stabilising $\tau$ near $i$, ``even if possible, cannot offer an explanation of these mass
+hierarchies'' (there, the charged-lepton and quark mass hierarchies). The $S_4$ model with generalised CP~\cite{nppt2019} fits $\sin^2\theta_{23}=0.4862$, inside
+the windows. Its $\tau=\pm0.09922+1.016i$ is a continuous fit variable, not the fixed point, and at
+CP-conserving $\tau$ the same paper gives $\sin\delta=0$; landing in a window is not a verdict under
+the family-wise rule.\quad
+\emph{Verdict.} D10 closes at the gate under the pre-registered rule. The one model with no
+continuous input on $\theta_{23}$ fixes it outside the data, and a vacuum at $\tau=i$ is a chosen class of
+the potential, not forced by it.
 
 
 \subsection{D11: an extremum principle}\label{sec:D11}
