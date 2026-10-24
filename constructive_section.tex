@@ -1,0 +1,477 @@
+% constructive_section.tex — SKELETON (crew flavor-obstruction-paper, R1, 2026-10-23)
+% The constructive continuation of theta23_obstruction_paper.tex, Sec. \ref{sec:external}.
+% A fragment for \input after Sec. \ref{sec:external}; it uses that file's macros
+% (\He, \Hnu, \Tr, \one, \Fnorm) and leaves every proof in it untouched.
+% Status: object, conditions and per-candidate gates only. Every "Result" is empty until the
+% lab crew's verdict for that candidate arrives through the manager. Numbers enter only
+% when the lab topic holding them exists (calculations/<topic>/ in Domain.Alignment) and
+% the verifier reproduces them.
+% Bibliography: brsm1999, zhou2014, xingzhao2016 are in theta23_obstruction_paper.tex (verified, item #8).
+% Audit basis: AUDIT-theta23-paper.md (this repo), sections (ii), (ii-A), (iii), Review,
+% "What the paper can still claim".
+
+%=======================================================================
+\section{What would fix the orientation: a test battery}\label{sec:constructive}
+%=======================================================================
+
+\subsection{The object to be fixed}\label{sec:object}
+% Manager decision 2026-10-23 (files/R1-constructive-spec.md).
+The no-go of Secs.~\ref{sec:obstruction}--\ref{sec:external} is the $\varepsilon\to0$ limit
+of a non-degenerate problem. Write the data-fed neutrino Hermitian as
+\begin{equation}\label{eq:epsilon-split}
+  \Hnu \;=\; \Hnu^{(0)} + \varepsilon\,K,\qquad
+  \Hnu^{(0)}\big|_{E}=\lambda\,\one_E ,
+\end{equation}
+where $E$ is the atmospheric ($\nu_2$--$\nu_3$) pair and $K|_E$ is the degeneracy-lifting
+term. For $\varepsilon\neq0$ the rotation $R(\theta)$ inside $E$ is no longer a symmetry of
+$\Hnu$. The frame is then physical, and the orientation that has to be supplied is the
+\emph{eigenframe of $K|_E$}, not $\theta_{23}$ taken alone.
+% TODO(lead): state the two audit facts this rests on, citing the captures:
+%   (1) away from theta12=theta13=0 the degenerate E is tilted out of the mu--tau flavor plane, and
+%       rotating inside it moves theta12 and theta13 as well (AUDIT (ii));
+%   (2) the data's small splitting is the solar pair, Dm21/|Dm3l| ~ 0.03 (AUDIT (ii-A)), and
+%       m2 ~ m3 is excluded by every LCDM Sigma m_nu bound (AUDIT (iii)) but not by KATRIN
+%       (m_beta < 0.45 eV).
+
+\subsection{Conditions on a candidate operator}\label{sec:conditions}
+A candidate external operator $Q$ \emph{passes} only if it meets all five conditions:
+\begin{enumerate}
+\item[(a)] \textbf{Non-inert:} $Q|_E\not\propto\one_E$.
+\item[(b)] \textbf{Externally oriented:} the eigen-orientation of $Q$ on $E$ is fixed by data other
+  than the mixing angles.
+\item[(c)] \textbf{Fixes the frame:} $Q$ fixes the eigenframe of $K|_E$ in \eqref{eq:epsilon-split}.
+\item[(d)] \textbf{Beats the null:} the selected orientation beats a null ensemble of generic
+  tilted $(\He,\Hnu)$ configurations, so it is not a look-elsewhere coincidence.
+\item[(e)] \textbf{Scorable:} it yields a number, a sign or an octant that can be scored against
+  NuFIT~6.0 \cite{nufit6} without using $\theta_{23}$ as an input, with the variant (IC19 without
+  SK-atm, or IC24 with SK-atm) named.
+\end{enumerate}
+Conditions (a) and (b) are those of Cor.~\ref{cor:external}; (c)--(e) make them testable.
+"Fails" is a complete verdict when its reason is given.
+
+% One subsection per candidate, run one at a time in this order. Each stub states the
+% candidate, the ground-truth gate that must pass before any novel number is believed,
+% and the verdict on (a)--(e). Gates are those in the manager's plan (files/plan.md).
+
+\subsection{D1: scale (renormalization-group running)}\label{sec:D1}
+\emph{Candidate.} Running of the Weinberg operator from the seesaw scale to $M_Z$, starting
+from exact $\mu$--$\tau$ degeneracy, generates $K|_E$ through the charged-lepton Yukawa
+couplings.\\
+\emph{Gate.} Reproduce numerically the analytic running of the mixing angles of
+Antusch, Kersten, Lindner and Ratz (2003). Prior art for radiative breaking of $\mu$--$\tau$ reflection:
+Zhou~\cite{zhou2014}; review: Xing and Zhao~\cite{xingzhao2016}.\\
+% Source: Domain.Alignment lab crew, calculations/theta23-rg-running/ (README.md, rg_running.py,
+% validate-rg-running.py, run-2026-10-23.txt, run-2026-10-23-validate.txt), commits 397b4e8,
+% b3572ca, 49fa1c6, closed in 6834d33 (null relabelled; "(d) passes on sign" struck). Challenge:
+% lab crew folder, galt-crews/flavor-obstruction-lab/files/R1-T1-challenge.md (not in a repo).
+% All numbers below are that record's.
+% This repo's verifier, section "D1", reproduces the sign rule and the solar-vs-atmospheric
+% comparison independently (analysis/d1_rg_scale.py; analysis/verify-run-2026-10-23-D1.txt).
+% Sizes are the lab's alone.
+\emph{Setup.} The record runs at one loop, below the lightest seesaw scale $M_1$, from a
+$\mu$--$\tau$ permutation-symmetric seed at $M_1$ down to $M_Z$, in the SM and in the MSSM. Before
+any novel number it passes five gates, including the analytic angle RGEs of
+Antusch et~al.\ (2003), reproduced to $3\times10^{-9}$. An independent route reproduces it:
+RK4 transport of $\kappa$, least-squares shooting, and a separate null.\\
+\emph{Result.}
+\begin{itemize}
+\item \emph{Sign.} $\operatorname{sign}(\theta_{23}(M_Z)-\pi/4)=+\operatorname{sign}(C)\,
+  \operatorname{sign}(\Delta m^2_{\rm atm})$, with $C=-3/2$ (SM) and $C=+1$ (MSSM). For normal
+  ordering the SM gives the lower octant and the MSSM the upper. The octant therefore follows the
+  SM/MSSM choice, which is a model input, not data. The two NuFIT~6.0 normal-ordering fits also
+  disagree on the octant (IC19 without SK-atm $48.5^\circ$; IC24 with SK-atm $43.3^\circ$), so no
+  sign can be scored.
+\item \emph{Size.} SM: $|\theta_{23}(M_Z)-45^\circ|\le0.0026^\circ$ for every $\Lambda$CDM-allowed
+  $\Sigma m_\nu$, three orders of magnitude short. MSSM: the NuFIT~6.0 IC19 (without SK-atm)
+  normal-ordering $1\sigma$ window $[+2.6^\circ,+4.2^\circ]$ is reached only at $\tan\beta=50$,
+  $M_{\rm SUSY}=1$~TeV, $\Sigma m_\nu=0.12$~eV (23 of 64 Majorana-phase points). Under DESI DR1+CMB
+  and DR2+CMB the maximum is $+2.03^\circ$ and $+1.79^\circ$. The size grows with the free inputs
+  $\tan\beta$ and $M_1$.
+\item \emph{Which pair is oriented.} The running rotates the solar pair far more than the
+  atmospheric pair: $18.77^\circ$ vs $3.57^\circ$ at $\tan\beta=50$, $\Sigma m_\nu=0.12$~eV, phases~0.
+  This repo's verifier finds the same ordering with flavor-diagonal transport from the
+  $\mu$--$\tau$ seed (Sec.~D1 of the verifier). It holds for inverted ordering at every
+  $m_{\rm lightest}$. For normal ordering it holds above $m_{\rm lightest}\simeq4.4$~meV (both
+  NuFIT~6.0 variants). Below that, in the hierarchical limit, the atmospheric pair rotates more,
+  but there the running is smallest.
+\item \emph{Seed consistency (not a D1 result).} The permutation seed has $\theta_{13}=0$; running
+  generates at most $1.78^\circ$ under $\Lambda$CDM, against the measured $8.5^\circ$.
+\end{itemize}
+\emph{Verdict on (a)--(e).}
+\begin{itemize}
+\item (a) \textbf{Passes:} the running term on $E$ is rank one, not $\propto\one_E$.
+\item (b) \textbf{Passes in part:} its direction $e_\tau$ is set by the charged-lepton mass
+  ordering (data), but its sign is the model coefficient $C$.
+\item (c) \textbf{Fails:} the running does not single out the $\nu_2$--$\nu_3$ frame; it orients the
+  solar pair more strongly.
+\item (d) \textbf{Unscored:} the record's null is unmatched, tests $\theta_{23}$ only, and uses
+  phases $(0,0)$. It splits about 50/50 on the sign, against the running's fixed sign, so it cannot
+  score (d) as stated.
+  As a closeness figure only (not a (d) score): at the one allowed configuration that reaches the
+  window (MSSM, $\tan\beta=50$, $\Sigma m_\nu=0.12$~eV, shift $+4.21^\circ$), 10.3\% of
+  norm-matched random breakings land as close. That null is not mass-matched, tests $\theta_{23}$
+  only, uses phases $(0,0)$, is not joint with $\theta_{13}$, and carries no sign information.
+\item (e) \textbf{Fails}, except in the tuned corner above, and there $\theta_{13}$ is wrong.
+\end{itemize}
+Seesaw-threshold effects act through $Y_\nu$, whose orientation is unmeasured, so they fail (b) by
+construction (stated in the record, not computed). Not tested: two loops, SUSY threshold
+corrections, and a non-$\mu$--$\tau$ high-scale structure combined with running.
+\textbf{D1 fails as a data-fixed $\theta_{23}$ mechanism.}
+
+\subsection{D2: Majorana phases (the complex dimension)}\label{sec:D2}
+\emph{Candidate.} $\Hnu=m_\nu m_\nu^\dagger$ erases the Majorana phases; $Q$ is built from
+$m_\nu$ itself (the CP parities of the degenerate pair, $\mu$--$\tau$ reflection).\\
+\emph{Gate.} Harrison--Scott $\mu$--$\tau$ reflection ($\theta_{23}=\pi/4$, $\delta=\pm\pi/2$);
+the Casas--Espinosa--Ibarra--Navarro results for a degenerate pair.\\
+% CONFIRMED (manager, 2026-10-23): lab 2010400 (eta = J_tau; T1/T2 sign rules agree); validator
+% 75a3c3a; challenge closed (lab crew folder, galt-crews/flavor-obstruction-lab/files/R1-T2-challenge.md),
+% headline survives, six edits applied. Lab f1f00e3: (e) scored against the NuFIT 3-sigma delta
+% ranges, BRSM/Zhou citations corrected, Zhou 2014 added as T1 prior art. Citations checked
+% in item #8 (crew folder files/R1-literature-T2.md).
+% Source: Domain.Alignment lab crew, calculations/theta23-majorana-phase/ (majorana_gate.py,
+% majorana_lib.py, t2_question.py; run-2026-10-23.txt, run-2026-10-23-t2.txt). Commits:
+% gate a139b08, pre-registered question b6d9ed5, result 71a1021. All numbers are that record's.
+\emph{Setup.} The gate reproduces Grimus--Lavoura and Harrison--Scott: $\mu$--$\tau$ reflection on
+a complex-symmetric $m_\nu$ gives $|U_{\mu j}|=|U_{\tau j}|$ and $\theta_{23}=45^\circ$ exactly,
+and $\delta=\pm90^\circ$ (both signs occur) when $\theta_{13}\neq0$, with CP parities $\pm1$. It
+also reproduces the CP-parity stability of Casas et~al. This repo's verifier reproduces the
+reflection gate independently (Sec.~D2 of \texttt{verify\_theta23\_obstruction.py};
+\texttt{analysis/d2\_reflection.py}): over 2000 random reflection-symmetric $m_\nu$,
+$||U_{\mu j}|-|U_{\tau j}||\le2\times10^{-13}$, $||\sin\delta|-1|\le2\times10^{-13}$ with both signs,
+and $U^\dagger S U^*$ diagonal with entries $\pm1$, all eight parity patterns occurring; a generic
+complex-symmetric control fails every test.\\
+\emph{Result: what $m_\nu$ carries at $\varepsilon\to0$} (rigorous, checked against a closed form).
+\begin{itemize}
+\item \emph{Frame freedom.} $\Hnu$ leaves a $u(2)$ frame freedom on the degenerate $\nu_2$--$\nu_3$
+  pair (4 real dimensions in the block). $m_\nu$ cuts it to $o(2)$ (1 dimension). The underlying
+  fact is known: for exactly degenerate Majorana neutrinos the mixing matrix can be rotated away
+  only if all have the same CP parity, and cannot be when one has the opposite parity
+  (Branco, Rebelo and Silva-Marcos~\cite{brsm1999}, pp.~2--4, shown there for three degenerate
+  neutrinos). The pair statement is the lab's $2\times2$ sub-case. It holds only in the degenerate
+  limit, which the cosmological bounds exclude (Sec.~\ref{sec:object}).
+\item \emph{Stationarity.} Along the remaining direction
+  $d\theta_{23}/d\varphi=0.8414\cos(\psi/2)$, with $\psi$ the relative Majorana phase. So
+  $\theta_{23}$ is stationary to first order at opposite CP parity ($\psi=\pi$).
+\item \emph{Under the reflection.} With opposite $\nu_2$--$\nu_3$ parity, $\theta_{23}$ stays
+  exactly $45^\circ$ along the remaining direction while $\theta_{13}$ runs over
+  $0.067^\circ$--$34.6^\circ$. With the same parity, the reflection fixes the frame discretely.
+\item \emph{Solar pair.} It has the same structure: $d\theta_{12}/d\varphi=1$ at $\psi=0$ and $0$ at
+  $\psi=\pi$.
+\end{itemize}
+\emph{Result: the measured deviation.}
+\begin{itemize}
+\item \emph{Size.} Reaching the NuFIT~6.0 central values takes a reflection-odd breaking of relative size
+  $\rho\approx0.02$--$0.13$ over the $\Lambda$CDM-allowed $\Sigma m_\nu$.
+\item \emph{Null.} A matched-norm random odd breaking lands in the measured octant at chance:
+  $P=0.497$--$0.509$ in all 12 variant$\times m_{\rm lightest}$ cells.
+\item \emph{Data-fixed direction.} The only odd direction fixed by data is the $\tau$-Yukawa
+  splitting $m\to EmE$. It sets the octant by
+  $\operatorname{sign}(\eta)\operatorname{sign}(\Delta m^2_{\rm atm})$, with $\eta=J_\tau$, D1's
+  running strength; the T1 and T2 sign rules agree. In the SM the sign is data-fixed, but
+  $|J_\tau|=2.8\times10^{-5}$ is 653--3027 times too small. In the MSSM the sign is a model input:
+  $\tan\beta=50$ reaches 2 of 24 normal-ordering IC19 (without SK-atm) rows, and it has the wrong
+  sign for normal-ordering IC24 (with SK-atm) and for inverted ordering.
+\item \emph{Inverted ordering.} Reaching the data $\theta_{23}$ inflates
+  $\Delta m^2_{21}/|\Delta m^2_{\rm atm}|$ by a factor of 2.9--23.6.
+\end{itemize}
+\emph{Verdict on (a)--(e).}
+\begin{itemize}
+\item (a) \textbf{Passes:} $m_\nu$ is non-inert on the pair, reducing its frame freedom from 4
+  dimensions to 1.
+\item (b) \textbf{Fails:} $45^\circ$ and $\pm90^\circ$ come from the stated reflection input, not
+  from data. The breaking that the measured deviation needs has a free orientation. So (b) holds
+  only under an imposed symmetry, and only for the symmetric values.
+\item (c) \textbf{Fails:} no datum orients the remaining breaking.
+\item (d) \textbf{Not applicable:} there is no octant prediction to test. The chance level
+  $P=0.5$ against the matched-norm null is forced by the reflection symmetry.
+\item (e) \textbf{Not scored:} the reflection gives $\delta=\pm90^\circ$ with a free sign. Against
+  NuFIT~6.0 (\texttt{analysis/data/nufit6\_ranges.csv}), $\theta_{23}=45^\circ$ lies inside all four
+  $3\sigma$ ranges, $\delta=270^\circ$ inside all four $\delta$ ranges, and $\delta=90^\circ$ outside
+  all four. Exact reflection is therefore $3\sigma$-consistent for one sign of $\delta$ in every
+  variant, as an input, not as a prediction.
+\end{itemize}
+\textbf{D2 fails as a data-fixed $\theta_{23}$ mechanism.} It supplies the honest content of the
+\emph{erased dimension}: $m_\nu$ reduces the degenerate-pair freedom from 4 to 1 and makes $45^\circ$
+stationary at opposite CP parity, but no datum orients the breaking that remains.
+
+\subsection{D3: the harmonic (frequency) dimension}\label{sec:D3}
+\emph{Candidate.} $\mu$ and $\tau$ carry distinct harmonic labels on the cycle; the harmonic
+phase operator on $E$ serves as $Q$.\\
+\emph{Gate.} A null over random label assignments, with the observable defined on the real
+data-fed $\He,\Hnu$.\\
+% FINAL (manager, 2026-10-23). Source: Domain.Alignment lab crew, calculations/theta23-harmonic-label/
+% (gate a56d871; t3_question.py, run-2026-10-23-t3.txt, PART n = section of that capture; follow-up
+% captures run-2026-10-23-t3-signed.txt, -t3-qnull.txt, -t3-jarlskog.txt). Commits: 3f67f4b
+% (calculated), ea229c1 (reproduced), 6ca51a3 + a80e32b (follow-ups: recount, signed-residue rerun,
+% independent centred-window null), ef716dd (challenge edits incl. the Jarlskog verification).
+% Challenge: lab crew folder, galt-crews/flavor-obstruction-lab/files/R1-T3-challenge.md
+% (adversary-3; all five edits adopted). Structural paragraph verified on paper by theorist-2
+% (crew folder files/R1-theorist-D3.md). Never quote the PART 7 ratio hits: they are null-expected.
+\emph{Structure (exact).}
+\begin{remark}[Flavor labels are functions of $\He$]\label{rem:labels}
+Let the charged-lepton masses $a_\alpha=m_\alpha^2$ be distinct. Every operator diagonal in the
+charged-lepton basis is then a polynomial in $\He$ of degree at most 2, by Lagrange interpolation on
+the three eigenvalues. In particular a harmonic-label operator
+$\hat\Phi=\operatorname{diag}(n_e,n_\mu,n_\tau)$ on flavor states equals $f(\He)$ with
+$f(a_\alpha)=n_\alpha$; the unitary form $\operatorname{diag}(e^{2\pi i n_\alpha/N})$ is a polynomial
+with complex coefficients. So every functional of $(\hat\Phi,\Hnu)$ is a functional of
+$(\He,\Hnu)$, and the harmonic structure ($N$, $V_m$, gcd/LCM) enters only through three numbers.
+If the labels sit on mass states instead, $\hat\Phi=q(\Hnu)$ commutes with $\Hnu$ and is inert by
+construction.
+\end{remark}
+\noindent Consequences, stated for functionals \emph{restricted to $E$}:
+\begin{itemize}
+\item \emph{Exact $\mu$--$\tau$ plane (the paper's setting; $E$ invariant under $\He$).}
+  $f(\He)|_E=c_f\one+\tfrac12 d_f\sigma_z$ with $d_f=f(m_\tau^2)-f(m_\mu^2)$, so the eigenframe
+  is the flavor frame for every $f$ with $d_f\neq0$. Then
+  $\Tr(f(\He)\Hnu(\theta))=\mathrm{const}+\tfrac12 d_f\,\delta_\nu\cos2(\theta+\psi_0)$, with the
+  same $\psi_0$ and the same stationary set $\theta+\psi_0\in(\pi/2)\mathbb Z$; Thms.~single and
+  nogo apply to every such $Q$. This trace identity is exact at $3\times3$.
+  \emph{Order flip} ($d_f<0$): the frame is unchanged and the eigenvalue order is swapped, so
+  $\psi_0\to\psi_0+\pi/2$, maxima and minima exchange, and $\theta_{23}\to90^\circ-\theta_{23}$
+  as a label. \emph{Degenerate} ($d_f=0$, e.g.\ $n_\tau=-n_\mu \bmod N$ for a cosine label):
+  $f(\He)|_E\propto\one$, every functional is flat in $\theta$, $Q$ is inert, and (a) fails.
+\item \emph{The $3\times3$ commutator norm is not frozen.}
+  $\Fnorm{[f(\He),\Hnu(\theta)]}^2=\sum_{i\neq j}(f_i-f_j)^2|(\Hnu)_{ij}|^2$. Its $E$--$E$ part is
+  the paper's $C\sin^22(\theta+\psi_0)$ with $\delta_e\to d_f$. Its e-row part carries a second
+  harmonic with coefficient $\tfrac12(f_\tau-f_\mu)(2f_e-f_\mu-f_\tau)(|w_\mu|^2-|w_\tau|^2)$,
+  whose phase is set by the e-row of $\Hnu$, not by $\psi_0$. It vanishes only if that e-row is
+  zero, $f_\mu=f_\tau$, or $f_e=\tfrac12(f_\mu+f_\tau)$.
+\item \emph{$E$ tilted to the data value} ($E=\nu_1^\perp$). In the $(\nu_2,\nu_3)$ frame the
+  compression has off-diagonal element $(f_\mu-f_e)(A+rB)$, with
+  $A=\overline{U_{\mu2}}U_{\mu3}$, $B=\overline{U_{\tau2}}U_{\tau3}$ and
+  $r=(f_\tau-f_e)/(f_\mu-f_e)$. The labels enter only through $r$; the family is a one-parameter
+  curve of frames. For $\delta=0$ the frame aligns with the $\varepsilon$-term exactly at
+  \[
+    r^*=\frac{s_{23}(c_{12}c_{23}-s_{12}s_{23}s_{13})}{c_{23}(c_{12}s_{23}+s_{12}c_{23}s_{13})}.
+  \]
+  At $\theta_{13}=0$ this gives $r^*=1$, i.e.\ $f_\mu=f_\tau$: the only aligning label is the inert
+  one. The mechanism's entire leverage is $\theta_{13}\neq0$. For $\delta\neq0,\pi$ the frame is
+  complex and exact alignment is generically impossible, since
+  $\min_r|A+rB|=|A|\,|\sin(\arg A-\arg B)|>0$. This is consistent with the audit's complex-case
+  result. $Q$ acts only through $\nu_1$'s $\mu/\tau$ components, and alignment is one real equation
+  in $(r,\theta_{23})$: a one-parameter fit to one target, which reparametrises $\theta_{23}$ and
+  does not determine it.
+\end{itemize}
+\begin{proposition}[The aligning ratio is a unitarity identity]\label{prop:rstar}
+For real $U$ ($\delta\in\{0,\pi\}$), the label ratio that aligns $Q_E$ with the $\nu_2$--$\nu_3$
+frame is
+\[
+  r^*=-\frac{U_{\mu2}U_{\mu3}}{U_{\tau2}U_{\tau3}}
+     =1+\frac{U_{e2}U_{e3}}{U_{\tau2}U_{\tau3}}
+     \simeq1\mp\frac{2\tan\theta_{12}\sin\theta_{13}}{\sin2\theta_{23}}
+     \quad(\delta=0,\pi).
+\]
+\end{proposition}
+\noindent\emph{Proof.} Orthogonality of columns 2 and 3,
+$\sum_\alpha U_{\alpha2}U_{\alpha3}=0$, gives $-U_{\mu2}U_{\mu3}=U_{e2}U_{e3}+U_{\tau2}U_{\tau3}$.
+For the leading order, use $U_{e2}U_{e3}=s_{12}c_{13}s_{13}e^{-i\delta}$ and
+$U_{\tau2}U_{\tau3}=-c_{12}s_{23}c_{23}c_{13}+O(s_{13})$. $\square$\\
+So $r^*=1$ at $\theta_{13}=0$ is the statement $U_{e3}=0$, and the deviation of $r^*$ from 1 is
+entirely the $U_{e3}$ term. Leading order gives $\approx0.80$ / $1.20$. The exact form reproduces the
+lab's PART~2 values in all eight variant$\times\delta$ cells, e.g.\ NO IC19 (without SK-atm)
+$0.8170349147$ at $\delta=0$ and $1.2179887361$ at $\delta=\pi$
+(\texttt{analysis/d3\_rstar\_identity.py}, run from the verifier's D3 section). In the
+reading B below, the octant rule is the subleading $U_{e3}$ term.\\
+\emph{Known context.} A flavor-diagonal label operator is the residual $\mathbb Z_N$ generator $T$ of
+the charged-lepton sector in discrete flavor models. There it fixes only the charged-lepton basis,
+and the mixing comes from the neutrino-side symmetry: $U=U_l^\dagger U_\nu$, with $U_l$
+diagonalising $T$ and $U_\nu$ the Klein-group generators~\cite{residual2014} (stated there; the
+general setting is reviewed in~\cite{kingluhn2013,feruglioromanino2021}). Integer flavor charges are Froggatt--Nielsen charges, which set
+hierarchies, not angles~\cite{froggattnielsen1979}. D3 is a consistency check against these known
+results, not a new mechanism.\\
+\begin{proposition}[The CP-odd channel is closed]\label{prop:jarlskog}
+$\det[\hat\Phi,\Hnu]=2iJ\,(n_\mu-n_e)(n_\tau-n_\mu)(n_\tau-n_e)\,
+(m_2^2-m_1^2)(m_3^2-m_2^2)(m_3^2-m_1^2)$, with
+$J=\operatorname{Im}(U_{e1}U_{\mu2}U_{e2}^*U_{\mu1}^*)$ in the PDG sign convention
+(Jarlskog~\cite{jarlskog1985}). The overall sign is convention-dependent (commutator order,
+ordering of the differences, sign convention for $J$); the form here is verified numerically in the
+lab's stated conventions (PDG $J$, $[\hat\Phi,\Hnu]$, differences as written; lab run in ef716dd). Labels therefore enter the CP-odd invariant only through a
+Vandermonde factor that rescales $J$; they cannot orient anything through it.
+\end{proposition}
+\noindent The lab verified it exactly as quoted, with no sign or factor correction: the ratio of
+the determinant to the formula is 1 to $10^{-11}$ at the four data points and on 2000 random points
+(lab ef716dd, \texttt{run-2026-10-23-t3-jarlskog.txt}).\\
+\emph{Normalisation.} With $[\hat\Phi,\Hnu]=iC$, $C$ Hermitian,
+$\det[\hat\Phi,\Hnu]=i^3\det C=-i\det C$. Jarlskog~\cite{jarlskog1985} (Eq.~7, unnormalised masses)
+gives $\det C=-2J\,\Delta(n)\Delta(m^2)$, with $\Delta(x)=(x_2-x_1)(x_3-x_2)(x_3-x_1)$, hence the
+stated $2iJ\,\Delta(n)\Delta(m^2)$. For a traceless $3\times3$ $X$, $\det X=\tfrac13\Tr X^3$, so
+$\Tr[\hat\Phi,\Hnu]^3=6iJ\,\Delta(n)\Delta(m^2)$. That is the $\Tr X^3$ form and value quoted by
+King~\cite{king2017} (Eq.~74). As printed there, $6i\Delta J$ is equated with $\det$ as well; we
+cite King for the trace form only.\\
+\emph{Setup.} Labels range over every assignment with $N=2,\dots,60$, $n_\mu\neq n_\tau$ and
+residues $0..N-1$ (71\,980 tuples; pooling the sub-cycle sectors $V_m$ adds no new frames). Three
+label forms are scanned: linear $\hat\Phi$, and the cosine (C) and sine (S) Hermitian parts of
+$W=e^{2\pi i\hat\Phi/N}$. Scoring is on the real frame, $\delta\in\{0,180^\circ\}$. Two readings:
+\emph{A}, with $E$ at its data value and the prediction being the frame implied by $Q_E$'s
+eigenframe; \emph{B}, with $\theta_{23}$ solved from the alignment condition itself, so that data
+$\theta_{23}$ is not an input. The $\delta=0$ and $\delta=180^\circ$ columns are near-mirrors
+($\mu\leftrightarrow\tau$ sends $r\to1/r$), so the 8 variant$\times\delta$ cells are about 4
+independent ones. Inverted-ordering cells are scored at $\delta\in\{0,180^\circ\}$, far from the
+inverted-ordering data $\delta$ ($285^\circ$/$274^\circ$). The gate passes (PART 0--1): the closed-form $r^*$ returns the data
+angles exactly, $r^*=1$ for every $\theta_{23}$ at $\theta_{13}=0$, and Lagrange interpolation is
+exact.\\
+\emph{Result.}
+\begin{itemize}
+\item \emph{Alignment ratio.} $r^*_{23}=0.816$--$0.820$ at $\delta=0$ and $1.218$--$1.222$ at
+  $\delta=180^\circ$, across the four variants (PART 2). For the data $\delta$ the alignment
+  equation has no exact real solution: $\arg(A/B)=0.59^\circ$ (NO IC19 without SK-atm) to
+  $-11.4^\circ$ (IO IC24 with SK-atm).
+\item \emph{Not a distinguished rational.} $r^*$ does not sit at a small-denominator rational.
+  Its smallest denominator in the window is 9--11 (reading B) and 3--5 (reading A). Against a
+  centred-window null, $P(q_{\min}\le\text{data})=0.55$--$1.00$ in reading B and $0.44$--$0.95$ in
+  reading A (PART 5).
+\item \emph{Window-landing depends on the measure.} In reading A, linear label assignments land
+  $\theta_{23}'$ in the NuFIT~6.0 $3\sigma$ window at 4.8--6.5\% with canonical residues (7 of 8 cells
+  $\ge5\%$; PART 3), and at 2.6--3.3\% with signed residues (0 of 8). The share drops to 0.8--1.0\%
+  once $\theta_{13}'$ is also required within $0.5^\circ$ of data, since the label rotation moves
+  $\theta_{13}'$ over $3.5^\circ$--$13.3^\circ$ across the $3\sigma$ $r$-interval (PART 5). No
+  individual ratio that hits the window is singled out: such hits occur at the rate the null
+  expects. The centred-window null is reproduced independently (P within $5\times10^{-4}$).
+\item \emph{Octant.} In reading B the root nearest $45^\circ$ lies in the data octant in
+  $\ge99.9\%$ of assignments at one $\delta$ and $\le0.1\%$ at the other (PART 3). The octant follows
+  $\operatorname{sign}(\cos\delta)$, i.e.\ the sign of the subleading $U_{e3}$ term in
+  Prop.~\ref{prop:rstar}, not the labels.
+\item \emph{Both pairs at once (convention-free).} Any label set, with any residue convention,
+  acts on every pair only through the single ratio $r$ (C and S labels through their own single
+  ratios). Aligning both pairs needs $r=r^*_{23}$ ($+0.816$--$+0.822$ at $\delta=0$;
+  $+1.218$--$+1.222$ at $\delta=180^\circ$) and $r=r^*_{12}$ ($-0.99$ to $-1.47$; $-0.59$ to $-0.88$)
+  at once. The best single $r$ still leaves $\ge31.4^\circ$ of misalignment on one pair, and at
+  $r^*_{23}$ the solar misalignment is $34.5^\circ$--$34.6^\circ$
+  (\texttt{run-2026-10-23-t3-signed.txt}). \textbf{No label set orients both pairs.}
+\end{itemize}
+
+\emph{Verdict on (a)--(e).}
+\begin{itemize}
+\item (a) Holds unless $d_f=f(m_\tau^2)-f(m_\mu^2)=0$, in which case $Q$ is inert on the exact plane and (a) fails.
+\item (b) \textbf{Decided structurally: fails.} The framework's canon assigns no harmonics to the
+  leptons. Without a principle that selects the labels, the orientation is a free choice of $f$.
+\item (c) \textbf{Fails as a data-fixed mechanism:} a label can align the $\nu_2$--$\nu_3$ frame
+  only by tuning $r$ to $r^*$, and only through the $\theta_{13}$ tilt.
+\item (d) \textbf{Fails:} $r^*$ is not distinguished against the null in either reading.
+\item (e) \textbf{Fails:} landing in the window is measure-dependent and at the null rate, and the
+  octant is set by $\delta$, not by the labels.
+\end{itemize}
+\textbf{D3 fails as a data-fixed $\theta_{23}$ mechanism}, on (b) and on the small-denominator null.
+It is a consistency check of a known result.
+
+\subsection{D3b: an external harmonic frame}\label{sec:D3b}
+% PROVISIONAL (2026-10-23): lab e34fc31 (calculations/theta23-harmonic-frame/; gate 6e6ff74;
+% pre-registration amendment e92d5af; capture run-2026-10-23-t3b.txt). Validator and adversary are
+% pending. All numbers are that record's.
+\emph{Candidate.} The labels of D3, but in a frame $R\in SO(3)$ that is not the charged-lepton
+frame, i.e.\ not orthogonal to $E$ and oriented from outside the mass and flavor data. This is the
+setting the D4 consequence points to.\\
+\emph{Gate.} Haar sampling on $SO(3)$ (two samplers against the analytic angle density), and
+$R=\one$ reproducing D3's $r^*$ and the T0 frame-label table.\\
+\emph{Result} (provisional).
+\begin{itemize}
+\item \emph{Exact.} Aligning the $\nu_2$--$\nu_3$ pair and the solar pair together requires $\nu_2$
+  to be an eigenvector of $Q$. The needed frame tilt is then
+  $\theta_{\rm joint}=\min_\alpha\arccos|U_{\alpha2}|=47.2^\circ$--$52.2^\circ$, independent of the
+  labels.
+\item No label ratio is special: the small-denominator $r$ sit at grid percentiles 0.08--1.00.
+  The pre-registered yardstick $F<0.05$ holds for the whole grid, since every $r$ needs a tilt
+  $\le43^\circ$. It therefore does not discriminate, a design flaw that the record flags.
+\item \emph{Divisor-angle coincidences.} Every $3\sigma$ coincidence of the tilt with a divisor
+  angle has look-elsewhere probability $\ge0.133$. The single $1\sigma$ hit below 5\% is one variant
+  among 52 tests.
+\end{itemize}
+\emph{Verdict} (provisional). (b) fails by construction: $R$ is a free $SO(3)$ input. Whether canon
+fixes such a frame is a question for the author. (d) is not scored, because the pre-registered
+yardstick does not discriminate. \textbf{D3b fails as a data-fixed $\theta_{23}$ mechanism.}
+
+\subsection{D4: a fourth generation-space direction}\label{sec:D4}
+\emph{Candidate.} A non-degenerate $\Hnu^{(4)}$ on $\mathbb C^4$, compressed to $\mathbb C^3$
+(the 3+1 sterile structure); the compression may carry an orientation on $E$ fixed by the
+fourth direction's data.\\
+\emph{Gate.} The standard 3+1 parametrization, and the current bounds on sterile mixing.\\
+% PROVISIONAL (2026-10-23). Structural result: the manager's statement, verified on paper by
+% theorist-3 (crew folder files/R1-theorist-D4.md), whose corrections are folded in here. Numbers are
+% [pending] the lab's T4 record. Sterile inputs: analysis/data/sterile_3p1_bounds.csv (b9e5ea0) is a
+% SAMPLING REGION only. Its values came through a summarising tool and were not checked against the
+% primary tables, and one row is SUSPECT, so no value from it is quoted here as a checked number.
+\emph{Structure: for functionals of the compression to $E$, the no-go does not depend on the
+dimension of flavor space.} Let flavor space have dimension $n\ge3$ (3+1: $n=4$), with mixing matrix
+$N$ and $E$ the full $\lambda$-eigenspace of $\Hnu$, spanned by $(\nu_2,\nu_3)$. In 3+1,
+$\Delta m^2_{41}\sim1$~eV$^2$ keeps $\nu_4$ out of it.
+\begin{itemize}
+\item \emph{Mass states outside $E$ are inert.} Any $Q$ in the algebra generated by the spectral
+  projectors of $\Hnu$ outside $E$ (e.g.\ $Q_4=|\nu_4\rangle\langle\nu_4|$) satisfies
+  $P_EQP_E=q_0P_E$, for every $n$ and every $\varepsilon$. It is inert on $E$ and fails (a).
+\item \emph{The frame-label freedom persists.} $N\to N\operatorname{diag}(1,R,1)$ fixes columns 1
+  and 4 and $P_E=N_EN_E^\dagger$, and changes the individual entries $N_{\alpha2}$, $N_{\alpha3}$;
+  only $P_E$, $P_1$, $P_4$ are frame-independent. At $\varepsilon=0$ the individual $|N_{\mu3}|$,
+  $|N_{\tau3}|$ are not measurable, since oscillations depend only on $P_1$, $P_4$, $P_E$: what
+  changes is their label-level value. They become observable at $\varepsilon\neq0$, through the
+  eigenframe of $K$. The proof of Prop.~\ref{prop:obstruction} uses only $\Hnu|_E=\lambda\one_E$
+  and carries over unchanged.
+\item \emph{A larger charged-lepton operator adds one free input.} Let
+  $H_e^{(4)}=\operatorname{diag}(m_e^2,m_\mu^2,m_\tau^2,x)$, with the sterile mass $x$ undefined by
+  the theory, and let $h=P_EH_e^{(4)}P_E$ in the $(\nu_2,\nu_3)$ basis, $D=h_{22}-h_{33}$. Then,
+  exactly for any $n$,
+  \[
+    \Tr\!\big(H_e^{(4)}\Hnu(\theta)\big)=\mathrm{const}+\tfrac{d}{2}A(x)\cos2(\theta+\psi_0(x)),
+    \qquad
+    \psi_0(x)=\tfrac12\operatorname{atan2}\!\big(2\operatorname{Re}h^{(0)}_{23}
+      +2x\operatorname{Re}(\bar s_2s_3),\;D_0+x(|s_2|^2-|s_3|^2)\big),
+  \]
+  with $s_i=N_{si}$ the sterile components of $E$ and $h^{(0)}$, $D_0$ the active-only parts.
+  $\psi_0$ is $x$-independent iff $(s_2,s_3)$ is an eigenvector of $h^{(0)}$; in particular if $E$
+  has no sterile component, the trace is the $3\times3$ single cosine. Otherwise $x$ sweeps
+  $\psi_0$ along a one-parameter curve of frames, the same structure as the label ratio in
+  Prop.~\ref{prop:rstar}.
+\item \emph{Scope.} These statements, like Thms.~single and nogo, hold for functionals of the
+  compression to $E$. Full-space functionals are not covered: $\Tr(H_eSH_eS)$ and the full
+  commutator norm carry a $\cos4$ term whose phase is set by $P_EH_eP_\perp$, as in the
+  $3\times3$ case (D3; the audit's section (i)), now with sterile terms added.
+\end{itemize}
+\emph{Consequence.} Flavor dimensions orthogonal to $E$, and operators built from mass states
+outside $E$, leave the compression to $E$ unchanged or scalar. A sterile state with components in
+$E$ enters only through the undefined $x$, as a one-parameter family of frames. Then (b) fails and
+alignment reparametrises $\theta_{23}$ rather than determining it. The unitarity of $N$ plays no
+role. What this does \emph{not} exclude is a $Q$ whose compression to $E$ is non-scalar and oriented
+by data outside $(\He,\Hnu)$. Examples are a seesaw non-unitarity operator
+$\eta\sim Y_\nu M^{-2}Y_\nu^\dagger$, which is not a function of $(\He,\Hnu)$ in general, or the
+external harmonic frame of T3b.\\
+% Numbers: PROVISIONAL (2026-10-23), lab dc6d4b7 (gate), a7cc8a3 (pre-registration), e734dbc (run),
+% calculations/theta23-fourth-direction/. Validator and adversary are pending. Sampling region: the
+% PrGlo17 3-sigma box as a uniform prior (a choice, per the record).
+\emph{Result} (provisional).
+\begin{itemize}
+\item \emph{Exact.} $P_EQ_4P_E=0$ to $2.7\times10^{-17}$ over 4 variants $\times$ 2 $\delta$ $\times$
+  200 draws. $\Tr(H_e^{(4)}\Hnu(\theta))$ is a single cosine to $9\times10^{-15}$, with harmonics
+  $\ge2$ vanishing to $5\times10^{-15}$. Words in $P_1,P_4$ are scalar on $E$ for $n=3,\dots,6$ to
+  $1.3\times10^{-15}$. The in-$E$ rotation leaves columns 1 and 4 and $P_E$ fixed.
+\item \emph{The free sterile mass.} Over $x=0$--$10\,m_\tau^2$ in the PrGlo17 box, $x$ moves $\psi_0$
+  by a median $4.1^\circ$.
+\item \emph{Consistency check} (PART~B). The one non-inert 4D object, the active-block compression
+  $Q_{\rm act}$, has median norm 16--23 times the $\varepsilon$-term at $m_4^2=1$~eV$^2$ (5--95\%:
+  0.8--54). Yet it changes no measured element: $|N_{\alpha1}|$ and $|N_{\alpha4}|$ are invariant under
+  the in-$E$ rotation. Read as $\theta_{23}'$, its frame lands in the NuFIT~6.0 $3\sigma$ window at
+  0.57--1.03 times the random-frame rate (random $\approx0.09$--$0.11$), never above the
+  pre-registered $2\times$. So no enrichment appears.
+\end{itemize}
+\emph{Verdict on (a)--(e)} (provisional). (a) fails exactly for operators of the fourth mass state.
+(b) fails for $H_e^{(4)}$, because $\psi_0$ depends on the free $x$. The frame-label problem persists
+in 3+1. \textbf{D4 fails.}
+
+\subsection{D5: the Lorentzian fourth dimension}\label{sec:D5}
+\emph{Candidate.} Lift the Pauli algebra of $E$, $\mathrm{Cl}(3,0)$, into $\mathrm{Cl}(1,3)$. The
+question is whether the extra element can give a \emph{Hermitian}, non-inert $Q$ on $E$ with an
+externally fixed orientation; Hermiticity is the expected obstacle.\\
+\emph{Gate.} The embedding $\mathrm{Cl}(3,0)\subset\mathrm{Cl}(1,3)$ checked numerically: the
+generators, their signature, and the Hermiticity of the candidate.\\
+\emph{Result.} [pending]\\
+\emph{Verdict on (a)--(e).} [pending]
+
+\subsection{D6: the rotational (polarization) dimension}\label{sec:D6}
+\emph{Candidate.} $E\otimes D^1$; a polarization-dependent term acts as $Q$.\\
+\emph{Gate.} [to be named with the lab: the reduction $D^l\otimes D^1$ and what fixes its
+orientation]\\
+\emph{Result.} [pending]\\
+\emph{Verdict on (a)--(e).} [pending]
+
+\subsection{Summary}\label{sec:constructive-summary}
+% Table: candidate | (a) | (b) | (c) | (d) | (e) | prediction | lab topic | verifier check.
+[pending: filled once every candidate has a verdict]

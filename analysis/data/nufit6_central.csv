@@ -1,0 +1,9 @@
+# NuFIT 6.0 Table 1 best-fit central values (no uncertainties), transcribed by the literature member from
+# arXiv:2410.05380 v2 (PDF dated 28 Oct 2025; v1 7 Oct 2024; JHEP 12 (2024) 216), via
+# files/R1-literature.md section 3.1 (crew flavor-obstruction-paper). Copied here 2026-10-23.
+# variant labels are the paper's own. dm3l = dm31 (NO, >0) or dm32 (IO, <0), in 1e-3 eV^2; dm21 in 1e-5 eV^2; angles in degrees.
+variant,ordering,theta12,theta13,theta23,delta,dm21_1e-5,dm3l_1e-3
+IC19 w/o SK-atm,NO,33.68,8.52,48.5,177,7.49,2.534
+IC19 w/o SK-atm,IO,33.68,8.58,48.6,285,7.49,-2.510
+IC24 with SK-atm,NO,33.68,8.56,43.3,212,7.49,2.513
+IC24 with SK-atm,IO,33.68,8.59,47.9,274,7.49,-2.484

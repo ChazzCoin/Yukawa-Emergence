@@ -1,0 +1,39 @@
+# env: python 3.13.7 numpy 2.4.4 date 2026-10-23
+# cmd: /opt/homebrew/bin/python3 verify_theta23_obstruction.py (cwd flavor-paper-wt @ faf2d83)
+======================================================================
+Prop 1 (obstruction): degenerate H_nu -> E(theta) identically 0
+======================================================================
+  max E over sampled theta = 0.00e+00   -> PASS
+
+======================================================================
+Thm 1 (single invariant): residual freedom lives in tr(He Hnu(theta))
+======================================================================
+  max|tr(He Hnu(t)) - [2 ce cnu + (1/2) de dnu cos2(t+psi0)]| = 1.78e-15   -> PASS
+    tr He        range over theta = 0.00e+00   (t-indep)
+    tr Hnu(t)    range over theta = 8.88e-16   (t-indep)
+    tr He^2      range over theta = 0.00e+00   (t-indep)
+    tr Hnu(t)^2  range over theta = 2.66e-15   (t-indep)
+
+======================================================================
+Thm 2 (monotone no-go): monotone functionals -> exact alignment, all masses
+======================================================================
+  G=-overlap         min theta23 =  90.00 deg   -> ALIGNED
+  G=exp(-overlap)    min theta23 =  90.00 deg   -> ALIGNED
+  G=(overlap-5)^3    min theta23 =  90.00 deg   -> ALIGNED
+  G=1/(overlap+10)   min theta23 =  90.00 deg   -> ALIGNED
+  vary the masses (de,dnu,xi_e,xi_nu):
+    (1,1,0.1,0.8) -> min theta23 =  90.00 deg   -> ALIGNED
+    (10,0.2,1.2,0.3) -> min theta23 =  90.00 deg   -> ALIGNED
+    (0.3,5,0.5,1.4) -> min theta23 =   0.00 deg   -> ALIGNED
+
+======================================================================
+Thm 3 (commutator norm): E(t)=(1/2)de^2 dnu^2 sin^2 2(t+psi0)
+======================================================================
+  max|E_numeric - closed form| = 1.24e-14   -> PASS
+  minimizer theta23 = 90.00 deg (mod 90)   -> ALIGNED (not ~49 deg)
+  stationary set {0,45,90} deg is mass-independent: C is a pure prefactor (analytic).
+
+======================================================================
+ALL CHECKS PASS
+======================================================================
+# exit: 0

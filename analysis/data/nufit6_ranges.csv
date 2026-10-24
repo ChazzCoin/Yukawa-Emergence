@@ -1,0 +1,16 @@
+# NuFIT 6.0 Table 1 (p.6), arXiv:2410.05380v2 PDF (dated 28 Oct 2025; v1 7 Oct 2024; JHEP 12 (2024) 216).
+# Re-read from the PDF by literature-2, crew flavor-obstruction-paper, item #8, 2026-10-23 (files/R1-literature-T2.md).
+# Values as printed. Where a printed 3-sigma bound exceeds 360 deg, the wrapped value (minus 360) follows in parentheses
+# (manager ruling, R1). Angles in degrees. Central values match nufit6_central.csv exactly (checked in item #8).
+# Header notes: IC19 NO dchi2=0.6 (IO best); IC24 NO best (IO dchi2=6.1).
+# theta12 columns added 2026-10-23 from Table 1 p.6 as printed (literature-7, item #17, OPENED-img; files/R2-literature-T17.md).
+# theta13, sin^2 theta13, dm21 (1e-5 eV^2) and dm3l (1e-3 eV^2) columns added 2026-10-23 by the crew lead (flavor-obstruction-paper),
+# OPENED-img: Table 1 rows sin^2theta13, theta13/deg, Dm21^2/1e-5 eV^2, Dm3l^2/1e-3 eV^2; columns 'bfp +-1sigma' and '3sigma range' of each
+# ordering block, both variants; arXiv:2410.05380v2 PDF page 8 (printed -6-), PDF sha256 66ff020f...d54194f, rendered at 220 dpi.
+# Every value was also cross-checked as present in the PDF text layer (pdftotext). dm3l = dm31 > 0 for NO and dm32 < 0 for IO
+# (Table 1 caption); signs as printed. Each ordering's values are relative to its own local minimum (caption).
+variant,ordering,theta23_bfp,theta23_p1s,theta23_m1s,theta23_3s_lo,theta23_3s_hi,delta_bfp,delta_p1s,delta_m1s,delta_3s_lo,delta_3s_hi,s12sq_bfp,s12sq_p1s,s12sq_m1s,s12sq_3s_lo,s12sq_3s_hi,theta12_bfp,theta12_p1s,theta12_m1s,theta12_3s_lo,theta12_3s_hi,s13sq_bfp,s13sq_p1s,s13sq_m1s,s13sq_3s_lo,s13sq_3s_hi,theta13_bfp,theta13_p1s,theta13_m1s,theta13_3s_lo,theta13_3s_hi,dm21_bfp,dm21_p1s,dm21_m1s,dm21_3s_lo,dm21_3s_hi,dm3l_bfp,dm3l_p1s,dm3l_m1s,dm3l_3s_lo,dm3l_3s_hi
+IC19 w/o SK-atm,NO,48.5,+0.7,-0.9,41.0,50.5,177,+19,-20,96,422 (62),0.307,+0.012,-0.011,0.275,0.345,33.68,+0.73,-0.70,31.63,35.95,0.02195,+0.00054,-0.00058,0.02023,0.02376,8.52,+0.11,-0.11,8.18,8.87,7.49,+0.19,-0.19,6.92,8.05,+2.534,+0.025,-0.023,+2.463,+2.606
+IC19 w/o SK-atm,IO,48.6,+0.7,-0.9,41.4,50.6,285,+25,-28,201,348,0.308,+0.012,-0.011,0.275,0.345,33.68,+0.73,-0.70,31.63,35.95,0.02224,+0.00056,-0.00057,0.02053,0.02397,8.58,+0.11,-0.11,8.24,8.91,7.49,+0.19,-0.19,6.92,8.05,-2.510,+0.024,-0.025,-2.584,-2.438
+IC24 with SK-atm,NO,43.3,+1.0,-0.8,41.3,49.9,212,+26,-41,124,364 (4),0.308,+0.012,-0.011,0.275,0.345,33.68,+0.73,-0.70,31.63,35.95,0.02215,+0.00056,-0.00058,0.02030,0.02388,8.56,+0.11,-0.11,8.19,8.89,7.49,+0.19,-0.19,6.92,8.05,+2.513,+0.021,-0.019,+2.451,+2.578
+IC24 with SK-atm,IO,47.9,+0.7,-0.9,41.5,49.8,274,+22,-25,201,335,0.308,+0.012,-0.011,0.275,0.345,33.68,+0.73,-0.70,31.63,35.95,0.02231,+0.00056,-0.00056,0.02060,0.02409,8.59,+0.11,-0.11,8.25,8.93,7.49,+0.19,-0.19,6.92,8.05,-2.484,+0.020,-0.020,-2.547,-2.421

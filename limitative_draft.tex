@@ -1,0 +1,194 @@
+%=======================================================================
+%  limitative_draft.tex  —  NEW backbone for the limitative paper
+%  Drafted 2026-07-07.  Slots into main.tex; overwrites nothing.
+%
+%  Contents:
+%    (A) revised abstract  (replaces the current abstract, L16–33)
+%    (B) Lemma (inertness of the alignment operator)  — insert in §4
+%    (C) Theorem 3'  (the functional no-go)  — REPLACES the broken §5–6 Thm 3
+%    (D) Corollary   (what external input is required)  — feeds the outlook §7
+%
+%  Preamble needed (already in main.tex or add): amsmath, amssymb, amsthm,
+%  with \newtheorem{theorem}, {lemma}, {corollary} and the proof environment.
+%  Notation: E = the 2D degenerate mu-tau eigenspace of H_nu; H_e=Y_eY_e^dag,
+%  H_nu=m_nu m_nu^dag; 1_E the identity on E; R(theta) the residual SO(2).
+%=======================================================================
+
+
+%========================= (A) REVISED ABSTRACT ========================
+\begin{abstract}
+The finite spectral triple of the Standard Model geometrizes fermion mass
+spectra but does not, in the presence of degeneracies, fix the relative
+orientation of generation subspaces. We show that whenever the effective
+neutrino Hermitian operator $H_\nu = m_\nu m_\nu^\dagger$ admits a
+two-dimensional eigenspace $E$, an associated residual $\mathrm{SO}(2)$ freedom
+in the $\mu$--$\tau$ plane is invisible to every axiom of noncommutative
+geometry and to the spectral action, yet acts nontrivially on the PMNS matrix
+and carries the \emph{entire} indeterminacy of the atmospheric mixing angle
+$\theta_{23}$ (Theorem~\ref{thm:obstruction}). Subject to the order-zero,
+first-order, and reality conditions, the unique minimal relational operator
+built linearly from the sector Hermitians and capable of lifting this freedom
+is $A(\alpha,\beta)=\alpha H_e+\beta H_\nu$
+(Theorem~\ref{thm:minimal}). We show, however, that on the degenerate subspace
+this operator is \emph{inert}---its $H_\nu$ component acts as a multiple of the
+identity---so its eigenbasis coincides with that of $H_e$ and selects the
+\emph{aligned} configuration $\theta_{23}=0$
+(Lemma~\ref{lem:inertness}). More strongly, we prove that \emph{no} functional
+of the misalignment (commutator-norm) class can select the physical value: for
+any such functional the stationary configurations are rigidly
+$\{0,\pi/4,\pi/2\}$, independent of all fermion mass magnitudes, with the
+minima at exact alignment and the value $\pi/4$ a symmetry-forced maximum
+rather than a derived quantity (Theorem~\ref{thm:nogo}). We conclude that
+$\theta_{23}$ is not determined by spectral geometry in the (near-)degenerate
+regime; it is fixed only by $\mu$--$\tau$--symmetry--breaking data external to
+the finite triple, and we characterize precisely the structure such input must
+supply (Corollary~\ref{cor:external}). These results delineate the boundary of
+what spectral geometry alone can fix in the lepton flavor sector.
+\end{abstract}
+
+
+%============ (B) LEMMA — inertness of the alignment operator ===========
+% Insert in Section 4, immediately after A(alpha,beta)=alpha H_e+beta H_nu
+% is introduced and shown to be the minimal admissible operator.
+
+\begin{lemma}[Inertness of the alignment operator on $E$]
+\label{lem:inertness}
+Let $E\subset\mathbb{C}^3$ be the two-dimensional eigenspace on which
+$H_\nu|_E=\lambda\,\mathbf 1_E$, and let $H_e|_E$ be nondegenerate
+($m_\mu\neq m_\tau$). Then for every $\alpha\neq0$ and every $\beta\in\mathbb R$,
+\[
+  A|_E \;=\; \alpha\,H_e|_E \;+\; \beta\lambda\,\mathbf 1_E ,
+\]
+so $A|_E$ and $H_e|_E$ have identical eigenprojectors. Consequently the
+orientation of $E$ selected by diagonalizing $A$ is exactly that of $H_e$, and
+adopting it as the neutrino frame gives a trivial $\mu$--$\tau$ block of the
+PMNS matrix, i.e. $\theta_{23}=0$.
+\end{lemma}
+
+\begin{proof}
+By definition of $E$, $H_\nu|_E=\lambda\,\mathbf 1_E$, hence
+$A|_E=\alpha H_e|_E+\beta\lambda\,\mathbf 1_E$. Adding a scalar multiple of the
+identity shifts eigenvalues but leaves eigenvectors unchanged, so for
+$\alpha\neq0$ the spectral projectors of $A|_E$ coincide with those of
+$H_e|_E$. Writing $U_{\mathrm{PMNS}}=U_e^\dagger U_\nu$ and choosing $U_\nu$ on
+$E$ to be the eigenframe of $A|_E$ (equivalently of $H_e|_E$) gives
+$U_e^\dagger U_\nu|_E=\mathbf 1_E$ on the $\mu$--$\tau$ block, i.e.
+$\theta_{23}=0$.
+\end{proof}
+
+\noindent\emph{Remark.} The $H_\nu$ term is thus dynamically silent precisely
+where the residual freedom lives: on $E$ the ``relational'' operator collapses
+to $H_e$ alone. This is the structural reason a minimization of misalignment
+returns the unmixed configuration, and it motivates the sharper statement
+below.
+
+
+%============ (C) THEOREM 3' — the functional no-go =====================
+% Replaces the previous Section 5-6 "Theorem 3" (unique minimizer -> theta23).
+% Set delta_e = m_tau^2 - m_mu^2 > 0, and delta_nu >= 0 the mu-tau splitting of
+% H_nu on E (delta_nu = 0 is the exact-degeneracy limit of Theorem 1).
+% psi_0 is the relative eigenbasis angle of H_e and H_nu on E; in the
+% alignment convention theta_23 = psi_0 + theta.
+
+\begin{theorem}[No misalignment functional determines $\theta_{23}$]
+\label{thm:nogo}
+Work on $E\cong\mathbb{C}^2$. Let $H_e|_E$ have eigenvalue gap
+$\delta_e=m_\tau^2-m_\mu^2>0$ and let $H_\nu|_E$ have gap $\delta_\nu\ge0$, with
+relative eigenbasis angle $\psi_0$. Let $R(\theta)$ be the residual rotation of
+$E$ and define the misalignment functional
+\[
+  \mathcal{E}(\theta)\;=\;\bigl\|\,[\,H_e,\;R(\theta)^\dagger H_\nu R(\theta)\,]\,\bigr\|_F^2 .
+\]
+Then:
+\begin{enumerate}
+\item[(i)] If $\delta_\nu=0$ (exact degeneracy, the hypothesis of
+Theorem~\ref{thm:obstruction}), $[\,H_e,R(\theta)^\dagger H_\nu R(\theta)\,]=0$
+for all $\theta$; $\mathcal E\equiv0$ possesses no isolated extremum and selects
+no orientation.
+\item[(ii)] If $\delta_\nu>0$,
+\[
+  \boxed{\;\mathcal{E}(\theta)\;=\;C\,\sin^2\!\bigl(2(\theta+\psi_0)\bigr),
+  \qquad C=\tfrac12\,\delta_e^2\,\delta_\nu^2\;>\;0. \;}
+\]
+Its stationary points are $\theta+\psi_0\in\tfrac{\pi}{4}\mathbb{Z}$; reading
+$\theta_{23}=\psi_0+\theta$, the accessible stationary values are exactly
+\[
+  \theta_{23}\in\{\,0,\ \tfrac{\pi}{4},\ \tfrac{\pi}{2}\,\}\pmod{\tfrac{\pi}{2}},
+\]
+the minima ($\mathcal E=0$) being the aligned configurations $\theta_{23}=0,\pi/2$
+and $\theta_{23}=\pi/4$ the unique interior maximum.
+\item[(iii)] The amplitude $C$ carries the entire dependence on the fermion
+mass magnitudes and is a strictly positive prefactor; it does not enter the
+location of the stationary points. Hence for any monotone $F$, every extremizer
+of $F(\mathcal E)$ lies in $\{0,\pi/4,\pi/2\}$, independent of all mass inputs.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Decompose each restricted operator into trace and traceless parts. A $2\times2$
+Hermitian $X$ with eigenvalue gap $\delta_X$ may be written
+$X=c_X\mathbf 1+\tfrac{\delta_X}{2}\,\hat n_X\!\cdot\!\vec\sigma$, with
+$\hat n_X$ a unit Bloch vector in the plane spanned by $\sigma_x,\sigma_z$ at
+polar angle $2\xi_X$, where $\xi_X$ is the eigenbasis orientation of $X$ in $E$.
+Trace parts and the scalar $c_X$ commute with everything, so they drop from the
+commutator:
+\[
+  [H_e,H_\nu]=\Bigl[\tfrac{\delta_e}{2}\hat n_e\!\cdot\!\vec\sigma,\
+  \tfrac{\delta_\nu}{2}\hat n_\nu\!\cdot\!\vec\sigma\Bigr]
+  =\frac{\delta_e\delta_\nu}{4}\,[\hat n_e\!\cdot\!\vec\sigma,\ \hat n_\nu\!\cdot\!\vec\sigma]
+  = i\,\frac{\delta_e\delta_\nu}{2}\,(\hat n_e\times\hat n_\nu)\!\cdot\!\vec\sigma,
+\]
+using $[\,\hat a\!\cdot\!\vec\sigma,\hat b\!\cdot\!\vec\sigma\,]=2i(\hat a\times\hat b)\!\cdot\!\vec\sigma$.
+With $\operatorname{tr}(\sigma_i\sigma_j)=2\delta_{ij}$,
+\[
+  \|[H_e,H_\nu]\|_F^2=\frac{\delta_e^2\delta_\nu^2}{4}\cdot 2\,|\hat n_e\times\hat n_\nu|^2
+  =\frac{\delta_e^2\delta_\nu^2}{2}\,\sin^2\!\bigl(2(\xi_e-\xi_\nu)\bigr),
+\]
+since $\hat n_e,\hat n_\nu$ lie in a common plane at angles $2\xi_e,2\xi_\nu$, so
+$|\hat n_e\times\hat n_\nu|=|\sin(2\xi_e-2\xi_\nu)|$. Writing the relative angle
+$\psi_0=\xi_e-\xi_\nu$ gives the exact-degeneracy statement (i): if
+$\delta_\nu=0$ the commutator vanishes identically. For $\delta_\nu>0$, the
+residual rotation acts by $\xi_\nu\mapsto\xi_\nu-\theta$, i.e.
+$\psi_0\mapsto\psi_0+\theta$, and adding it back does not affect the trace parts;
+hence
+\[
+  \mathcal E(\theta)=\tfrac12\delta_e^2\delta_\nu^2\,\sin^2\!\bigl(2(\theta+\psi_0)\bigr),
+\]
+which is (ii) with $C=\tfrac12\delta_e^2\delta_\nu^2$. Stationarity:
+$\mathcal E'(\theta)=2C\sin\!\bigl(4(\theta+\psi_0)\bigr)=0\iff\theta+\psi_0\in\tfrac{\pi}{4}\mathbb Z$;
+$\mathcal E=0$ (minima) at $\theta+\psi_0\in\tfrac{\pi}{2}\mathbb Z$ and the
+maximum at the half-integer points, giving the stated $\theta_{23}$ values.
+Finally $C>0$ multiplies $\mathcal E$ uniformly, so $\operatorname*{arg\,ext}_\theta F(\mathcal E(\theta))$
+is unchanged by $C$ for any strictly monotone $F$, which is (iii).
+\end{proof}
+
+\begin{corollary}[External input required to fix $\theta_{23}$]
+\label{cor:external}
+No functional built monotonically from the misalignment
+$\|[H_e,R(\theta)^\dagger H_\nu R(\theta)]\|$ selects a value of $\theta_{23}$ in
+$(0,\pi/2)\setminus\{\pi/4\}$; in particular it cannot select the observed
+$\theta_{23}\approx49^\circ$. Minimization returns exact alignment,
+$\theta_{23}=0$ (Lemma~\ref{lem:inertness}); the value $\pi/4$ is the
+$\mu$--$\tau$ (2$\leftrightarrow$3 exchange) symmetric point, a symmetry-forced
+maximum independent of the mass inputs, not a determination. To select an
+interior value one must augment the construction with a Hermitian operator $Q$
+on $E$ such that
+\begin{enumerate}
+\item[(a)] $Q|_E\not\propto\mathbf 1_E$ (so $Q$ is \emph{non-inert}, unlike
+$H_\nu$ on $E$), and
+\item[(b)] the eigen-orientation of $Q$ on $E$ is fixed by data other than
+$\theta_{23}$ itself,
+\end{enumerate}
+for instance a controlled $\mu$--$\tau$--breaking of the neutrino sector whose
+orientation is pinned by the mass-squared splittings $\Delta m^2_{21},\Delta
+m^2_{31}$ or by renormalization-group running between the seesaw and electroweak
+scales. Absent such an operator, $\theta_{23}$ is a datum of the theory, not a
+prediction of it.
+\end{corollary}
+
+\noindent\emph{Remark.} The dichotomy is sharp: a \emph{symmetry}
+(2$\leftrightarrow$3 exchange) forces exactly $\pi/4$, while a
+\emph{relational functional} of the above class has its stationary set frozen at
+$\{0,\pi/4,\pi/2\}$. The physical deviation $\theta_{23}-\pi/4$ is precisely the
+$\mu$--$\tau$--breaking that neither device supplies; it is the content of
+condition (b) above.

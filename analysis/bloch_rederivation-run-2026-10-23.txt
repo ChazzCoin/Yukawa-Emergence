@@ -1,0 +1,21 @@
+# env: python 3.13.7 numpy 2.4.4 date 2026-10-23 flavor-paper-wt@faf2d83
+# cmd: /opt/homebrew/bin/python3 analysis/bloch_rederivation.py (cwd = repo root)
+5000 random draws (seed 1023). Worst absolute (V1: 1-|overlap|; V4: relative to C) deviations:
+  V1 eigenvector angle xi-t            2.220e-16   PASS
+  V2 Tr(He Hnu(t)) closed form         1.776e-14   PASS
+  V3a [a.s,b.s]=2i(axb).s              1.776e-15   PASS
+  V3b ||[He,Hnu]||^2 closed form       3.126e-13   PASS
+  V4 dE/dt = 2C sin4(t+psi0)           2.550e-11   PASS
+  V5a Tr(X^2Y) reduction               2.842e-14   PASS
+  V5b Tr(XYXY) reduction               1.705e-13   PASS
+  V5c Tr(X^2Y^2) reduction             1.137e-13   PASS
+  (V4 tolerance 1e-8 (relative to C): 5-point stencil, h=1e-3; the rest 1e-12)
+
+V6 (beyond the paper): He|_E complex Hermitian, Bloch vector n = (sin chi cos s, cos chi, sin chi sin s)-type with a sigma_y part
+  max|Tr(He Hnu) - [2 ce cnu + (1/2) de dnu r cos2(t+psi0)]| = 1.07e-14
+  max|E - (1/2)de^2 dnu^2 (1 - r^2 cos^2 2(t+psi0))|         = 1.99e-13   -> PASS
+  consequence: E_min = (1/2)de^2 dnu^2 (1-r^2) > 0 unless r=1: over these draws min(1-r^2) = 8.996e-08, median = 4.853e-01
+  stationary set of E(t): cos2(t+psi0)*sin2(t+psi0)=0 -> same {0, pi/4, pi/2} family (psi0 is the xz-projection angle)
+
+ALL CHECKS PASS
+# exit: 0

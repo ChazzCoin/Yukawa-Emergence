@@ -1,0 +1,64 @@
+# env: python 3.13.7 numpy 2.4.4 date 2026-10-23 flavor-paper-wt@faf2d83
+# cmd: /opt/homebrew/bin/python3 analysis/tilted_degenerate_eigenspace.py (cwd = repo root)
+inputs: m^2 = 2.500e-03 eV^2, Delta = m1^2 - m^2 = -7.400e-05 eV^2
+
+=== GROUND TRUTH: theta12 = theta13 = 0 ===
+  2-3 flavor block of H_nu - m^2*1 : max|.| = 4.86e-20 (expect 0 => block ∝ 1)
+  t= 0 deg -> theta12=0.000 theta13=0.000 theta23=49.000  (expect 0, 0, 49-t=49: R(t) shifts theta23 by exactly t, sign set by the R convention)
+  t=10 deg -> theta12=0.000 theta13=0.000 theta23=39.000  (expect 0, 0, 49-t=39: R(t) shifts theta23 by exactly t, sign set by the R convention)
+  t=25 deg -> theta12=0.000 theta13=0.000 theta23=24.000  (expect 0, 0, 49-t=24: R(t) shifts theta23 by exactly t, sign set by the R convention)
+  t=40 deg -> theta12=0.000 theta13=0.000 theta23=9.000  (expect 0, 0, 49-t=9: R(t) shifts theta23 by exactly t, sign set by the R convention)
+  GROUND TRUTH: PASS
+
+=== REALISTIC tilt: theta12=33.4 theta13=8.6 theta23=49 delta=0 deg, m2=m3 ===
+  A. 2-3 flavor block of H_nu: eigenvalues = 2.476423e-03, 2.500000e-03 ; gap = 2.358e-05 eV^2
+     predicted gap |Delta|*(1-|U_e1|^2) = 2.358e-05  (1-|U_e1|^2 = 0.3186);  gap/|Delta| = 0.3186
+     => flavor 2-3 block is NOT ∝ 1; true degenerate eigenspace E = span(U[:,1],U[:,2]) is tilted out of the flavor mu-tau plane
+     check H_nu E = m^2 E : max|H_nu U[:,j] - m^2 U[:,j]| (j=2,3) = 5.42e-20
+  B. rotate inside E: U(t) = U (1 (+) R(t))
+     t(deg)   theta12   theta13   theta23   |delta|   |Ue2|     |Ue3|    |Ue2|^2+|Ue3|^2  max|dH_nu|
+       0.0    33.400     8.600    49.000     0.000  0.54429  0.14954  0.318613886530  0.00e+00
+       5.0    33.927     5.827    44.806     0.000  0.55525  0.10153  0.318613886530  4.34e-19
+      10.0    34.248     3.024    40.653     0.000  0.56199  0.05275  0.318613886530  4.34e-19
+      20.0    34.277     2.616    32.391   180.000  0.56261  0.04564  0.318613886530  4.34e-19
+      30.0    33.489     8.201    24.056   180.000  0.54614  0.14264  0.318613886530  4.34e-19
+      45.0    30.725    16.209    11.065   180.000  0.49061  0.27913  0.318613886530  9.66e-20
+      60.0    25.946    23.366     2.961     0.000  0.40165  0.39660  0.318613886530  4.34e-19
+      90.0    10.268    32.976    35.369     0.000  0.14954  0.54429  0.318613886530  2.37e-19
+     theta13(t) over t in [0,180) deg: min=0.0068 max=34.3647 ; theta13 -> 0 at t=15.35 deg
+     at that t: theta12=34.365 theta13=0.0068 theta23=36.232 (an orbit point with theta13=0, same H_nu)
+     invariant under t: |U_e1|,|U_mu1|,|U_tau1| = [0.825461 0.455365 0.333551] ; max drift over t = 0.00e+00
+     P(mu->tau) at an arbitrary phase x=3700.0 eV^-2: t=0: 0.001718686829 ; t=17: 0.001718686829 ; t=63: 0.001718686829
+  C. lift the degeneracy: m3^2 = m^2 + eps, rotate by t=20 deg inside E
+     eps (eV^2)   max|H_nu(t=20)-H_nu(0)|   ratio to eps   theta12  theta13  theta23 (t=0 -> t=20)
+     2.5e-03      7.269e-04                 0.2908        (33.40,8.60,49.00)->(34.28,2.62,32.39)
+     2.5e-04      7.269e-05                 0.2908        (33.40,8.60,49.00)->(34.28,2.62,32.39)
+     2.5e-05      7.269e-06                 0.2908        (33.40,8.60,49.00)->(34.28,2.62,32.39)
+     2.5e-06      7.269e-07                 0.2908        (33.40,8.60,49.00)->(34.28,2.62,32.39)
+
+=== REALISTIC tilt: theta12=33.4 theta13=8.6 theta23=49 delta=197 deg, m2=m3 ===
+  A. 2-3 flavor block of H_nu: eigenvalues = 2.476423e-03, 2.500000e-03 ; gap = 2.358e-05 eV^2
+     predicted gap |Delta|*(1-|U_e1|^2) = 2.358e-05  (1-|U_e1|^2 = 0.3186);  gap/|Delta| = 0.3186
+     => flavor 2-3 block is NOT ∝ 1; true degenerate eigenspace E = span(U[:,1],U[:,2]) is tilted out of the flavor mu-tau plane
+     check H_nu E = m^2 E : max|H_nu U[:,j] - m^2 U[:,j]| (j=2,3) = 2.17e-19
+  B. rotate inside E: U(t) = U (1 (+) R(t))
+     t(deg)   theta12   theta13   theta23   |delta|   |Ue2|     |Ue3|    |Ue2|^2+|Ue3|^2  max|dH_nu|
+       0.0    33.400     8.600    49.000   163.000  0.54429  0.14954  0.318613886530  0.00e+00
+       5.0    32.692    11.235    44.746   166.915  0.52977  0.19483  0.318613886530  4.34e-19
+      10.0    31.772    13.842    40.413   169.281  0.51125  0.23925  0.318613886530  4.34e-19
+      20.0    29.277    18.854    31.440   171.949  0.46280  0.32316  0.318613886530  4.34e-19
+      30.0    25.880    23.440    21.941   173.459  0.40047  0.39779  0.318613886530  4.34e-19
+      45.0    19.075    29.142     6.521   178.319  0.28543  0.48697  0.318613886530  4.34e-19
+      60.0    10.505    32.909    10.534    21.561  0.15306  0.54331  0.318613886530  2.78e-19
+      90.0    10.268    32.976    46.389   163.150  0.14954  0.54429  0.318613886530  4.34e-19
+     theta13(t) over t in [0,180) deg: min=2.4230 max=34.2548 ; theta13 -> 0 at t=165.20 deg
+     at that t: theta12=34.290 theta13=2.4230 theta23=61.324 (an orbit point with theta13=0, same H_nu)
+     invariant under t: |U_e1|,|U_mu1|,|U_tau1| = [0.825461 0.272444 0.494357] ; max drift over t = 0.00e+00
+     P(mu->tau) at an arbitrary phase x=3700.0 eV^-2: t=0: 0.001351405259 ; t=17: 0.001351405259 ; t=63: 0.001351405259
+  C. lift the degeneracy: m3^2 = m^2 + eps, rotate by t=20 deg inside E
+     eps (eV^2)   max|H_nu(t=20)-H_nu(0)|   ratio to eps   theta12  theta13  theta23 (t=0 -> t=20)
+     2.5e-03      7.830e-04                 0.3132        (33.40,8.60,49.00)->(29.28,18.85,31.44)
+     2.5e-04      7.830e-05                 0.3132        (33.40,8.60,49.00)->(29.28,18.85,31.44)
+     2.5e-05      7.830e-06                 0.3132        (33.40,8.60,49.00)->(29.28,18.85,31.44)
+     2.5e-06      7.830e-07                 0.3132        (33.40,8.60,49.00)->(29.28,18.85,31.44)
+# exit: 0

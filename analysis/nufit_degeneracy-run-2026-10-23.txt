@@ -1,0 +1,100 @@
+# env: python 3.13.7 numpy 2.4.4 date 2026-10-23 flavor-paper-wt@5223dc3
+# cmd: /opt/homebrew/bin/python3 nufit_degeneracy.py (cwd analysis/)
+
+===== [IC19 w/o SK-atm, NO]: th12=33.68 th13=8.52 th23=48.5 delta=177.0 deg; dm21=7.4900e-05 dm3l=+2.5340e-03 eV^2
+  A. dm21/|dm3l| = 0.02956  (solar pair is the near-degenerate one in both orderings)
+     U (|entries|) row e: [0.82296 0.54843 0.14815] ; third column |U_x3|: [0.14815 0.74069 0.65531]
+     U -> U R12(t):  t(deg)  |Ue1|   |Ue2|   |Ue3|   col3 drift  col1 drift   th12     th13     th23
+                   0  0.8230  0.5484  0.1482  0.00e+00   0.00e+00    33.680    8.520   48.500
+                  10  0.9057  0.3972  0.1482  0.00e+00   1.11e-01    23.680    8.520   48.500
+                  20  0.9609  0.2339  0.1482  0.00e+00   2.26e-01    13.680    8.520   48.500
+                  30  0.9869  0.0635  0.1482  0.00e+00   3.51e-01     3.680    8.520   48.500
+                  45  0.9697  0.1941  0.1482  0.00e+00   4.46e-01    11.320    8.520   48.500
+     U -> U R23(t):  t(deg)  |Ue1|   |Ue2|   |Ue3|   col3 drift  col1 drift   th12     th13     th23
+                   0  0.8230  0.5484  0.1482  0.00e+00   0.00e+00    33.680    8.520   48.500
+                  10  0.8230  0.5144  0.2411  1.18e-01   0.00e+00    32.008   13.949   39.937
+                  20  0.8230  0.4648  0.3267  2.54e-01   0.00e+00    29.455   19.068   30.974
+                  30  0.8230  0.4010  0.4024  4.06e-01   0.00e+00    25.978   23.728   21.468
+                  45  0.8230  0.2832  0.4924  6.50e-01   0.00e+00    18.992   29.502    5.964
+
+===== [IC19 w/o SK-atm, IO]: th12=33.68 th13=8.58 th23=48.6 delta=285.0 deg; dm21=7.4900e-05 dm3l=-2.5100e-03 eV^2
+  A. dm21/|dm3l| = 0.02984  (solar pair is the near-degenerate one in both orderings)
+     U (|entries|) row e: [0.82283 0.54835 0.14919] ; third column |U_x3|: [0.14919 0.74172 0.65391]
+     U -> U R12(t):  t(deg)  |Ue1|   |Ue2|   |Ue3|   col3 drift  col1 drift   th12     th13     th23
+                   0  0.8228  0.5483  0.1492  0.00e+00   0.00e+00    33.680    8.580   48.600
+                  10  0.9056  0.3971  0.1492  0.00e+00   1.11e-01    23.680    8.580   48.600
+                  20  0.9608  0.2339  0.1492  0.00e+00   2.24e-01    13.680    8.580   48.600
+                  30  0.9868  0.0635  0.1492  0.00e+00   3.05e-01     3.680    8.580   48.600
+                  45  0.9696  0.1941  0.1492  0.00e+00   2.54e-01    11.320    8.580   48.600
+     U -> U R23(t):  t(deg)  |Ue1|   |Ue2|   |Ue3|   col3 drift  col1 drift   th12     th13     th23
+                   0  0.8228  0.5483  0.1492  0.00e+00   0.00e+00    33.680    8.580   48.600
+                  10  0.8228  0.5473  0.1530  1.04e-01   0.00e+00    33.629    8.801   40.193
+                  20  0.8228  0.5308  0.2030  2.27e-01   0.00e+00    32.824   11.714   31.710
+                  30  0.8228  0.4994  0.2712  3.65e-01   0.00e+00    31.255   15.733   23.021
+                  45  0.8228  0.4274  0.3746  5.89e-01   0.00e+00    27.447   21.997    9.479
+
+===== [IC24 with SK-atm, NO]: th12=33.68 th13=8.56 th23=43.3 delta=212.0 deg; dm21=7.4900e-05 dm3l=+2.5130e-03 eV^2
+  A. dm21/|dm3l| = 0.02981  (solar pair is the near-degenerate one in both orderings)
+     U (|entries|) row e: [0.82288 0.54838 0.14885] ; third column |U_x3|: [0.14885 0.67818 0.71967]
+     U -> U R12(t):  t(deg)  |Ue1|   |Ue2|   |Ue3|   col3 drift  col1 drift   th12     th13     th23
+                   0  0.8229  0.5484  0.1488  0.00e+00   0.00e+00    33.680    8.560   43.300
+                  10  0.9056  0.3972  0.1488  0.00e+00   1.16e-01    23.680    8.560   43.300
+                  20  0.9608  0.2339  0.1488  0.00e+00   2.32e-01    13.680    8.560   43.300
+                  30  0.9868  0.0635  0.1488  0.00e+00   3.12e-01     3.680    8.560   43.300
+                  45  0.9696  0.1941  0.1488  0.00e+00   3.87e-01    11.320    8.560   43.300
+     U -> U R23(t):  t(deg)  |Ue1|   |Ue2|   |Ue3|   col3 drift  col1 drift   th12     th13     th23
+                   0  0.8229  0.5484  0.1488  0.00e+00   0.00e+00    33.680    8.560   43.300
+                  10  0.8229  0.5183  0.2329  1.24e-01   0.00e+00    32.206   13.466   34.755
+                  20  0.8229  0.4729  0.3150  2.64e-01   0.00e+00    29.886   18.362   25.853
+                  30  0.8229  0.4137  0.3895  4.17e-01   0.00e+00    26.690   22.926   16.458
+                  45  0.8229  0.3037  0.4803  6.51e-01   0.00e+00    20.256   28.703    1.791
+
+===== [IC24 with SK-atm, IO]: th12=33.68 th13=8.59 th23=47.9 delta=274.0 deg; dm21=7.4900e-05 dm3l=-2.4840e-03 eV^2
+  A. dm21/|dm3l| = 0.03015  (solar pair is the near-degenerate one in both orderings)
+     U (|entries|) row e: [0.82281 0.54833 0.14936] ; third column |U_x3|: [0.14936 0.73365 0.66291]
+     U -> U R12(t):  t(deg)  |Ue1|   |Ue2|   |Ue3|   col3 drift  col1 drift   th12     th13     th23
+                   0  0.8228  0.5483  0.1494  0.00e+00   0.00e+00    33.680    8.590   47.900
+                  10  0.9055  0.3971  0.1494  0.00e+00   1.08e-01    23.680    8.590   47.900
+                  20  0.9607  0.2338  0.1494  0.00e+00   2.19e-01    13.680    8.590   47.900
+                  30  0.9867  0.0635  0.1494  0.00e+00   3.06e-01     3.680    8.590   47.900
+                  45  0.9695  0.1941  0.1494  0.00e+00   2.33e-01    11.320    8.590   47.900
+     U -> U R23(t):  t(deg)  |Ue1|   |Ue2|   |Ue3|   col3 drift  col1 drift   th12     th13     th23
+                   0  0.8228  0.5483  0.1494  0.00e+00   0.00e+00    33.680    8.590   47.900
+                  10  0.8228  0.5424  0.1696  1.07e-01   0.00e+00    33.394    9.762   39.470
+                  20  0.8228  0.5213  0.2263  2.33e-01   0.00e+00    32.358   13.078   30.919
+                  30  0.8228  0.4858  0.2949  3.74e-01   0.00e+00    30.560   17.150   22.124
+                  45  0.8228  0.4089  0.3947  5.99e-01   0.00e+00    26.425   23.246    8.417
+
+===== B. absolute mass scale
+  ground truth: minimal sum m_nu at m_lightest = 0
+    [IC19 w/o SK-atm, NO] masses = 0.00000, 0.00865, 0.05034 eV  sum = 0.05899 eV  (ok; expect ~0.059 NO / ~0.10 IO)
+    [IC19 w/o SK-atm, IO] masses = 0.04935, 0.05010, 0.00000 eV  sum = 0.09945 eV  (ok; expect ~0.059 NO / ~0.10 IO)
+    [IC24 with SK-atm, NO] masses = 0.00000, 0.00865, 0.05013 eV  sum = 0.05878 eV  (ok; expect ~0.059 NO / ~0.10 IO)
+    [IC24 with SK-atm, IO] masses = 0.04908, 0.04984, 0.00000 eV  sum = 0.09892 eV  (ok; expect ~0.059 NO / ~0.10 IO)
+  ground truth: PASS
+  bounds (LCDM 95%): Planck18+BAO 0.12 eV, DESI DR1+CMB 0.072 eV, DESI DR2+CMB 0.064 eV
+  [IC19 w/o SK-atm, NO] pair (2,3): (m3-m2)/m3; relative splitting at m_l=0: 82.808 %
+     f<   1%: m_lightest >= 0.34791 eV, masses 0.34791/0.34801/0.35153, sum = 1.04745 eV -> Planck18+BAO: EXCLUDED, DESI DR1+CMB: EXCLUDED, DESI DR2+CMB: EXCLUDED
+     f<   5%: m_lightest >= 0.15062 eV, masses 0.15062/0.15087/0.15881, sum = 0.46031 eV -> Planck18+BAO: EXCLUDED, DESI DR1+CMB: EXCLUDED, DESI DR2+CMB: EXCLUDED
+     f<  10%: m_lightest >= 0.10202 eV, masses 0.10202/0.10239/0.11377, sum = 0.31818 eV -> Planck18+BAO: EXCLUDED, DESI DR1+CMB: EXCLUDED, DESI DR2+CMB: EXCLUDED
+  [IC19 w/o SK-atm, IO] pair (1,2): (m2-m1)/m2; relative splitting at m_l=0: 1.503 %
+     f<   1%: m_lightest >= 0.03541 eV, masses 0.06074/0.06135/0.03541, sum = 0.15750 eV -> Planck18+BAO: EXCLUDED, DESI DR1+CMB: EXCLUDED, DESI DR2+CMB: EXCLUDED
+     f<   5%: m_lightest >= 0.00000 eV, masses 0.04935/0.05010/0.00000, sum = 0.09945 eV -> Planck18+BAO: allowed, DESI DR1+CMB: EXCLUDED, DESI DR2+CMB: EXCLUDED
+     f<  10%: m_lightest >= 0.00000 eV, masses 0.04935/0.05010/0.00000, sum = 0.09945 eV -> Planck18+BAO: allowed, DESI DR1+CMB: EXCLUDED, DESI DR2+CMB: EXCLUDED
+  [IC19 w/o SK-atm, IO] pair (2,3): (m2-m3)/m2; relative splitting at m_l=0: 100.000 %
+     f<   1%: m_lightest >= 0.35160 eV, masses 0.35504/0.35515/0.35160, sum = 1.06179 eV -> Planck18+BAO: EXCLUDED, DESI DR1+CMB: EXCLUDED, DESI DR2+CMB: EXCLUDED
+     f<   5%: m_lightest >= 0.15243 eV, masses 0.16021/0.16045/0.15243, sum = 0.47309 eV -> Planck18+BAO: EXCLUDED, DESI DR1+CMB: EXCLUDED, DESI DR2+CMB: EXCLUDED
+     f<  10%: m_lightest >= 0.10344 eV, masses 0.11461/0.11494/0.10344, sum = 0.33299 eV -> Planck18+BAO: EXCLUDED, DESI DR1+CMB: EXCLUDED, DESI DR2+CMB: EXCLUDED
+  [IC24 with SK-atm, NO] pair (2,3): (m3-m2)/m3; relative splitting at m_l=0: 82.736 %
+     f<   1%: m_lightest >= 0.34642 eV, masses 0.34642/0.34652/0.35003, sum = 1.04297 eV -> Planck18+BAO: EXCLUDED, DESI DR1+CMB: EXCLUDED, DESI DR2+CMB: EXCLUDED
+     f<   5%: m_lightest >= 0.14998 eV, masses 0.14998/0.15023/0.15813, sum = 0.45834 eV -> Planck18+BAO: EXCLUDED, DESI DR1+CMB: EXCLUDED, DESI DR2+CMB: EXCLUDED
+     f<  10%: m_lightest >= 0.10158 eV, masses 0.10158/0.10195/0.11328, sum = 0.31681 eV -> Planck18+BAO: EXCLUDED, DESI DR1+CMB: EXCLUDED, DESI DR2+CMB: EXCLUDED
+  [IC24 with SK-atm, IO] pair (1,2): (m2-m1)/m2; relative splitting at m_l=0: 1.519 %
+     f<   1%: m_lightest >= 0.03577 eV, masses 0.06074/0.06135/0.03577, sum = 0.15786 eV -> Planck18+BAO: EXCLUDED, DESI DR1+CMB: EXCLUDED, DESI DR2+CMB: EXCLUDED
+     f<   5%: m_lightest >= 0.00000 eV, masses 0.04908/0.04984/0.00000, sum = 0.09892 eV -> Planck18+BAO: allowed, DESI DR1+CMB: EXCLUDED, DESI DR2+CMB: EXCLUDED
+     f<  10%: m_lightest >= 0.00000 eV, masses 0.04908/0.04984/0.00000, sum = 0.09892 eV -> Planck18+BAO: allowed, DESI DR1+CMB: EXCLUDED, DESI DR2+CMB: EXCLUDED
+  [IC24 with SK-atm, IO] pair (2,3): (m2-m3)/m2; relative splitting at m_l=0: 100.000 %
+     f<   1%: m_lightest >= 0.34977 eV, masses 0.35320/0.35330/0.34977, sum = 1.05627 eV -> Planck18+BAO: EXCLUDED, DESI DR1+CMB: EXCLUDED, DESI DR2+CMB: EXCLUDED
+     f<   5%: m_lightest >= 0.15163 eV, masses 0.15938/0.15961/0.15163, sum = 0.47063 eV -> Planck18+BAO: EXCLUDED, DESI DR1+CMB: EXCLUDED, DESI DR2+CMB: EXCLUDED
+     f<  10%: m_lightest >= 0.10291 eV, masses 0.11401/0.11434/0.10291, sum = 0.33126 eV -> Planck18+BAO: EXCLUDED, DESI DR1+CMB: EXCLUDED, DESI DR2+CMB: EXCLUDED
+# exit: 0

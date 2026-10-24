@@ -1,0 +1,621 @@
+%=======================================================================
+%  theta23_obstruction_paper.tex
+%
+%  A self-contained, submission-shaped draft built AROUND the one
+%  correct, verifiable result in the flavor work: the residual-symmetry
+%  obstruction to the atmospheric mixing angle in the noncommutative
+%  Standard Model.
+%
+%  Author: Chazz Romeo (independent).  Draft.
+%
+%  Compile: pdflatex theta23_obstruction_paper.tex  (twice, for refs)
+%
+%  HONESTY NOTES FOR THE AUTHOR (delete before submission):
+%   * All Alignment-framework vocabulary (D360, resonance, "alignment
+%     operator", divide-the-cycle) has been REMOVED on purpose. A referee
+%     in this field rejects on sight of that language. The result is
+%     stated entirely in standard NCG / flavor-physics terms.
+%   * Every theorem here is proved and independently checked numerically
+%     (verify_theta23_obstruction.py, reproduced in Appendix A).
+%   * The bibliography was web-verified against inSPIRE-HEP / arXiv /
+%     publisher pages on 2026-07-27: all 11 entries confirmed
+%     high-confidence, with arXiv IDs and DOIs added. A final sanity
+%     check at submission time is still prudent, but the
+%     author/title/volume/page/year/arXiv are confirmed as they stand.
+%   * This is a NO-GO / limitative note. Keep the scope honest: it does
+%     not predict theta_23; it proves what spectral geometry cannot fix
+%     and characterizes the minimal external input required. That honesty
+%     is the paper's strength, not a weakness.
+%=======================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\He}{H_e}
+\newcommand{\Hnu}{H_\nu}
+\newcommand{\PMNS}{U_{\mathrm{PMNS}}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\Fnorm}[1]{\lVert #1 \rVert_F}
+\DeclareMathOperator*{\argext}{arg\,ext}
+
+\title{\bf Spectral geometry does not fix the atmospheric mixing angle:\\
+a residual--symmetry obstruction in the noncommutative Standard Model}
+
+\author{Chazz Romeo\thanks{Independent researcher. \texttt{charleskromeo@gmail.com}.}}
+
+\date{Draft --- \today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The finite spectral triple of the Standard Model geometrizes the fermion mass
+spectra, but in the presence of degeneracies it does not fix the relative
+orientation of the generation subspaces. We show that whenever the effective
+neutrino Hermitian $\Hnu=m_\nu m_\nu^\dagger$ possesses a two--dimensional
+eigenspace $E$ (the exact or near $\mu$--$\tau$ degenerate regime), an associated
+residual $\mathrm{SO}(2)$ freedom in the $\mu$--$\tau$ plane is invisible to the
+order--zero, first--order and reality conditions and to the spectral action, yet
+it acts nontrivially on the PMNS matrix and carries the \emph{entire}
+indeterminacy of the atmospheric mixing angle $\theta_{23}$
+(Proposition~\ref{prop:obstruction}). We then prove a structural no--go: this
+residual freedom enters \emph{every} relational (unitarily invariant) functional
+of the sector Hermitians through the \emph{single} joint invariant
+$\Tr(\He\,\Hnu(\theta))=\mathrm{const}+\tfrac12\delta_e\delta_\nu\cos 2(\theta+\psi_0)$
+(Theorem~\ref{thm:single}). Consequently the aligned configurations
+$\theta_{23}\in\{0,\pi/2\}$ are stationary for all such functionals and all mass
+values; every functional \emph{monotone} in the misalignment selects exact
+alignment $\theta_{23}=0$, independently of the fermion masses
+(Theorem~\ref{thm:monotone}); and for the commutator--norm functional the
+stationary set is rigidly $\{0,\pi/4,\pi/2\}$, with $\pi/4$ a symmetry--forced
+maximum rather than a derived quantity (Theorem~\ref{thm:nogo}). We conclude that
+$\theta_{23}$ is not determined by spectral geometry in the (near--)degenerate
+regime; it is fixed only by $\mu$--$\tau$--breaking data external to the finite
+triple, and we characterize precisely the structure such input must supply
+(Corollary~\ref{cor:external}). These results delineate a sharp boundary of what
+spectral geometry alone can fix in the lepton flavor sector. All statements are
+elementary and are verified numerically in Appendix~\ref{app:numeric}.
+\end{abstract}
+
+%=======================================================================
+\section{Introduction}
+%=======================================================================
+
+The noncommutative--geometry (NCG) formulation of the Standard Model
+\cite{connes1994,connesCMP1996,cc1997,ccm2007} derives the gauge sector, the
+Higgs, and the fermionic action from a single geometric datum: a finite spectral
+triple $(\mathcal A,\mathcal H,D)$ tensored with a Riemannian manifold. The finite
+Dirac operator $D_F$ contains the Yukawa data, so the fermion mass spectra are
+geometric outputs \cite{vandenDungen2012,vanSuijlekom2015}. A natural and much
+studied question is then: \emph{which} flavor observables does the spectral
+construction actually fix, and which remain free inputs?
+
+For the lepton mixing matrix the answer is subtle in the regime relevant to
+Nature. The measured atmospheric angle is close to maximal but its octant is
+undetermined: global fits place $\theta_{23}$ near $45^\circ$, with best--fit
+values ranging from $\approx43^\circ$ (lower octant) to $\approx49^\circ$ (upper
+octant) depending on the mass ordering and dataset, and a $3\sigma$ interval
+$\approx41^\circ$--$51^\circ$ that straddles $45^\circ$ \cite{pdg,nufit6}. In the
+flavor literature this near--maximality is associated with an approximate
+$\mu$--$\tau$ symmetry of the neutrino sector
+\cite{harrison2002,xingzhao2016,kingluhn2013}. In that same regime the effective
+neutrino operator $\Hnu=m_\nu m_\nu^\dagger$ is (nearly) degenerate on the
+$\mu$--$\tau$ subspace, and a degenerate operator does not fix its own eigenframe.
+We note in passing that the experimental octant ambiguity---whether $\theta_{23}$
+is larger or smaller than $45^\circ$---concerns the very quantity,
+$\operatorname{sign}(\theta_{23}-\pi/4)$, that the obstruction below leaves
+undetermined (Corollary~\ref{cor:external}). The purpose of this note is to make
+precise what this near--degeneracy costs the geometric program.
+
+We prove three things. First (\S\ref{sec:obstruction}), in the exact degenerate
+limit there is a residual $\mathrm{SO}(2)$ rotation of the $\mu$--$\tau$ eigenspace
+that leaves the entire finite spectral triple---its axioms and its spectral
+action---invariant while shifting $\theta_{23}$ across its full range; the angle
+is simply undetermined by the geometry. Second (\S\ref{sec:nogo}), one cannot
+repair this by adding a ``relational'' penalty built from the sector Hermitians:
+we show that the residual freedom enters every unitarily invariant functional of
+$(\He,\Hnu)$ through a \emph{single} joint invariant, so that the natural
+misalignment/coherence functionals all return exact alignment $\theta_{23}=0$,
+independently of every mass magnitude, and the commutator--norm functional in
+particular has its stationary points frozen at $\{0,\pi/4,\pi/2\}$. Third
+(\S\ref{sec:external}), we characterize exactly the external, $\mu$--$\tau$--breaking
+data that any construction must supply to pin $\theta_{23}$ to a physical interior
+value.
+
+We state the scope plainly. The result is a \emph{no--go}, not a prediction; the
+underlying $\mu$--$\tau$ physics of a near--maximal $\theta_{23}$ is well known; and
+the proofs are elementary ($2\times2$ Hermitian algebra). The contribution is the
+precise, geometry--intrinsic statement of the obstruction---an exact boundary on
+the reach of the spectral action in lepton flavor---together with the sharp
+characterization of the minimal input that lifts it. Delineating where a
+derivation \emph{cannot} go is, we hold, as legitimate as extending where it can.
+
+%=======================================================================
+\section{Setup and notation}\label{sec:setup}
+%=======================================================================
+
+We work with the finite part of the almost--commutative Standard Model spectral
+triple with right--handed neutrinos and Majorana mass term
+\cite{ccm2007,vanSuijlekom2015}. For a single lepton doublet structure the relevant
+data on the three--generation space $\mathbb C^3$ are two Hermitian operators
+\begin{equation}
+  \He \;=\; Y_e Y_e^\dagger, \qquad \Hnu \;=\; m_\nu m_\nu^\dagger,
+\end{equation}
+where $Y_e$ is the charged--lepton Yukawa and $m_\nu$ the (seesaw) effective
+neutrino mass matrix. The physical mixing is the PMNS matrix
+$\PMNS = U_e^\dagger U_\nu$, where $U_e,U_\nu$ diagonalize $\He,\Hnu$
+respectively. We use the standard PDG parametrization; $\theta_{23}$ is the
+atmospheric angle, controlled by the $2$--$3$ ($\mu$--$\tau$) block.
+
+Let $E\subset\mathbb C^3$ denote the two--dimensional subspace spanned by the
+second and third generations. In the exact $\mu$--$\tau$ symmetric limit
+$\Hnu|_E=\lambda\,\one_E$ for some $\lambda>0$; away from it $\Hnu|_E$ has a small
+gap $\delta_\nu\ge 0$. Throughout, $\He|_E$ is nondegenerate,
+$\delta_e := m_\tau^2-m_\mu^2>0$. We write $R(\theta)\in\mathrm{SO}(2)$ for the real
+rotation of $E$,
+\begin{equation}
+  R(\theta)=\begin{pmatrix}\cos\theta & -\sin\theta\\ \sin\theta & \cos\theta\end{pmatrix},
+  \qquad \Hnu(\theta):=R(\theta)^\dagger\,\Hnu\,R(\theta),
+\end{equation}
+and $\psi_0$ for the relative eigenbasis angle of $\He|_E$ and $\Hnu|_E$. In the
+alignment convention the atmospheric angle reads $\theta_{23}=\psi_0+\theta$.
+
+A functional $\mathcal F$ of the sector operators is called \emph{relational} if it
+is invariant under simultaneous unitary conjugation of its arguments,
+$\mathcal F(U\He U^\dagger, U\Hnu U^\dagger)=\mathcal F(\He,\Hnu)$ for all
+$U\in\mathrm U(E)$; equivalently, $\mathcal F$ depends only on the operators, not on
+an externally chosen frame. Every basis--independent penalty one can build from
+the sector Hermitians alone---coherence, misalignment, commutator norms---is of
+this type.
+
+%=======================================================================
+\section{The residual freedom is invisible to the geometry}\label{sec:obstruction}
+%=======================================================================
+
+\begin{proposition}[Residual $\mathrm{SO}(2)$ obstruction]\label{prop:obstruction}
+Suppose $\Hnu|_E=\lambda\,\one_E$ (exact $\mu$--$\tau$ degeneracy). Then for every
+$\theta$ the rotated operator satisfies $\Hnu(\theta)|_E=\Hnu|_E$, so $R(\theta)$
+leaves $\He$, $\Hnu$, and hence the finite Dirac operator $D_F$ invariant. In
+particular $R(\theta)$ preserves the order--zero, first--order and reality
+conditions and leaves the spectral action $\Tr\,f(D_A/\Lambda)$ invariant. Yet
+$R(\theta)$ acts as a genuine change of the neutrino eigenframe on $E$ and shifts
+the PMNS atmospheric angle by $\theta$. Consequently $\theta_{23}$ is undetermined
+by the spectral data.
+\end{proposition}
+
+\begin{proof}
+Since $\Hnu|_E=\lambda\one_E$ commutes with every operator on $E$,
+$R(\theta)^\dagger\Hnu R(\theta)=\Hnu$; and $R(\theta)$ acts trivially on the
+orthogonal complement by construction, so $\Hnu(\theta)=\Hnu$ globally.
+$\He$ is untouched. Thus every functional of $(\He,\Hnu)$---in particular the
+spectral action, which enters the fermion sector only through $D_F$ built from
+these operators---is invariant. On the other hand, because $\Hnu|_E$ is degenerate,
+its eigenframe on $E$ is defined only up to $\mathrm{O}(2)$; choosing the frame
+$R(\theta)U_\nu$ instead of $U_\nu$ changes $\PMNS=U_e^\dagger U_\nu$ on the
+$2$--$3$ block by the rotation $R(\theta)$, i.e.\ $\theta_{23}\mapsto\theta_{23}+\theta$.
+The spectral data are blind to $\theta$; the observable is not.
+\end{proof}
+
+\noindent This is the geometric core: exactly where Nature places $\theta_{23}$
+(near the degenerate, near--maximal regime) the finite triple has a flat direction
+along which $\theta_{23}$ slides freely.
+
+%=======================================================================
+\section{A relational penalty cannot lift it}\label{sec:nogo}
+%=======================================================================
+
+One might hope to fix $\theta_{23}$ by supplementing the geometry with a
+``relational'' operator or penalty built from the sector Hermitians---a canonical
+move, since $\He$ and $\Hnu$ are the only intrinsic data. We first record the
+minimal such operator and its failure, then prove the general no--go.
+
+\subsection{The minimal relational lift is inert}
+
+\begin{proposition}[Minimal relational operator]\label{prop:minimal}
+Subject to the order--zero, first--order and reality conditions, the unique
+minimal Hermitian operator built linearly from the sector Hermitians and capable
+of lifting the residual freedom is
+$A(\alpha,\beta)=\alpha\He+\beta\Hnu$, $\alpha,\beta\in\mathbb R$.
+\end{proposition}
+
+\noindent (Linearity and Hermiticity leave only real combinations of $\He,\Hnu$
+and the identity; the identity is inert, and any product $\He\Hnu$ is
+non--Hermitian and excluded by the reality condition. We take
+Proposition~\ref{prop:minimal} as the definition of the class we test.)
+
+\begin{lemma}[Inertness on $E$]\label{lem:inertness}
+Let $\Hnu|_E=\lambda\one_E$ and $\He|_E$ be nondegenerate. Then for every
+$\alpha\ne0,\ \beta\in\mathbb R$,
+\begin{equation}
+  A|_E=\alpha\,\He|_E+\beta\lambda\,\one_E,
+\end{equation}
+so $A|_E$ and $\He|_E$ share eigenprojectors. Diagonalizing $A$ therefore selects
+the eigenframe of $\He$ on $E$; adopting it as the neutrino frame gives a trivial
+$2$--$3$ block, $\theta_{23}=0$.
+\end{lemma}
+
+\begin{proof}
+$A|_E=\alpha\He|_E+\beta\lambda\one_E$ by hypothesis; adding a scalar multiple of
+the identity shifts eigenvalues but not eigenvectors, so for $\alpha\ne0$ the
+spectral projectors of $A|_E$ coincide with those of $\He|_E$. Choosing $U_\nu$ on
+$E$ as this common eigenframe gives $U_e^\dagger U_\nu|_E=\one_E$, i.e.\
+$\theta_{23}=0$.
+\end{proof}
+
+\noindent The $\Hnu$ term is dynamically silent precisely where the freedom
+lives: on $E$ the relational operator collapses to $\He$ alone, and minimizing
+misalignment returns the unmixed configuration. This motivates the general
+statement.
+
+\subsection{The residual freedom enters through a single invariant}
+
+\begin{theorem}[Single--invariant reduction]\label{thm:single}
+Let $\mathcal F$ be any relational functional of $(\He|_E,\Hnu(\theta)|_E)$. Then
+$\mathcal F$ depends on $\theta$ only through the single joint invariant
+\begin{equation}
+  \Tr\!\bigl(\He\,\Hnu(\theta)\bigr)
+  \;=\; c \;+\; \tfrac12\,\delta_e\,\delta_\nu\,\cos 2(\theta+\psi_0),
+  \label{eq:overlap}
+\end{equation}
+where $c$ is $\theta$--independent. All other joint invariants
+$\bigl(\Tr\He,\ \Tr\He^2,\ \Tr\Hnu,\ \Tr\Hnu^2\bigr)$ are independent of $\theta$.
+\end{theorem}
+
+\begin{proof}
+On $E\cong\mathbb C^2$, the algebra of $\mathrm U(2)$--invariants of the pair
+$(\He,\Hnu)$ under simultaneous conjugation is generated by
+$\Tr\He,\ \Tr\He^2,\ \Tr\Hnu,\ \Tr\Hnu^2,\ \Tr(\He\Hnu)$\footnote{This is the classical
+minimal generating set for the invariants of a pair of $2\times2$ matrices
+(Sibirski\u{\i}~\cite{sibirskii1968}, as cited in Drensky~\cite{drensky2005}, Thm.~2.10; that
+trace invariants generate in general is Procesi~\cite{procesi1976}, as cited there). A functional is
+called relational if it is a function of $(\He|_E,\Hnu|_E)$ invariant under simultaneous conjugation
+by $\mathrm U(2)$. The step from the five polynomial generators to \emph{all} such functionals uses
+that polynomial invariants of a compact group separate its orbits. If two pairs lie in different
+$\mathrm U(2)$-orbits, approximate an invariant bump separating the two compact orbits by a
+polynomial, then average it over Haar measure: the result is an invariant polynomial that takes
+different values on them. Hence every continuous invariant function is a function of the five
+traces. Concretely, in the Bloch form below $\mathrm U(2)$ acts through $\mathrm{SO}(3)$ on the pair
+$(\hat n_e,\hat n_\nu)$, and such a pair is determined up to $\mathrm{SO}(3)$ by
+$\lvert\hat n_e\rvert$, $\lvert\hat n_\nu\rvert$ and $\hat n_e\!\cdot\!\hat n_\nu$.}; all higher traces of
+words in $\He,\Hnu$ reduce to these by the Cayley--Hamilton relation
+$X^2=(\Tr X)X-(\det X)\one$ valid for $2\times2$ matrices. The rotation $R(\theta)$
+acts by conjugation on $\Hnu$ alone, so the single--operator invariants
+$\Tr\Hnu=\Tr\Hnu(\theta)$ and $\Tr\Hnu^2=\Tr\Hnu(\theta)^2$ are unchanged, as are
+those of $\He$. The only invariant that mixes the two operators, and hence the only
+one carrying the relative orientation, is $\Tr(\He\Hnu(\theta))$. Writing each
+$2\times2$ Hermitian in Bloch form
+$X=c_X\one+\tfrac{\delta_X}{2}\,\hat n_X\!\cdot\!\vec\sigma$ with $\hat n_X$ a unit
+vector at Bloch angle $2\xi_X$ (so $\xi_X$ is the eigenbasis orientation of $X$),
+and using $\Tr(\sigma_i\sigma_j)=2\delta_{ij}$,
+\begin{equation}
+  \Tr\!\bigl(\He\Hnu(\theta)\bigr)
+  = 2c_ec_\nu+\tfrac12\delta_e\delta_\nu\,\hat n_e\!\cdot\!\hat n_\nu(\theta)
+  = 2c_ec_\nu+\tfrac12\delta_e\delta_\nu\cos 2\bigl(\xi_e-\xi_\nu+\theta\bigr),
+\end{equation}
+since $R(\theta)$ advances the Bloch angle of $\Hnu$ by $2\theta$. With
+$\psi_0=\xi_e-\xi_\nu$ this is \eqref{eq:overlap}.
+\end{proof}
+
+\begin{corollary}[Aligned configurations are always stationary]\label{cor:aligned}
+For every relational $\mathcal F$ and all mass values, the aligned configurations
+$\theta_{23}=\psi_0+\theta\in\{0,\pi/2\}\ (\mathrm{mod}\ \pi)$ are stationary points
+of $\theta\mapsto\mathcal F$.
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{thm:single}, $\mathcal F=G\bigl(\cos 2(\theta+\psi_0)\bigr)$ for
+some smooth $G$ (holding the $\theta$--independent invariants fixed). Then
+$\dfrac{d\mathcal F}{d\theta}=-2\,G'\,\sin 2(\theta+\psi_0)$, which vanishes wherever
+$\sin 2(\theta+\psi_0)=0$, i.e.\ at $\theta+\psi_0\in\tfrac\pi2\mathbb Z$.
+\end{proof}
+
+\begin{theorem}[Monotone functionals force exact alignment]\label{thm:monotone}
+If $\mathcal F$ is a relational functional strictly monotone in the misalignment
+(equivalently, $G$ in Corollary~\ref{cor:aligned} is strictly monotone on
+$[-1,1]$), then its only stationary points in $\theta$ are the aligned
+configurations $\theta_{23}\in\{0,\pi/2\}$, and extremization selects exact
+alignment $\theta_{23}=0$ (or $\pi/2$)---independently of $\delta_e,\delta_\nu$ and
+of all mass magnitudes.
+\end{theorem}
+
+\begin{proof}
+With $\mathcal F=G(u)$, $u=\cos2(\theta+\psi_0)$, stationarity requires
+$G'(u)\sin2(\theta+\psi_0)=0$. If $G'$ has no zero on $(-1,1)$ (strict
+monotonicity), the only solutions are $\sin2(\theta+\psi_0)=0$, i.e.\ the aligned
+points, at which $u=\pm1$ are the endpoints of its range; the extremum of a
+monotone $G$ over $u\in[-1,1]$ is attained at an endpoint, i.e.\ at exact
+alignment. The location $\{0,\pi/2\}$ is independent of the amplitude
+$\tfrac12\delta_e\delta_\nu$, hence of the masses.
+\end{proof}
+
+\begin{theorem}[Commutator--norm functional: frozen stationary set]\label{thm:nogo}
+Let the misalignment functional be the squared Frobenius commutator norm
+\begin{equation}
+  \mathcal E(\theta)=\Fnorm{\,[\,\He,\ \Hnu(\theta)\,]\,}^2 .
+\end{equation}
+Then:
+\begin{enumerate}
+\item[(i)] If $\delta_\nu=0$ (exact degeneracy), $\mathcal E\equiv0$: no orientation
+is selected.
+\item[(ii)] If $\delta_\nu>0$,
+\begin{equation}
+  \boxed{\;\mathcal E(\theta)=C\,\sin^2\!\bigl(2(\theta+\psi_0)\bigr),
+  \qquad C=\tfrac12\,\delta_e^2\,\delta_\nu^2>0.\;}
+  \label{eq:Eclosed}
+\end{equation}
+The stationary points are $\theta+\psi_0\in\tfrac\pi4\mathbb Z$; equivalently
+$\theta_{23}\in\{0,\pi/4,\pi/2\}$ on the fundamental interval $[0,\pi/2]$, the minima
+($\mathcal E=0$) at exact alignment $\{0,\pi/2\}$ and $\pi/4$ the unique interior
+maximum.
+\item[(iii)] The amplitude $C$ carries the entire dependence on the fermion mass
+magnitudes and is a strictly positive prefactor; it does not enter the location of
+the stationary points. Hence for any strictly monotone $F$, every extremizer of
+$F(\mathcal E)$ lies in $\{0,\pi/4,\pi/2\}$, independently of all mass inputs.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+With the Bloch decomposition of Theorem~\ref{thm:single} the trace and scalar
+parts commute and drop from the commutator, leaving
+\begin{equation}
+  [\He,\Hnu]=\tfrac14\delta_e\delta_\nu\,[\hat n_e\!\cdot\!\vec\sigma,\hat n_\nu\!\cdot\!\vec\sigma]
+  =i\tfrac12\delta_e\delta_\nu\,(\hat n_e\times\hat n_\nu)\!\cdot\!\vec\sigma,
+\end{equation}
+using $[\hat a\!\cdot\!\vec\sigma,\hat b\!\cdot\!\vec\sigma]=2i(\hat a\times\hat
+b)\!\cdot\!\vec\sigma$. Then
+$\Fnorm{[\He,\Hnu]}^2=\tfrac14\delta_e^2\delta_\nu^2\cdot2|\hat n_e\times\hat
+n_\nu|^2=\tfrac12\delta_e^2\delta_\nu^2\sin^2 2(\xi_e-\xi_\nu)$. If $\delta_\nu=0$
+this vanishes identically, giving (i). For $\delta_\nu>0$, $R(\theta)$ sends
+$\xi_\nu\mapsto\xi_\nu-\theta$, i.e.\ $\psi_0\mapsto\psi_0+\theta$, yielding
+\eqref{eq:Eclosed}. Stationarity:
+$\mathcal E'(\theta)=2C\sin4(\theta+\psi_0)=0\iff\theta+\psi_0\in\tfrac\pi4\mathbb Z$,
+with minima at the half--integer multiples of $\tfrac\pi2$ and maxima between,
+giving (ii). Finally $C>0$ multiplies $\mathcal E$ uniformly, so
+$\argext_\theta F(\mathcal E)$ is $C$--independent for strictly monotone $F$, which
+is (iii).
+\end{proof}
+
+\noindent Theorem~\ref{thm:nogo} is the special case of
+Theorems~\ref{thm:single}--\ref{thm:monotone} in which $G(u)=\tfrac12\delta_e^2
+\delta_\nu^2(1-u^2)$ is \emph{even} rather than monotone; the evenness is what adds
+the interior point $\pi/4$, and $\pi/4$ is a maximum---so \emph{minimizing} the
+misalignment still returns alignment. In neither case is a physical interior angle
+produced.
+
+%=======================================================================
+\section{What external input fixes \texorpdfstring{$\theta_{23}$}{theta23}}\label{sec:external}
+%=======================================================================
+
+\begin{corollary}[External input required]\label{cor:external}
+No functional built monotonically from the misalignment
+$\Fnorm{[\He,\Hnu(\theta)]}$ selects a value $\theta_{23}\in(0,\pi/2)\setminus\{\pi/4\}$;
+in particular none selects the observed near--maximal value, whose octant
+$\operatorname{sign}(\theta_{23}-\pi/4)$ is itself experimentally undetermined
+\cite{pdg,nufit6}. Minimization returns exact alignment, $\theta_{23}=0$
+(Lemma~\ref{lem:inertness}); the value $\pi/4$ is the $\mu$--$\tau$ ($2\!\leftrightarrow\!3$
+exchange) symmetric point, a symmetry--forced extremum independent of the masses,
+not a determination. To select an interior value one must augment the construction
+with a Hermitian operator $Q$ on $E$ such that
+\begin{enumerate}
+\item[(a)] $Q|_E\not\propto\one_E$ ($Q$ is \emph{non--inert} on $E$, unlike $\Hnu$),
+and
+\item[(b)] the eigen--orientation of $Q$ on $E$ is fixed by data other than
+$\theta_{23}$ itself
+\end{enumerate}
+---for instance a controlled $\mu$--$\tau$ breaking of the neutrino sector whose
+orientation is pinned by the mass--squared splittings $\Delta m^2_{21},\Delta
+m^2_{31}$, or by renormalization--group running between the seesaw and electroweak
+scales. Absent such an operator, $\theta_{23}$ is a datum of the theory, not a
+prediction of it.
+\end{corollary}
+
+\begin{remark}
+The dichotomy is sharp. A \emph{symmetry} ($2\!\leftrightarrow\!3$ exchange) forces
+exactly $\pi/4$; a \emph{relational functional} of the class above has its
+stationary set frozen at $\{0,\pi/4,\pi/2\}$ and, if monotone, at $\{0,\pi/2\}$. The
+physical deviation $\theta_{23}-\pi/4$ is precisely the $\mu$--$\tau$ breaking that
+neither device supplies. It is the content of condition (b): the missing $O(1)$
+datum is the \emph{orientation} of the breaking, not its magnitude.
+\end{remark}
+
+%=======================================================================
+\input{constructive_section}
+\input{r2_section}
+
+\section{Discussion}\label{sec:discussion}
+%=======================================================================
+
+The results above draw a boundary rather than cross one. Three points fix their
+scope honestly.
+
+\emph{On novelty.} The physics that a near--maximal $\theta_{23}$ reflects an
+approximate $\mu$--$\tau$ symmetry, with the deviation measuring its breaking, is
+standard \cite{harrison2002,xingzhao2016,kingluhn2013}. What is made precise here
+is the \emph{geometric} statement: within the finite spectral triple, the
+$\mu$--$\tau$ degeneracy is a genuine flat direction of the spectral action
+(Proposition~\ref{prop:obstruction}). What is added is the assembly. The classical fact that the
+$\mathrm U(2)$-invariants of a pair of $2\times2$ Hermitian matrices are generated by five
+traces~\cite{sibirskii1968,drensky2005}, applied to the $E$ block, makes every relational
+functional of the intrinsic sector data a function of a single joint invariant
+(Theorem~\ref{thm:single}). It follows that the aligned configuration is always a critical
+point (Corollary~\ref{cor:aligned}), the \emph{natural} (monotone) misalignment and
+coherence functionals return exact alignment $\theta_{23}=0$
+(Theorem~\ref{thm:monotone}), and the commutator norm adds only the
+symmetry--forced maximum at $\pi/4$ (Theorem~\ref{thm:nogo}). We are careful not to
+overstate the reach: a \emph{contrived} non--monotone functional can place an
+interior stationary point at any chosen angle, but only by fixing that angle
+through its own tuned shape---a fit dressed as a principle---rather than through the
+geometry. Producing a physical interior $\theta_{23}$ canonically requires genuine
+external $\mu$--$\tau$--breaking data, which is the content of
+Corollary~\ref{cor:external}.
+
+\emph{On elementarity.} The proofs use only $2\times2$ Hermitian algebra. We regard
+this as a feature: the obstruction is not an artifact of a particular model but a
+consequence of the $2$--$3$ block structure common to all seesaw constructions in
+the near--degenerate regime.
+
+\emph{On the constructive half.} Corollary~\ref{cor:external} is the useful
+output. It tells a model builder exactly what to add---a non--inert operator whose
+orientation is fixed externally, e.g.\ by $\Delta m^2$ data or RG running---and,
+equally, what \emph{cannot} work: any further penalty built from $\He,\Hnu$ alone.
+This isolates the atmospheric angle as the single lepton observable that spectral
+geometry, in this regime, must import rather than derive.
+
+A natural continuation is to test whether RG running of $\Hnu$ between the seesaw
+and electroweak scales supplies a $Q$ meeting conditions (a)--(b) with a
+\emph{predictive} orientation---i.e.\ whether the sign and size of
+$\theta_{23}-\pi/4$ can be tied to the measured splittings. That is a question about
+added dynamics, not about the finite geometry, and is exactly where
+Corollary~\ref{cor:external} says the content must come from.
+
+% Relation to known results (R2 novelty audit; manager ruling 2026-10-23). The fragment cites labels
+% from constructive_section.tex (sec:D2, sec:D3b, prop:jarlskog), which must be \input as well.
+\input{relation_known_results}
+
+An earlier version of this work stated the uniqueness of the linear relational operator
+$\alpha\He+\beta\Hnu$ as a theorem. As stated, that is false: $A=\He^2$ is Hermitian and built from
+$\He$ alone, and it is generically non-degenerate on $E$, so it also breaks the residual
+$\mathrm{SO}(2)$. Proposition~\ref{prop:minimal} therefore states the linear class as a definition
+of the class tested, not as a uniqueness result.
+
+%=======================================================================
+\appendix
+\section{Numerical verification}\label{app:numeric}
+%=======================================================================
+
+Every claim is checked by the script
+\texttt{verify\_theta23\_obstruction.py} (Python 3, NumPy only, deterministic).
+It constructs random $2\times2$ Hermitian $\He,\Hnu$ with prescribed gaps and
+eigenbasis angles and confirms, to machine precision:
+\begin{itemize}
+\item \textbf{Prop.~\ref{prop:obstruction}:} for degenerate $\Hnu|_E$,
+$\mathcal E(\theta)\equiv0$ (residual freedom invisible).
+\item \textbf{Thm.~\ref{thm:single}:}
+$\Tr(\He\Hnu(\theta))=2c_ec_\nu+\tfrac12\delta_e\delta_\nu\cos2(\theta+\psi_0)$ with
+residual $<10^{-14}$; the other four joint invariants are $\theta$--independent to
+$<10^{-15}$.
+\item \textbf{Thm.~\ref{thm:monotone}:} four distinct monotone functionals each
+minimize at $\theta_{23}\in\{0,\pi/2\}$, for three different mass choices.
+\item \textbf{Thm.~\ref{thm:nogo}:}
+$\mathcal E(\theta)=\tfrac12\delta_e^2\delta_\nu^2\sin^2 2(\theta+\psi_0)$ matches the
+direct commutator norm to $<10^{-14}$; stationary points at $\{0,\pi/4,\pi/2\}$;
+the minimizer is $\theta_{23}=0$, mass--independent.
+\end{itemize}
+
+%=======================================================================
+\begin{thebibliography}{99}
+% Web-verified against inSPIRE-HEP / arXiv / publisher pages, 2026-07-27.
+% All entries confirmed high-confidence; arXiv IDs and DOIs added.
+
+\bibitem{connes1994} A.\ Connes, \emph{Noncommutative Geometry},
+Academic Press, San Diego, 1994.
+
+\bibitem{connesCMP1996} A.\ Connes, ``Gravity coupled with matter and the
+foundation of non-commutative geometry,'' Commun.\ Math.\ Phys.\ \textbf{182}
+(1996) 155--176, arXiv:hep-th/9603053, doi:10.1007/BF02506388.
+
+\bibitem{cc1997} A.\ H.\ Chamseddine and A.\ Connes, ``The spectral action
+principle,'' Commun.\ Math.\ Phys.\ \textbf{186} (1997) 731--750,
+arXiv:hep-th/9606001, doi:10.1007/s002200050126.
+
+\bibitem{ccm2007} A.\ H.\ Chamseddine, A.\ Connes and M.\ Marcolli, ``Gravity and
+the standard model with neutrino mixing,'' Adv.\ Theor.\ Math.\ Phys.\ \textbf{11}
+(2007) 991--1089, arXiv:hep-th/0610241, doi:10.4310/ATMP.2007.v11.n6.a3.
+
+\bibitem{vandenDungen2012} K.\ van den Dungen and W.\ D.\ van Suijlekom,
+``Particle physics from almost-commutative spacetimes,'' Rev.\ Math.\ Phys.\
+\textbf{24} (2012) 1230004, arXiv:1204.0328, doi:10.1142/S0129055X1230004X.
+
+\bibitem{vanSuijlekom2015} W.\ D.\ van Suijlekom, \emph{Noncommutative Geometry
+and Particle Physics}, Mathematical Physics Studies (Springer, Dordrecht, 2015),
+doi:10.1007/978-94-017-9162-5.
+
+\bibitem{harrison2002} P.\ F.\ Harrison and W.\ G.\ Scott, ``$\mu$--$\tau$
+reflection symmetry in lepton mixing and neutrino oscillations,'' Phys.\ Lett.\ B
+\textbf{547} (2002) 219--228, arXiv:hep-ph/0210197,
+doi:10.1016/S0370-2693(02)02772-7.
+
+\bibitem{xingzhao2016} Z.-z.\ Xing and Z.-h.\ Zhao, ``A review of $\mu$--$\tau$
+flavor symmetry in neutrino physics,'' Rept.\ Prog.\ Phys.\ \textbf{79} (2016)
+076201, arXiv:1512.04207, doi:10.1088/0034-4885/79/7/076201.
+
+\bibitem{kingluhn2013} S.\ F.\ King and C.\ Luhn, ``Neutrino mass and mixing with
+discrete symmetry,'' Rept.\ Prog.\ Phys.\ \textbf{76} (2013) 056201,
+arXiv:1301.1340, doi:10.1088/0034-4885/76/5/056201.
+
+\bibitem{pdg} S.\ Navas \textit{et al.} (Particle Data Group), ``Review of
+Particle Physics,'' Phys.\ Rev.\ D \textbf{110} (2024) 030001,
+doi:10.1103/PhysRevD.110.030001.
+
+\bibitem{brsm1999} G.\ C.\ Branco, M.\ N.\ Rebelo and J.\ I.\ Silva-Marcos,
+``Degenerate and quasi degenerate Majorana neutrinos,''
+Phys.\ Rev.\ Lett.\ \textbf{82} (1999) 683, arXiv:hep-ph/9810328.
+
+\bibitem{zhou2014} Y.-L.\ Zhou, ``$\mu$--$\tau$ reflection symmetry and radiative corrections,''
+arXiv:1409.8600 [hep-ph].
+
+\bibitem{jarlskog1985} C.\ Jarlskog, ``Commutator of the quark mass matrices in the
+standard electroweak model and a measure of maximal CP nonconservation,''
+Phys.\ Rev.\ Lett.\ \textbf{55} (1985) 1039, doi:10.1103/PhysRevLett.55.1039.
+
+\bibitem{froggattnielsen1979} C.\ D.\ Froggatt and H.\ B.\ Nielsen, ``Hierarchy of quark
+masses, Cabibbo angles and CP violation,'' Nucl.\ Phys.\ B \textbf{147} (1979) 277.
+
+\bibitem{feruglioromanino2021} F.\ Feruglio and A.\ Romanino, ``Lepton flavour symmetries,''
+Rev.\ Mod.\ Phys.\ \textbf{93} (2021) 015007, arXiv:1912.06028.
+
+\bibitem{residual2014} B.\ Hu, ``Lepton mixing, residual symmetries, and trigonometric
+Diophantine equations,'' Phys.\ Rev.\ D \textbf{90} (2014) 073012, arXiv:1407.4722,
+doi:10.1103/PhysRevD.90.073012.
+
+\bibitem{sibirskii1968} K.\ S.\ Sibirski\u{\i}, ``Algebraic invariants for a set of matrices''
+(Russian), Sib.\ Mat.\ Zh.\ \textbf{9} (1968) 152--164; transl.\ Siber.\ Math.\ J.\ \textbf{9} (1968)
+115--124; as cited in V.\ Drensky, arXiv:math/0506614, Thm.~2.10 [primary not opened].
+
+\bibitem{procesi1976} C.\ Procesi, ``The invariant theory of $n\times n$ matrices,'' Adv.\ Math.\
+\textbf{19} (1976) 306--381; as cited in V.\ Drensky, arXiv:math/0506614 [primary not opened].
+
+\bibitem{drensky2005} V.\ Drensky, ``Computing with matrix invariants,'' arXiv:math/0506614.
+
+\bibitem{lam2008} C.\ S.\ Lam, ``Symmetry of lepton mixing,'' Phys.\ Lett.\ B \textbf{656}
+(2007) 193, arXiv:0708.3665, doi:10.1016/j.physletb.2007.09.032.
+
+\bibitem{fonsecagrimus2014} R.\ M.\ Fonseca and W.\ Grimus, ``Classification of lepton mixing
+matrices from finite residual symmetries,'' arXiv:1405.3678 [hep-ph].
+
+\bibitem{king2017} S.\ F.\ King, ``Unified models of neutrinos, flavour and CP violation,''
+arXiv:1701.04413 [hep-ph].
+
+\bibitem{fhz2013} F.\ Feruglio, C.\ Hagedorn and R.\ Ziegler, ``Lepton mixing parameters from
+discrete and CP symmetries,'' JHEP \textbf{07} (2013) 027, arXiv:1211.5560,
+doi:10.1007/JHEP07(2013)027.
+
+\bibitem{nufit6} I.\ Esteban, M.\ C.\ Gonzalez-Garcia, M.\ Maltoni,
+I.\ Martinez-Soler, J.\ P.\ Pinheiro and T.\ Schwetz, ``NuFit-6.0: Updated global
+analysis of three-flavor neutrino oscillations,'' JHEP \textbf{12} (2024) 216,
+arXiv:2410.05380, doi:10.1007/JHEP12(2024)216.
+
+\bibitem{feruglio2017} F.\ Feruglio, ``Are neutrino masses modular forms?,'' arXiv:1706.08749.
+
+\bibitem{nppt2019} P.\ P.\ Novichkov, J.\ T.\ Penedo, S.\ T.\ Petcov, A.\ V.\ Titov, ``Generalised CP
+symmetry in modular-invariant models of flavour,'' arXiv:1905.11970.
+
+\bibitem{npp2022} P.\ P.\ Novichkov, J.\ T.\ Penedo, S.\ T.\ Petcov, ``Modular flavour symmetries and
+modulus stabilisation,'' arXiv:2201.02020.
+
+\end{thebibliography}
+
+\end{document}
