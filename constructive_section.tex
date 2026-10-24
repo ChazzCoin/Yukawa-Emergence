@@ -292,6 +292,13 @@ Vandermonde factor that rescales $J$; they cannot orient anything through it.
 \noindent The lab verified it exactly as quoted, with no sign or factor correction: the ratio of
 the determinant to the formula is 1 to $10^{-11}$ at the four data points and on 2000 random points
 (lab ef716dd, \texttt{run-2026-10-23-t3-jarlskog.txt}).\\
+\emph{Normalisation.} With $[\hat\Phi,\Hnu]=iC$, $C$ Hermitian,
+$\det[\hat\Phi,\Hnu]=i^3\det C=-i\det C$. Jarlskog~\cite{jarlskog1985} (Eq.~7, unnormalised masses)
+gives $\det C=-2J\,\Delta(n)\Delta(m^2)$, with $\Delta(x)=(x_2-x_1)(x_3-x_2)(x_3-x_1)$, hence the
+stated $2iJ\,\Delta(n)\Delta(m^2)$. For a traceless $3\times3$ $X$, $\det X=\tfrac13\Tr X^3$, so
+$\Tr[\hat\Phi,\Hnu]^3=6iJ\,\Delta(n)\Delta(m^2)$. That is the $\Tr X^3$ form and value quoted by
+King~\cite{king2017} (Eq.~74). As printed there, $6i\Delta J$ is equated with $\det$ as well; we
+cite King for the trace form only.\\
 \emph{Setup.} Labels range over every assignment with $N=2,\dots,60$, $n_\mu\neq n_\tau$ and
 residues $0..N-1$ (71\,980 tuples; pooling the sub-cycle sectors $V_m$ adds no new frames). Three
 label forms are scanned: linear $\hat\Phi$, and the cosine (C) and sine (S) Hermitian parts of
